@@ -1,0 +1,114 @@
+{
+  "project_name": "DENTAL CLINICa",
+  "design_system": {
+    "archetype": "SWISS & HIGH-CONTRAST (Authority, Clarity, Truth) meets LUXURY EDITORIAL",
+    "typography": {
+      "headline_font": "Playfair Display",
+      "body_font": "Plus Jakarta Sans",
+      "mono_font": "JetBrains Mono",
+      "hierarchy": {
+        "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none font-serif",
+        "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-serif",
+        "h3": "text-xl sm:text-2xl font-sans font-medium",
+        "h4": "text-lg sm:text-xl font-sans font-medium",
+        "body": "text-base font-sans leading-relaxed",
+        "small": "text-sm font-sans"
+      }
+    },
+    "colors": {
+      "background_primary": "#FFFFFF",
+      "background_secondary": "#F8F8F6",
+      "surface_dark": "#0A0A0A",
+      "surface_card": "#FAFAF8",
+      "text_primary": "#0A0A0A",
+      "text_secondary": "#595959",
+      "text_inverse": "#FFFFFF",
+      "accent_red": "#E63946",
+      "accent_red_hover": "#D62828",
+      "border_subtle": "#E5E5E0",
+      "border_dark": "#262626"
+    },
+    "visual_enhancers": {
+      "borders": "1px solid #E5E5E0",
+      "shadows": "0 10px 30px -10px rgba(0,0,0,0.05)",
+      "radius": "rounded-none"
+    }
+  },
+  "verified_details": {
+    "clinic_name": "DENTAL CLINICa",
+    "google_rating": "4.9",
+    "google_reviews_count": 288,
+    "address": "Fa-99, Thokar -4, Abul Fazal Enclave, Jamia Nagar, Okhla, New Delhi, Delhi 110025, India",
+    "phone": "+91 83687 84559",
+    "whatsapp_url": "https://wa.me/message/MWF3LLCPQ53NL1",
+    "plus_code": "H74X+26"
+  },
+  "sections_order": [
+    "utility_strip",
+    "main_header",
+    "dark_hero",
+    "intro_about",
+    "verified_metrics",
+    "editorial_transition",
+    "dark_philosophy",
+    "scope_of_care_accordion",
+    "dark_service_cards",
+    "difference_comparison",
+    "public_google_trust",
+    "gallery",
+    "team_placeholders",
+    "location_contact",
+    "faq",
+    "journal_placeholders",
+    "final_cta",
+    "footer",
+    "mobile_sticky_actions"
+  ],
+  "image_urls": {
+    "clinic_interior": "https://images.unsplash.com/photo-1762625570087-6d98fca29531?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "dental_chair": "https://images.unsplash.com/photo-1629909615184-74f495363b67?crop=entropy&cs=srgb&fm=jpg&q=85",
+    "architecture_minimal": "https://images.unsplash.com/photo-1520529890308-f503006340b4?crop=entropy&cs=srgb&fm=jpg&q=85"
+  },
+  "cms_content_structure": {
+    "services": [
+      {
+        "id": "implantology",
+        "title": "Precision Dental Implantology",
+        "subtitle": "Permanent, bone-integrated tooth replacement with digital planning.",
+        "category": "Surgical"
+      },
+      {
+        "id": "orthodontics",
+        "title": "Invisible & Aesthetic Orthodontics",
+        "subtitle": "Clear aligners and precision brackets crafted for optimal occlusion.",
+        "category": "Restorative"
+      },
+      {
+        "id": "endodontics",
+        "title": "Microscopic Endodontics",
+        "subtitle": "Painless root canal therapy under high-magnification optics.",
+        "category": "Therapeutic"
+      },
+      {
+        "id": "prosthetics",
+        "title": "Ceramic Veneers & Crown Work",
+        "subtitle": "Custom shade-matched porcelain restorations crafted by master ceramists.",
+        "category": "Aesthetic"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "How do I book an emergency appointment?",
+        "answer": "You can call our direct line at +91 83687 84559 or message us instantly via WhatsApp for priority emergency response."
+      },
+      {
+        "question": "Where is DENTAL CLINICa located?",
+        "answer": "We are located at Fa-99, Thokar -4, Abul Fazal Enclave, Jamia Nagar, Okhla, New Delhi, Delhi 110025, India (Plus Code: H74X+26)."
+      },
+      {
+        "question": "What are your verification metrics?",
+        "answer": "We proudly maintain a 4.9 Google rating across 288 verified patient reviews."
+      }
+    ]
+  }
+}
