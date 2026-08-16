@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { ArrowDownRight, ArrowRight, ChevronDown, Menu, Phone, MapPin, X } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus } from "lucide-react";
 import "@/App.css";
 import "@/Enquiry.css";
 
 const logo = "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/ffpfut3t_4ca5f714-79cd-4bd3-84cc-ecc1bfb5e1d1.webp";
+const heroImage = "/media/hero-treatment.jpg";
 const photos = [
   "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/fp78lijx_WhatsApp%20Image%202026-08-15%20at%206.13.27%20PM.webp",
   "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/h2fngxq3_WhatsApp%20Image%202026-08-15%20at%206.13.27%20PM%20%281%29.webp",
@@ -42,9 +43,11 @@ function App() {
       requestAnimationFrame(() => {
         const y = window.scrollY;
         header.classList.toggle("scrolled", y > 8);
-        if (y < window.innerHeight) heroImg.style.transform = `translateY(${y * 0.22}px) scale(1.08)`;
-        const r = finalImg.parentElement.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) finalImg.style.transform = `translateY(${(r.top - window.innerHeight / 2) * -0.06}px) scale(1.18)`;
+        if (heroImg && y < window.innerHeight) heroImg.style.transform = `translateY(${y * 0.18}px) scale(1.04)`;
+        if (finalImg && finalImg.parentElement) {
+          const r = finalImg.parentElement.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) finalImg.style.transform = `translateY(${(r.top - window.innerHeight / 2) * -0.06}px) scale(1.18)`;
+        }
         ticking = false;
       });
     };
@@ -52,7 +55,6 @@ function App() {
     onScroll();
     return () => { window.removeEventListener("scroll", onScroll); io.disconnect(); };
   }, []);
-  const nav = ["About", "Treatments", "Reviews", "Gallery", "Contact"];
   const services = ["Check-ups and cleaning", "Fillings and restorations", "Root canal treatment", "Crowns and bridges", "Dental implants", "Whitening and smile enhancement"];
   const faqs = [
     ["How can I book an appointment?", "Call +91 83687 84559 or message DENTAL CLINICa directly on WhatsApp. We will help you find the right next step."],
@@ -69,9 +71,88 @@ function App() {
   };
   return <main className="site-shell">
     <div className="utility"><div className="container utility-inner"><span data-testid="utility-location"><MapPin size={13}/> Jamia Nagar, Okhla · New Delhi</span><div className="utility-links"><a data-testid="utility-phone" href={phone}><Phone size={13}/> +91 83687 84559</a><a data-testid="utility-directions" href={maps} target="_blank" rel="noreferrer">Directions <ArrowUpRight/></a><a data-testid="utility-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking <ArrowUpRight/></a></div></div></div>
-    <header className="header"><div className="container header-inner"><a data-testid="brand-logo-link" href="#top" className="brand"><img src={logo} alt="DENTAL CLINICa logo"/></a><nav className={menuOpen ? "nav nav-open" : "nav"}>{nav.map((item) => <a data-testid={`nav-${item.toLowerCase()}`} key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{item}</a>)}</nav><div className="header-actions"><a data-testid="header-phone" href={phone}><Phone size={15}/><span>+91 83687 84559</span></a><Button testid="header-book-cta" href={whatsapp}>Book appointment</Button><button data-testid="mobile-menu-button" className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X/> : <Menu/>}</button></div></div></header>
+    
+    {/* Oralic-style Navbar */}
+    <header className="header oralic-header">
+      <div className="container header-inner">
+        <nav className={menuOpen ? "nav nav-open" : "nav"}>
+          <a data-testid="nav-home" href="#top" onClick={() => setMenuOpen(false)}>HOME</a>
+          <a data-testid="nav-about" href="#about" onClick={() => setMenuOpen(false)}>ABOUT</a>
+          <a data-testid="nav-services" href="#treatments" onClick={() => setMenuOpen(false)}>SERVICES</a>
+          <a data-testid="nav-pages" href="#reviews" onClick={() => setMenuOpen(false)}>PAGES +</a>
+          <a data-testid="nav-contact" href="#contact" onClick={() => setMenuOpen(false)}>CONTACT</a>
+        </nav>
 
-    <section id="top" className="hero"><img className="hero-image" src={photos[0]} alt="DENTAL CLINICa treatment room"/><div className="hero-shade"/><div className="container hero-content"><p className="eyebrow">DENTAL CLINICa · NEW DELHI</p><h1>Care that makes<br/><em>room for confidence.</em></h1><p className="hero-copy">A considered dental experience in Jamia Nagar, Okhla — clear guidance, modern surroundings, and a calmer way forward.</p><div className="hero-buttons"><Button testid="hero-book-button" href={whatsapp}>Book an appointment</Button><a data-testid="hero-call-button" className="text-link light-link" href={phone}>Call the clinic <ArrowRight/></a></div><a data-testid="hero-rating-pill" className="hero-rating-pill" href={maps} target="_blank" rel="noreferrer"><span className="pill-star">★</span><strong>4.9 on Google</strong><small>288 reviews</small><ArrowUpRight/></a></div><div className="hero-bottom"><div className="container hero-bottom-inner"><span>Precise care. Human conversation.</span><span>Fa-99, Thokar -4 · Plus Code H74X+26</span></div></div></section>
+        <a data-testid="brand-logo-link" href="#top" className="brand oralic-brand">
+          <svg className="oralic-sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="3.6" fill="currentColor"/>
+            <path d="M12 2.5V5M12 19V21.5M2.5 12H5M19 12H21.5M5.28 5.28L7.05 7.05M16.95 16.95L18.72 18.72M5.28 18.72L7.05 16.95M16.95 7.05L18.72 5.28" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
+          </svg>
+          <span className="brand-title">DENTAL CLINICa<sup>™</sup></span>
+        </a>
+
+        <div className="header-actions oralic-header-actions">
+          <div className="oralic-cart-pill" title="Consultation Cart">
+            <ShoppingCart size={14} />
+            <span>0</span>
+          </div>
+          <a data-testid="header-book-cta" href={whatsapp} target="_blank" rel="noreferrer" className="oralic-btn oralic-btn-nav">
+            SCHEDULE A CALL <span className="btn-bullet">•</span>
+          </a>
+          <button data-testid="mobile-menu-button" className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            {menuOpen ? <X size={22}/> : <Menu size={22}/>}
+          </button>
+        </div>
+      </div>
+    </header>
+
+    {/* Oralic-style Hero Section */}
+    <section id="top" className="hero oralic-hero">
+      <img className="hero-image" src={heroImage} alt="DENTAL CLINICa treatment room" />
+      <div className="hero-shade" />
+
+      <div className="container hero-content">
+        <div className="hero-badge">
+          <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
+          <span>SINCE 1998 — TRUSTED DENTAL CARE</span>
+        </div>
+
+        <h1 className="hero-heading">
+          Trusted Partner for<br/>
+          Exceptional Oral<br/>
+          Health.
+        </h1>
+
+        <p className="hero-copy">
+          Expert medical specialists dedicated to your family’s wellness.
+        </p>
+
+        <div className="hero-cta-group">
+          <a data-testid="hero-services-button" href="#treatments" className="oralic-btn oralic-btn-white">
+            OUR SERVICES <span className="btn-bullet">•</span>
+          </a>
+          <a data-testid="hero-book-button" href={whatsapp} target="_blank" rel="noreferrer" className="oralic-btn oralic-btn-navy">
+            BOOK APPOINTMENT <span className="btn-bullet">•</span>
+          </a>
+        </div>
+
+        {/* Floating / Inline Google Rating Card */}
+        <a data-testid="hero-rating-pill" className="oralic-rating-card" href={maps} target="_blank" rel="noreferrer">
+          <div className="rating-stars">★★★★★</div>
+          <div className="rating-meta">
+            <strong>4.9 on Google</strong>
+            <span>(288 reviews)</span>
+          </div>
+        </a>
+      </div>
+
+      <div className="hero-bottom">
+        <div className="container hero-bottom-inner">
+          <span>Precise care. Human conversation.</span>
+          <span>Fa-99, Thokar -4 · Plus Code H74X+26</span>
+        </div>
+      </div>
+    </section>
 
     <section id="about" className="section intro"><div className="container intro-grid"><div><p className="eyebrow red">A quieter kind of clinic</p><h2>Good care begins<br/>with being <em>heard.</em></h2><p className="lead">DENTAL CLINICa is a dental clinic in Jamia Nagar, Okhla, New Delhi. We believe the first step is a clear conversation — one that gives you context, confidence, and a plan that feels right.</p><a data-testid="about-contact-link" className="text-link" href="#contact">Meet us at the clinic <ArrowRight/></a></div><div className="intro-images"><img className="intro-main" src={photos[1]} alt="Dental chair and clinic interior"/><div className="image-note"><span>01</span><span>A considered space<br/>for your next step</span></div><img className="intro-small" src={photos[2]} alt="DENTAL CLINICa treatment space"/></div></div></section>
 
