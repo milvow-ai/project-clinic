@@ -1,5 +1,22 @@
 # AI Work Changelog
 
+## 2026-08-16 — Vimeo Video Integration, Slide Frame Refinement & Orthodontic Close Photo
+- **What changed**:
+  - Embedded the user's custom Vimeo treatment video (`https://vimeo.com/1218731432`) in background autoplay/loop/muted mode without any player branding or letterboxing.
+  - Connected the bottom-right frosted glass control toggle (`⏸` / `▶`) to the Vimeo Player API via `postMessage` for seamless pause/play interaction.
+  - Replaced the brown-shirt doctor/patient consultation image in Slide 04 with the uploaded high-resolution close-up orthodontic procedure photo (`/media/patient-care-close.jpg`).
+  - Refined the frame aspect ratios and proportions matching Oralic reference mockups:
+    - Left slideshow panel: `1.62fr` with `26px` smooth border-radius.
+    - Right video panel: `1fr` with `26px` smooth border-radius.
+    - Full-bleed edge-to-edge video scaling on both desktop and mobile viewports.
+- **Files modified/added**:
+  - `frontend/public/media/patient-care-close.jpg` [NEW]
+  - `frontend/src/App.js` [MODIFIED]
+  - `frontend/src/App.css` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.023a9e6c.js`, `main.38994f64.css`).
+  - Verified live in browser subagent: Vimeo video playback, Slide 4 close photo, and 100% full-bleed mobile scaling.
+
 ## 2026-08-16 — Trust & Philosophy Section Redesign (Interactive 4-Slide Showcase & Video Anchor)
 - **What changed**:
   - Implemented the exact Trust / Philosophy section below the Hero matching the reference mockup:

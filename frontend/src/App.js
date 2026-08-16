@@ -41,7 +41,7 @@ const trustSlides = [
     tag: "DOCTOR + PATIENT",
     title: "Care Built Around You",
     description: "Your concerns, goals, and comfort guide every decision. We explain your options clearly so you can move forward with confidence.",
-    image: "/media/doctor-patient.jpg",
+    image: "/media/patient-care-close.jpg",
   },
 ];
 
@@ -88,7 +88,7 @@ function TrustPhilosophySection() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
-  const videoRef = useRef(null);
+  const iframeRef = useRef(null);
 
   // Auto-advance slideshow every 5.5s unless paused by user hover
   useEffect(() => {
@@ -100,13 +100,13 @@ function TrustPhilosophySection() {
   }, [isPaused]);
 
   const toggleVideo = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play().catch(() => {});
-        setIsVideoPlaying(true);
-      } else {
-        videoRef.current.pause();
+    if (iframeRef.current && iframeRef.current.contentWindow) {
+      if (isVideoPlaying) {
+        iframeRef.current.contentWindow.postMessage(JSON.stringify({ method: "pause" }), "*");
         setIsVideoPlaying(false);
+      } else {
+        iframeRef.current.contentWindow.postMessage(JSON.stringify({ method: "play" }), "*");
+        setIsVideoPlaying(true);
       }
     } else {
       setIsVideoPlaying(!isVideoPlaying);
@@ -178,23 +178,16 @@ function TrustPhilosophySection() {
             </div>
           </div>
 
-          {/* Right Panel: Video / Treatment Visual Anchor with Control Toggle */}
+          {/* Right Panel: Vimeo Treatment Video Anchor with Custom Control Toggle */}
           <div className="trust-video-panel">
             <div className="trust-video-wrapper">
-              <video
-                ref={videoRef}
-                className="trust-video-player"
-                src="/media/treatment-loop.mp4"
-                poster="/media/hero-treatment.jpg"
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-              <img 
-                src="/media/hero-treatment.jpg" 
-                alt="Real dental treatment at DENTAL CLINICa" 
-                className="trust-video-fallback"
+              <iframe
+                ref={iframeRef}
+                className="trust-vimeo-iframe"
+                src="https://player.vimeo.com/video/1218731432?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0"
+                title="DENTAL CLINICa Patient Care Video"
+                allow="autoplay; fullscreen"
+                allowFullScreen
               />
               <div className="trust-video-overlay" />
             </div>
