@@ -1,0 +1,5 @@
+# Demo build. Flip to Allow once the clinic signs.
+User-agent: *
+Disallow: /
+
+Sitemap: https://project-clinic.pages.dev/sitemap.xml
