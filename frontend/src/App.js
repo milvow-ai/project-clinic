@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ArrowDownRight, ArrowRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus } from "lucide-react";
 import "@/App.css";
 import "@/Enquiry.css";
@@ -13,6 +13,37 @@ const photos = [
 const whatsapp = "https://wa.me/message/MWF3LLCPQ53NL1";
 const maps = "https://www.google.com/maps/search/?api=1&query=Fa-99%2C+Thokar+-4%2C+Abul+Fazal+Enclave%2C+Jamia+Nagar%2C+Okhla%2C+New+Delhi%2C+Delhi+110025%2C+India";
 const phone = "tel:+918368784559";
+
+const trustSlides = [
+  {
+    number: "01",
+    tag: "X-RAY / DIAGNOSTICS",
+    title: "Diagnostic Accuracy",
+    description: "Every treatment begins with a clear understanding of your oral health. Detailed diagnostics help us identify what needs attention and plan treatment with confidence.",
+    image: "/media/xray-diagnostics.jpg",
+  },
+  {
+    number: "02",
+    tag: "DENTAL TREATMENT",
+    title: "Gentle Care & Patient Comfort",
+    description: "Modern dentistry should feel calm and comfortable. We take the time to make every visit reassuring, precise, and centred around you.",
+    image: "/media/hero-treatment.jpg",
+  },
+  {
+    number: "03",
+    tag: "DENTAL INSTRUMENTS",
+    title: "Precision in Every Detail",
+    description: "From routine care to complex treatment, every procedure is approached with careful technique, modern equipment, and attention to the smallest details.",
+    image: "/media/dental-instruments.jpg",
+  },
+  {
+    number: "04",
+    tag: "DOCTOR + PATIENT",
+    title: "Care Built Around You",
+    description: "Your concerns, goals, and comfort guide every decision. We explain your options clearly so you can move forward with confidence.",
+    image: "/media/doctor-patient.jpg",
+  },
+];
 
 const AnimatedButtonContent = ({ children }) => <><span className="button-label"><span className="button-label-current">{children}</span><span aria-hidden="true" className="button-label-next">{children}</span></span><span aria-hidden="true" className="button-arrow"><ArrowUpRight /></span></>;
 const Button = ({ children, href = "#contact", light = false, testid }) => <a data-testid={testid} className={`button ${light ? "button-light" : ""}`} href={href}><AnimatedButtonContent>{children}</AnimatedButtonContent></a>;
@@ -52,6 +83,140 @@ const TypewriterReviewQuote = ({ text, speed = 24 }) => {
     </blockquote>
   );
 };
+
+function TrustPhilosophySection() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+  const videoRef = useRef(null);
+
+  // Auto-advance slideshow every 5.5s unless paused by user hover
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % trustSlides.length);
+    }, 5500);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const toggleVideo = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play().catch(() => {});
+        setIsVideoPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsVideoPlaying(false);
+      }
+    } else {
+      setIsVideoPlaying(!isVideoPlaying);
+    }
+  };
+
+  const slide = trustSlides[activeSlide];
+
+  return (
+    <section id="about" className="section trust-section">
+      <div className="container trust-container">
+        {/* Header: Left Badge + Heading, Right Description */}
+        <div className="trust-header">
+          <div className="trust-header-left">
+            <div className="trust-badge">
+              <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
+              <span>OUR PHILOSOPHY</span>
+            </div>
+            <h2 className="trust-heading">
+              Trusted Dental Care for a<br/>Brighter Smile.
+            </h2>
+          </div>
+          <div className="trust-header-right">
+            <p className="trust-description">
+              At the heart of our practice is a commitment to precision and patient comfort. We don’t just treat symptoms; we focus on the long-term health and vitality of your smile.
+            </p>
+          </div>
+        </div>
+
+        {/* 2-Panel Showcase Grid: Left Slideshow (larger), Right Video (anchor) */}
+        <div className="trust-showcase-grid">
+          {/* Left Panel: Dynamic Slideshow with Overlay Text & Dash Progress Indicators */}
+          <div 
+            className="trust-slideshow-panel"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {trustSlides.map((s, idx) => (
+              <div 
+                key={s.title} 
+                className={`trust-slide-bg ${idx === activeSlide ? "active" : ""}`}
+                style={{ backgroundImage: `url(${s.image})` }}
+              />
+            ))}
+            <div className="trust-slide-overlay" />
+
+            <div className="trust-slide-content">
+              <div className="trust-slide-top">
+                <h3 className="trust-slide-title">{slide.title}</h3>
+              </div>
+
+              <div className="trust-slide-bottom">
+                <p className="trust-slide-desc">{slide.description}</p>
+                <div className="trust-slide-indicators">
+                  {trustSlides.map((_, idx) => (
+                    <button
+                      key={idx}
+                      className={`trust-dash-btn ${idx === activeSlide ? "active" : ""}`}
+                      onClick={() => setActiveSlide(idx)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                    >
+                      <span className="trust-dash-line">
+                        {idx === activeSlide && <span className="trust-dash-progress" />}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Panel: Video / Treatment Visual Anchor with Control Toggle */}
+          <div className="trust-video-panel">
+            <div className="trust-video-wrapper">
+              <video
+                ref={videoRef}
+                className="trust-video-player"
+                src="/media/treatment-loop.mp4"
+                poster="/media/hero-treatment.jpg"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+              <img 
+                src="/media/hero-treatment.jpg" 
+                alt="Real dental treatment at DENTAL CLINICa" 
+                className="trust-video-fallback"
+              />
+              <div className="trust-video-overlay" />
+            </div>
+
+            {/* Bottom Right Control Toggle */}
+            <button 
+              className="trust-video-control-btn" 
+              onClick={toggleVideo}
+              aria-label={isVideoPlaying ? "Pause video" : "Play video"}
+            >
+              {isVideoPlaying ? (
+                <span className="pause-bars"><span></span><span></span></span>
+              ) : (
+                <span className="play-triangle">▶</span>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -232,7 +397,8 @@ function App() {
       </div>
     </section>
 
-    <section id="about" className="section intro"><div className="container intro-grid"><div><p className="eyebrow red">A quieter kind of clinic</p><h2>Good care begins<br/>with being <em>heard.</em></h2><p className="lead">DENTAL CLINICa is a dental clinic in Jamia Nagar, Okhla, New Delhi. We believe the first step is a clear conversation — one that gives you context, confidence, and a plan that feels right.</p><a data-testid="about-contact-link" className="text-link" href="#contact">Meet us at the clinic <ArrowRight/></a></div><div className="intro-images"><img className="intro-main" src={photos[1]} alt="Dental chair and clinic interior"/><div className="image-note"><span>01</span><span>A considered space<br/>for your next step</span></div><img className="intro-small" src={photos[2]} alt="DENTAL CLINICa treatment space"/></div></div></section>
+    {/* Trust & Philosophy Section with Dynamic Slideshow and Video Anchor */}
+    <TrustPhilosophySection />
 
     <section className="metrics"><div className="container metrics-grid"><div><strong data-testid="metric-rating">4.9</strong><span>Google rating</span></div><div><strong data-testid="metric-reviews">288</strong><span>Public reviews</span></div><div><strong>01</strong><span>New Delhi location</span></div><div><strong>WA</strong><span>Easy WhatsApp booking</span></div></div></section>
     <section className="statement"><div className="container statement-inner"><p className="eyebrow">THE DENTAL CLINICa APPROACH</p><h2>Clear answers.<br/><em>Calmer decisions.</em></h2><img src={photos[2]} alt="Clinic environment"/><span className="statement-number">02 / 04</span></div></section>
