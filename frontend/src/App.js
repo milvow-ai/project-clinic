@@ -100,7 +100,46 @@ function App() {
     window.open(`${whatsapp}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
   return <main className="site-shell">
-    <div className="utility"><div className="container utility-inner"><span data-testid="utility-location"><MapPin size={13}/> Jamia Nagar, Okhla · New Delhi</span><div className="utility-links"><a data-testid="utility-phone" href={phone}><Phone size={13}/> +91 83687 84559</a><a data-testid="utility-directions" href={maps} target="_blank" rel="noreferrer">Directions <ArrowUpRight/></a><a data-testid="utility-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking <ArrowUpRight/></a></div></div></div>
+    {/* Dynamic Announcement & Discount Strip with Infinite Loop Animation */}
+    <div className="utility discount-strip" data-testid="discount-banner">
+      <div className="ticker-track">
+        <div className="ticker-content">
+          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
+            <span className="ticker-badge">SPECIAL OFFER</span>
+            <span>Flat 20% OFF on Advanced Tooth Implants & Smile Restoration — Book on WhatsApp</span>
+            <span className="ticker-sep">✦</span>
+          </a>
+          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
+            <span className="ticker-badge">LIMITED TIME</span>
+            <span>Complimentary Consultation with Dr Ahmad & Dr Sidra</span>
+            <span className="ticker-sep">✦</span>
+          </a>
+          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
+            <span className="ticker-badge">PATIENT CARE</span>
+            <span>Painless Treatments · Modern Facilities · Jamia Nagar, Okhla</span>
+            <span className="ticker-sep">✦</span>
+          </a>
+        </div>
+        {/* Duplicate track for seamless infinite scroll */}
+        <div className="ticker-content" aria-hidden="true">
+          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
+            <span className="ticker-badge">SPECIAL OFFER</span>
+            <span>Flat 20% OFF on Advanced Tooth Implants & Smile Restoration — Book on WhatsApp</span>
+            <span className="ticker-sep">✦</span>
+          </a>
+          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
+            <span className="ticker-badge">LIMITED TIME</span>
+            <span>Complimentary Consultation with Dr Ahmad & Dr Sidra</span>
+            <span className="ticker-sep">✦</span>
+          </a>
+          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
+            <span className="ticker-badge">PATIENT CARE</span>
+            <span>Painless Treatments · Modern Facilities · Jamia Nagar, Okhla</span>
+            <span className="ticker-sep">✦</span>
+          </a>
+        </div>
+      </div>
+    </div>
     
     {/* Redesigned White/Frosted Navbar with Left Links, Center Logo, Right Button */}
     <header className="header custom-navbar">
