@@ -120,56 +120,56 @@ function App() {
       <img className="hero-image" src={heroImage} alt="DENTAL CLINICa treatment room" />
       <div className="hero-shade custom-hero-shade" />
 
-      <div className="container hero-content custom-hero-content">
-        <div className="hero-badge">
-          <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
-          <span>SINCE 2018 — TRUSTED DENTAL CARE</span>
+      <div className="container custom-hero-container">
+        <div className="custom-hero-content">
+          <div className="hero-badge">
+            <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
+            <span>SINCE 2018 — TRUSTED DENTAL CARE</span>
+          </div>
+
+          <h1 className="hero-heading">
+            Trusted Partner for<br className="hero-br"/> Exceptional Oral Health.
+          </h1>
+
+          <p className="hero-copy">
+            Expert medical specialists dedicated to your family’s wellness.
+          </p>
+
+          <div className="hero-buttons custom-hero-buttons">
+            <AnimatedOralicButton testid="hero-book-button" href={whatsapp}>
+              Book appointment
+            </AnimatedOralicButton>
+            <a data-testid="hero-services-button" className="text-link light-link custom-services-link" href="#treatments">
+              Our services <ArrowRight size={14}/>
+            </a>
+          </div>
         </div>
 
-        <h1 className="hero-heading">
-          Trusted Partner for<br/>
-          Exceptional Oral<br/>
-          Health.
-        </h1>
-
-        <p className="hero-copy">
-          Expert medical specialists dedicated to your family’s wellness.
-        </p>
-
-        <div className="hero-buttons custom-hero-buttons">
-          <AnimatedOralicButton testid="hero-book-button" href={whatsapp}>
-            Book appointment
-          </AnimatedOralicButton>
-          <a data-testid="hero-services-button" className="text-link light-link custom-services-link" href="#treatments">
-            Our services <ArrowRight size={14}/>
-          </a>
-        </div>
+        {/* Real Google Review Card Matching Oralic Design & Red/White Clinic Theme */}
+        <a data-testid="hero-review-card" className="oralic-google-review-card" href={maps} target="_blank" rel="noreferrer">
+          <div className="review-card-stars">
+            <span className="star">★</span>
+            <span className="star">★</span>
+            <span className="star">★</span>
+            <span className="star">★</span>
+            <span className="star">★</span>
+          </div>
+          <blockquote className="review-card-quote">
+            “Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!”
+          </blockquote>
+          <div className="review-card-author">
+            <div className="author-tooth-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.5 2 6 4.5 6 8c0 3 1.5 6.5 2.5 10 .5 2 1.5 4 3.5 4s3-2 3.5-4c1-3.5 2.5-7 2.5-10 0-3.5-2.5-6-6-6z"/>
+              </svg>
+            </div>
+            <div className="author-details">
+              <strong className="author-name">Taniya Zabeen</strong>
+              <span className="author-source">Verified Google Review · 5★</span>
+            </div>
+          </div>
+        </a>
       </div>
-
-      {/* Real Google Review Card Matching Oralic Design & Red/White Clinic Theme */}
-      <a data-testid="hero-review-card" className="oralic-google-review-card" href={maps} target="_blank" rel="noreferrer">
-        <div className="review-card-stars">
-          <span className="star">★</span>
-          <span className="star">★</span>
-          <span className="star">★</span>
-          <span className="star">★</span>
-          <span className="star">★</span>
-        </div>
-        <blockquote className="review-card-quote">
-          “Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!”
-        </blockquote>
-        <div className="review-card-author">
-          <div className="author-tooth-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C8.5 2 6 4.5 6 8c0 3 1.5 6.5 2.5 10 .5 2 1.5 4 3.5 4s3-2 3.5-4c1-3.5 2.5-7 2.5-10 0-3.5-2.5-6-6-6z"/>
-            </svg>
-          </div>
-          <div className="author-details">
-            <strong className="author-name">Taniya Zabeen</strong>
-            <span className="author-source">Verified Google Review · 5★</span>
-          </div>
-        </div>
-      </a>
 
       <div className="hero-bottom">
         <div className="container hero-bottom-inner">
