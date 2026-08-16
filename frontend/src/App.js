@@ -31,6 +31,28 @@ const AnimatedOralicButton = ({ children, href = whatsapp, light = false, testid
   </a>
 );
 
+const TypewriterReviewQuote = ({ text, speed = 24 }) => {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    let index = 0;
+    setDisplayed("");
+    const timer = setInterval(() => {
+      index++;
+      setDisplayed(text.slice(0, index));
+      if (index >= text.length) {
+        clearInterval(timer);
+      }
+    }, speed);
+    return () => clearInterval(timer);
+  }, [text, speed]);
+
+  return (
+    <blockquote className="review-card-quote">
+      “{displayed}”<span className="typewriter-cursor">|</span>
+    </blockquote>
+  );
+};
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
@@ -48,20 +70,14 @@ function App() {
     els.forEach((el) => io.observe(el));
     const heroImg = document.querySelector(".hero-image");
     const finalImg = document.querySelector(".final-cta>img");
-    const header = document.querySelector(".header");
-    let ticking = false;
     const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const y = window.scrollY;
-        header.classList.toggle("scrolled", y > 8);
-        if (heroImg && y < window.innerHeight) heroImg.style.transform = `translateY(${y * 0.16}px) scale(1.03)`;
-        if (finalImg && finalImg.parentElement) {
-          const r = finalImg.parentElement.getBoundingClientRect();
-          if (r.top < window.innerHeight && r.bottom > 0) finalImg.style.transform = `translateY(${(r.top - window.innerHeight / 2) * -0.06}px) scale(1.18)`;
-        }
-        ticking = false;
+      const pos = window.scrollY;
+      if (heroImg) heroImg.style.transform = `scale(${1.03 + pos * 0.0003}) translateY(${pos * 0.08}px)`;
+      if (finalImg) finalImg.style.transform = `scale(${1.18 - (document.body.scrollHeight - window.innerHeight - pos) * 0.0002})`;
+      const headers = document.querySelectorAll(".header, .custom-navbar");
+      headers.forEach(h => {
+        if (pos > 20) h.classList.add("scrolled");
+        else h.classList.remove("scrolled");
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -145,7 +161,7 @@ function App() {
           </div>
         </div>
 
-        {/* Real Google Review Card Matching Oralic Design & Red/White Clinic Theme */}
+        {/* Real Google Review Card Matching Oralic Design & Red/White Clinic Theme with Typewriter */}
         <a data-testid="hero-review-card" className="oralic-google-review-card" href={maps} target="_blank" rel="noreferrer">
           <div className="review-card-stars">
             <span className="star">★</span>
@@ -154,9 +170,7 @@ function App() {
             <span className="star">★</span>
             <span className="star">★</span>
           </div>
-          <blockquote className="review-card-quote">
-            “Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!”
-          </blockquote>
+          <TypewriterReviewQuote text="Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!" />
           <div className="review-card-author">
             <div className="author-tooth-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="currentColor">
