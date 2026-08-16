@@ -1,5 +1,28 @@
 # AI Work Changelog
 
+## 2026-08-17 — Services Carousel Section (Editorial Horizontal Showcase & Bespoke Icons)
+- **What changed**:
+  - Implemented the editorial **Services Carousel Section** positioned immediately below the rating belt:
+    - **Header**: `[ ✛ OUR SERVICES ]` signature pill badge with red plus icon, editorial headline `Find your way forward.` in Fraunces serif, and top-right navigation arrows (`←` and `→`).
+    - **4 Service Cards**:
+      1. `General & Preventive Dentistry`: Routine check-ups, cleaning, gum care (`/media/service-preventive.jpg` with female dentist & patient in chair).
+      2. `Dental Implants`: Replacing missing teeth with secure implants (`/media/service-implants.jpg` with male dentist explaining implant model & X-ray).
+      3. `Smile Makeover`: Personalized cosmetic treatments (`/media/service-makeover.jpg` with female patient viewing smile in mirror).
+      4. `Orthodontics`: Braces & clear aligners (`/media/service-orthodontics.png` with close-up braces).
+    - **Bespoke Monochrome Icons**: Designed 4 custom inline SVGs (shield outline, implant threads, sparkle starburst, bracket wire) with consistent thin linework.
+    - **Dot-to-Arrow CTA Interaction**: "View Details" button with signature red dot that morphs smoothly into a white arrow on hover while keeping button text rock solid.
+    - **Carousel Behavior**: Desktop shows 3 full cards + 4th card partially entering from right to communicate horizontal scrolling; smooth arrow navigation and touch swipe on mobile.
+- **Files modified/added**:
+  - `frontend/public/media/service-preventive.jpg` [NEW]
+  - `frontend/public/media/service-implants.jpg` [NEW]
+  - `frontend/public/media/service-makeover.jpg` [NEW]
+  - `frontend/public/media/service-orthodontics.png` [NEW]
+  - `frontend/src/App.js` [MODIFIED]
+  - `frontend/src/App.css` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.e259449e.js`, `main.d46bbf24.css`).
+  - Verified live in browser subagent: Desktop carousel view, hover dot-to-arrow morph, right-arrow sliding, and mobile responsive layout.
+
 ## 2026-08-16 — Vimeo Video Integration, Slide Frame Refinement & Orthodontic Close Photo
 - **What changed**:
   - Embedded the user's custom Vimeo treatment video (`https://vimeo.com/1218731432`) in background autoplay/loop/muted mode without any player branding or letterboxing.

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowDownRight, ArrowRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowLeft, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus } from "lucide-react";
 import "@/App.css";
 import "@/Enquiry.css";
 
@@ -211,6 +211,163 @@ function TrustPhilosophySection() {
   );
 }
 
+// Bespoke Monochrome Dental Line Icons for Project Clinic
+const PreventiveToothIcon = () => (
+  <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M11 11C11 7 13.5 5 18 5C22.5 5 25 7 25 11C25 15.5 23 19 21.5 28C21 30.5 19.2 30.5 18 27C16.8 30.5 15 30.5 14.5 28C13 19 11 15.5 11 11Z" />
+    <path d="M14 13C15.5 14.5 20.5 14.5 22 13" />
+    <path d="M7 11C7 17 11 22 18 24C25 22 29 17 29 11C23 11 20.5 8 18 6C15.5 8 13 11 7 11Z" strokeWidth="1.1" strokeDasharray="2 2" opacity="0.5"/>
+  </svg>
+);
+
+const ImplantsToothIcon = () => (
+  <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M11 11C11 7 13.5 5 18 5C22.5 5 25 7 25 11C25 14.5 23.5 17 22.5 19H13.5C12.5 17 11 14.5 11 11Z" />
+    <path d="M14 19V28C14 29.5 22 29.5 22 28V19" />
+    <path d="M14.5 22H21.5" />
+    <path d="M15 25H21" />
+    <path d="M16 28H20" />
+  </svg>
+);
+
+const MakeoverToothIcon = () => (
+  <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M10 12C10 7.5 12.5 5.5 17 5.5C21.5 5.5 24 7.5 24 12C24 16.5 22 20 20.5 29C20 31.5 18.2 31.5 17 28C15.8 31.5 14 31.5 13.5 29C12 20 10 16.5 10 12Z" />
+    <path d="M13.5 14C15 16 19 16 20.5 14" />
+    <path d="M28 8L29 11L32 12L29 13L28 16L27 13L24 12L27 11L28 8Z" fill="currentColor" strokeWidth="0.5" />
+  </svg>
+);
+
+const OrthodonticsToothIcon = () => (
+  <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M11 11C11 7 13.5 5 18 5C22.5 5 25 7 25 11C25 15.5 23 19 21.5 28C21 30.5 19.2 30.5 18 27C16.8 30.5 15 30.5 14.5 28C13 19 11 15.5 11 11Z" />
+    <path d="M6 16H30" strokeWidth="1.2" />
+    <rect x="15" y="13.5" width="6" height="5" rx="1" strokeWidth="1.4" />
+  </svg>
+);
+
+const serviceCardsData = [
+  {
+    id: "preventive",
+    title: "General & Preventive Dentistry",
+    description: "Routine check-ups, professional cleaning, gum care, and preventive treatment to keep your smile healthy year-round.",
+    image: "/media/service-preventive.jpg",
+    icon: PreventiveToothIcon,
+    whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about General & Preventive Dentistry.",
+  },
+  {
+    id: "implants",
+    title: "Dental Implants",
+    description: "Replace missing teeth with secure, natural-looking implants designed to restore function and confidence.",
+    image: "/media/service-implants.jpg",
+    icon: ImplantsToothIcon,
+    whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about Dental Implants.",
+  },
+  {
+    id: "makeover",
+    title: "Smile Makeover",
+    description: "A personalized combination of cosmetic treatments to refine your smile while keeping it natural to you.",
+    image: "/media/service-makeover.jpg",
+    icon: MakeoverToothIcon,
+    whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about a Smile Makeover consultation.",
+  },
+  {
+    id: "orthodontics",
+    title: "Orthodontics",
+    description: "Braces and clear aligners to gradually straighten your teeth and create a healthier, more confident smile.",
+    image: "/media/service-orthodontics.png",
+    icon: OrthodonticsToothIcon,
+    whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about Orthodontics and Braces.",
+  },
+];
+
+function ServicesCarouselSection() {
+  const carouselRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (carouselRef.current) {
+      const scrollAmount = direction === "left" ? -380 : 380;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <section id="treatments" className="section services-carousel-section">
+      <div className="container services-carousel-container">
+        {/* Top Header: Badge + Heading on Left, Arrows on Right */}
+        <div className="services-carousel-header">
+          <div className="services-header-left">
+            <div className="trust-badge">
+              <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
+              <span>Our Services</span>
+            </div>
+            <h2 className="services-heading">Find your way forward.</h2>
+          </div>
+          <div className="services-nav-arrows">
+            <button 
+              data-testid="services-prev-btn"
+              className="services-arrow-btn" 
+              onClick={() => scroll("left")}
+              aria-label="Previous services"
+            >
+              <ArrowLeft size={18} />
+            </button>
+            <button 
+              data-testid="services-next-btn"
+              className="services-arrow-btn" 
+              onClick={() => scroll("right")}
+              aria-label="Next services"
+            >
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Horizontal Overflow Track showing 3 full cards + partial 4th extending beyond */}
+      <div className="services-cards-track" ref={carouselRef}>
+        <div className="services-track-inner">
+          {serviceCardsData.map((card) => {
+            const Icon = card.icon;
+            return (
+              <article className="service-editorial-card" key={card.id} data-testid={`service-card-${card.id}`}>
+                <div className="service-card-top">
+                  <div className="service-card-icon" aria-hidden="true">
+                    <Icon />
+                  </div>
+                  <h3 className="service-card-title">{card.title}</h3>
+                  <p className="service-card-desc">{card.description}</p>
+                  <a 
+                    data-testid={`service-cta-${card.id}`}
+                    href={`https://wa.me/message/MWF3LLCPQ53NL1?text=${encodeURIComponent(card.whatsappMsg)}`}
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="service-card-cta"
+                  >
+                    <span className="cta-dot-circle">
+                      <span className="cta-dot" />
+                      <ArrowRight size={12} className="cta-arrow" />
+                    </span>
+                    <span className="cta-text">View Details</span>
+                  </a>
+                </div>
+                <div className="service-card-image-wrap">
+                  <img 
+                    src={card.image} 
+                    alt={`${card.title} at DENTAL CLINICa`} 
+                    className="service-card-img"
+                    loading="lazy"
+                  />
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
@@ -394,13 +551,9 @@ function App() {
     <TrustPhilosophySection />
 
     <section className="metrics"><div className="container metrics-grid"><div><strong data-testid="metric-rating">4.9</strong><span>Google rating</span></div><div><strong data-testid="metric-reviews">288</strong><span>Public reviews</span></div><div><strong>01</strong><span>New Delhi location</span></div><div><strong>WA</strong><span>Easy WhatsApp booking</span></div></div></section>
-    <section className="statement"><div className="container statement-inner"><p className="eyebrow">THE DENTAL CLINICa APPROACH</p><h2>Clear answers.<br/><em>Calmer decisions.</em></h2><img src={photos[2]} alt="Clinic environment"/><span className="statement-number">02 / 04</span></div></section>
 
-    <section className="dark philosophy"><div className="container philosophy-inner"><div><p className="eyebrow red">A better first impression</p><h2>We make the<br/><em>next step simple.</em></h2></div><p className="dark-lead">From your first message to the moment you leave, we want dental care to feel clear, comfortable, and human.</p></div><div className="container philosophy-points"><div><span>01</span><h3>Clear conversations</h3><p>We explain the options so you can make a decision with confidence.</p></div><div><span>02</span><h3>A calmer visit</h3><p>A welcoming environment designed around your questions and comfort.</p></div><div><span>03</span><h3>Thoughtful care</h3><p>A modern clinical setting in the heart of Okhla.</p></div></div></section>
-
-    <section id="treatments" className="section care"><div className="container care-grid"><div className="care-intro"><p className="eyebrow red">Scope of care</p><h2>Find your<br/><em>way forward.</em></h2><p className="lead">A simple starting point for exploring the conversations your smile may need. Confirm the right treatment path with the clinic team.</p><span data-testid="treatments-confirmation-note" className="confirmation-note">Treatment list · pending clinic confirmation</span><img src={photos[1]} alt="Dental consultation setting"/></div><div className="accordion">{services.map((service, i) => <div className={`accordion-item ${openService === i ? "expanded" : ""}`} key={service}><button data-testid={`service-accordion-${i}`} onClick={() => setOpenService(openService === i ? -1 : i)}><span>0{i + 1}</span><b>{service}</b><ChevronDown/></button>{openService === i && <p data-testid={`service-detail-${i}`}>A considered conversation about {service.toLowerCase()}, tailored to your questions and confirmed by the clinic team.</p>}</div>)}</div></div></section>
-
-    <section className="dark service-cards"><div className="container"><div className="section-heading"><div><p className="eyebrow red">A framework, not a formula</p><h2>Care that meets<br/><em>you where you are.</em></h2></div><span className="heading-note">Three ways to begin<br/>a better conversation.</span></div><div className="card-grid">{[["Prevent", "Keep small concerns from becoming bigger decisions.", photos[2]], ["Restore", "A clear, considered route back to comfort.", photos[1]], ["Enhance", "Explore what feeling good about your smile means to you.", photos[0]]].map(([title, text, image], i) => <article className="service-card" key={title}><img src={image} alt={`${title} dental care`} /><div className="service-card-content"><span>0{i + 1}</span><h3>{title}</h3><p>{text}</p><a data-testid={`service-card-${title.toLowerCase()}`} href={whatsapp} target="_blank" rel="noreferrer">Start a conversation <ArrowRight/></a></div></article>)}</div></div></section>
+    {/* Services Carousel Section Matching Editorial Polish with 4 Cards and Navigation */}
+    <ServicesCarouselSection />
 
     <section className="section difference"><div className="container"><div className="center-heading"><p className="eyebrow red">Why begin here</p><h2>A more considered<br/><em>way to care.</em></h2></div><div className="compare"><div className="compare-head"><span></span><b>DENTAL CLINICa</b><span>What matters</span></div>{[["Clear communication", "A conversation before a recommendation"], ["Easy WhatsApp booking", "Reach us in the way that feels easiest"], ["Verified Google trust", "4.9 rating · 288 public reviews"], ["Clear directions", "Jamia Nagar, Okhla · H74X+26"]].map(([a,b], i) => <div className="compare-row" key={a}><span>{a}</span><strong>✓</strong><em>{b}</em></div>)}</div></div></section>
 
