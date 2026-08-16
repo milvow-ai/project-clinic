@@ -3,7 +3,7 @@ import { ArrowDownRight, ArrowRight, ChevronDown, Menu, Phone, MapPin, X, Shoppi
 import "@/App.css";
 import "@/Enquiry.css";
 
-const logo = "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/ffpfut3t_4ca5f714-79cd-4bd3-84cc-ecc1bfb5e1d1.webp";
+const logoImg = "/media/dental-clinica-logo.png";
 const heroImage = "/media/hero-treatment.jpg";
 const photos = [
   "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/fp78lijx_WhatsApp%20Image%202026-08-15%20at%206.13.27%20PM.webp",
@@ -17,6 +17,19 @@ const phone = "tel:+918368784559";
 const AnimatedButtonContent = ({ children }) => <><span className="button-label"><span className="button-label-current">{children}</span><span aria-hidden="true" className="button-label-next">{children}</span></span><span aria-hidden="true" className="button-arrow"><ArrowUpRight /></span></>;
 const Button = ({ children, href = "#contact", light = false, testid }) => <a data-testid={testid} className={`button ${light ? "button-light" : ""}`} href={href}><AnimatedButtonContent>{children}</AnimatedButtonContent></a>;
 const ArrowUpRight = () => <ArrowRight size={15} />;
+
+const AnimatedOralicButton = ({ children, href = whatsapp, light = false, testid, className = "" }) => (
+  <a data-testid={testid} className={`oralic-button ${light ? "oralic-button-light" : ""} ${className}`} href={href} target="_blank" rel="noreferrer">
+    <span className="button-flip-label">
+      <span className="button-flip-current">{children}</span>
+      <span aria-hidden="true" className="button-flip-next">{children}</span>
+    </span>
+    <span aria-hidden="true" className="button-morph-icon">
+      <span className="btn-dot-indicator">•</span>
+      <span className="btn-arrow-indicator"><ArrowUpRight /></span>
+    </span>
+  </a>
+);
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,7 +56,7 @@ function App() {
       requestAnimationFrame(() => {
         const y = window.scrollY;
         header.classList.toggle("scrolled", y > 8);
-        if (heroImg && y < window.innerHeight) heroImg.style.transform = `translateY(${y * 0.18}px) scale(1.04)`;
+        if (heroImg && y < window.innerHeight) heroImg.style.transform = `translateY(${y * 0.16}px) scale(1.03)`;
         if (finalImg && finalImg.parentElement) {
           const r = finalImg.parentElement.getBoundingClientRect();
           if (r.top < window.innerHeight && r.bottom > 0) finalImg.style.transform = `translateY(${(r.top - window.innerHeight / 2) * -0.06}px) scale(1.18)`;
@@ -55,6 +68,7 @@ function App() {
     onScroll();
     return () => { window.removeEventListener("scroll", onScroll); io.disconnect(); };
   }, []);
+  const nav = ["About", "Treatments", "Reviews", "Gallery", "Contact"];
   const services = ["Check-ups and cleaning", "Fillings and restorations", "Root canal treatment", "Crowns and bridges", "Dental implants", "Whitening and smile enhancement"];
   const faqs = [
     ["How can I book an appointment?", "Call +91 83687 84559 or message DENTAL CLINICa directly on WhatsApp. We will help you find the right next step."],
@@ -72,49 +86,44 @@ function App() {
   return <main className="site-shell">
     <div className="utility"><div className="container utility-inner"><span data-testid="utility-location"><MapPin size={13}/> Jamia Nagar, Okhla · New Delhi</span><div className="utility-links"><a data-testid="utility-phone" href={phone}><Phone size={13}/> +91 83687 84559</a><a data-testid="utility-directions" href={maps} target="_blank" rel="noreferrer">Directions <ArrowUpRight/></a><a data-testid="utility-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking <ArrowUpRight/></a></div></div></div>
     
-    {/* Oralic-style Navbar */}
-    <header className="header oralic-header">
-      <div className="container header-inner">
-        <nav className={menuOpen ? "nav nav-open" : "nav"}>
-          <a data-testid="nav-home" href="#top" onClick={() => setMenuOpen(false)}>HOME</a>
-          <a data-testid="nav-about" href="#about" onClick={() => setMenuOpen(false)}>ABOUT</a>
-          <a data-testid="nav-services" href="#treatments" onClick={() => setMenuOpen(false)}>SERVICES</a>
-          <a data-testid="nav-pages" href="#reviews" onClick={() => setMenuOpen(false)}>PAGES +</a>
-          <a data-testid="nav-contact" href="#contact" onClick={() => setMenuOpen(false)}>CONTACT</a>
-        </nav>
+    {/* Redesigned White/Frosted Navbar with Left Links, Center Logo, Right Button */}
+    <header className="header custom-navbar">
+      <div className="container header-inner custom-navbar-inner">
+        <div className="navbar-left">
+          <nav className={menuOpen ? "nav nav-open" : "nav"}>
+            {nav.map((item) => (
+              <a data-testid={`nav-${item.toLowerCase()}`} key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>
+                {item}
+              </a>
+            ))}
+          </nav>
+        </div>
 
-        <a data-testid="brand-logo-link" href="#top" className="brand oralic-brand">
-          <svg className="oralic-sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="3.6" fill="currentColor"/>
-            <path d="M12 2.5V5M12 19V21.5M2.5 12H5M19 12H21.5M5.28 5.28L7.05 7.05M16.95 16.95L18.72 18.72M5.28 18.72L7.05 16.95M16.95 7.05L18.72 5.28" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>
-          </svg>
-          <span className="brand-title">DENTAL CLINICa<sup>™</sup></span>
+        <a data-testid="brand-logo-link" href="#top" className="brand navbar-center-brand">
+          <img src={logoImg} alt="DENTAL CLINICa logo" className="navbar-logo-img" />
         </a>
 
-        <div className="header-actions oralic-header-actions">
-          <div className="oralic-cart-pill" title="Consultation Cart">
-            <ShoppingCart size={14} />
-            <span>0</span>
-          </div>
-          <a data-testid="header-book-cta" href={whatsapp} target="_blank" rel="noreferrer" className="oralic-btn oralic-btn-nav">
-            SCHEDULE A CALL <span className="btn-bullet">•</span>
-          </a>
+        <div className="navbar-right">
+          <AnimatedOralicButton testid="header-book-cta" href={whatsapp}>
+            Book appointment
+          </AnimatedOralicButton>
+
           <button data-testid="mobile-menu-button" className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-            {menuOpen ? <X size={22}/> : <Menu size={22}/>}
+            {menuOpen ? <X size={24}/> : <Menu size={24}/>}
           </button>
         </div>
       </div>
     </header>
 
-    {/* Oralic-style Hero Section */}
-    <section id="top" className="hero oralic-hero">
+    {/* Hero Section with Warm Natural Contrast and Oralic Review Card */}
+    <section id="top" className="hero custom-hero">
       <img className="hero-image" src={heroImage} alt="DENTAL CLINICa treatment room" />
-      <div className="hero-shade" />
+      <div className="hero-shade custom-hero-shade" />
 
-      <div className="container hero-content">
+      <div className="container hero-content custom-hero-content">
         <div className="hero-badge">
           <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
-          <span>SINCE 1998 — TRUSTED DENTAL CARE</span>
+          <span>SINCE 2018 — TRUSTED DENTAL CARE</span>
         </div>
 
         <h1 className="hero-heading">
@@ -127,24 +136,40 @@ function App() {
           Expert medical specialists dedicated to your family’s wellness.
         </p>
 
-        <div className="hero-cta-group">
-          <a data-testid="hero-services-button" href="#treatments" className="oralic-btn oralic-btn-white">
-            OUR SERVICES <span className="btn-bullet">•</span>
-          </a>
-          <a data-testid="hero-book-button" href={whatsapp} target="_blank" rel="noreferrer" className="oralic-btn oralic-btn-navy">
-            BOOK APPOINTMENT <span className="btn-bullet">•</span>
+        <div className="hero-buttons custom-hero-buttons">
+          <AnimatedOralicButton testid="hero-book-button" href={whatsapp}>
+            Book appointment
+          </AnimatedOralicButton>
+          <a data-testid="hero-services-button" className="text-link light-link custom-services-link" href="#treatments">
+            Our services <ArrowRight size={14}/>
           </a>
         </div>
-
-        {/* Floating / Inline Google Rating Card */}
-        <a data-testid="hero-rating-pill" className="oralic-rating-card" href={maps} target="_blank" rel="noreferrer">
-          <div className="rating-stars">★★★★★</div>
-          <div className="rating-meta">
-            <strong>4.9 on Google</strong>
-            <span>(288 reviews)</span>
-          </div>
-        </a>
       </div>
+
+      {/* Real Google Review Card Matching Oralic Design & Red/White Clinic Theme */}
+      <a data-testid="hero-review-card" className="oralic-google-review-card" href={maps} target="_blank" rel="noreferrer">
+        <div className="review-card-stars">
+          <span className="star">★</span>
+          <span className="star">★</span>
+          <span className="star">★</span>
+          <span className="star">★</span>
+          <span className="star">★</span>
+        </div>
+        <blockquote className="review-card-quote">
+          “Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!”
+        </blockquote>
+        <div className="review-card-author">
+          <div className="author-tooth-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8.5 2 6 4.5 6 8c0 3 1.5 6.5 2.5 10 .5 2 1.5 4 3.5 4s3-2 3.5-4c1-3.5 2.5-7 2.5-10 0-3.5-2.5-6-6-6z"/>
+            </svg>
+          </div>
+          <div className="author-details">
+            <strong className="author-name">Taniya Zabeen</strong>
+            <span className="author-source">Verified Google Review · 5★</span>
+          </div>
+        </div>
+      </a>
 
       <div className="hero-bottom">
         <div className="container hero-bottom-inner">
@@ -177,8 +202,7 @@ function App() {
 
     <section className="section faq"><div className="container faq-grid"><div><p className="eyebrow red">Good to know</p><h2>Questions,<br/><em>answered.</em></h2><p className="lead">The practical details, before you arrive.</p></div><div>{faqs.map(([q,a], i) => <div className="faq-item" key={q}><button data-testid={`faq-question-${i}`} onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{q}</span><ChevronDown className={openFaq === i ? "rotate" : ""}/></button>{openFaq === i && <p data-testid={`faq-answer-${i}`}>{a}</p>}</div>)}</div></div></section>
     <section className="journal"><div className="container"><div className="section-heading"><div><p className="eyebrow red">From the journal</p><h2>Small notes on<br/><em>better care.</em></h2></div><span className="heading-note">Helpful reading<br/>coming soon</span></div><div className="journal-grid">{["How to prepare for your first visit", "Questions worth asking your dentist", "Keeping your smile comfortable"].map((item, i) => <article key={item}><span>0{i + 1} · JOURNAL</span><h3>{item}</h3><p>Helpful guidance from DENTAL CLINICa, coming soon.</p><ArrowDownRight/></article>)}</div></div></section>
-    <section className="final-cta"><img src={photos[0]} alt="DENTAL CLINICa clinic interior"/><div className="final-shade"/><div className="container final-content"><p className="eyebrow">DENTAL CLINICa · OKHLA</p><h2>Start with a<br/><em>conversation.</em></h2><div><Button testid="final-book-button" href={whatsapp}>Book an appointment</Button><a data-testid="final-call-link" href={phone} className="text-link light-link">Call +91 83687 84559 <ArrowRight/></a></div></div></section>
-    <footer className="footer"><div className="container footer-grid"><div><img src={logo} alt="DENTAL CLINICa logo" className="footer-logo"/><p>A considered dental experience<br/>in Jamia Nagar, Okhla.</p></div><div><span className="footer-label">Visit</span><a data-testid="footer-address" href={maps} target="_blank" rel="noreferrer">Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</a></div><div><span className="footer-label">Connect</span><a data-testid="footer-phone" href={phone}>+91 83687 84559</a><a data-testid="footer-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking</a><a data-testid="footer-maps" href={maps} target="_blank" rel="noreferrer">Google Maps</a></div><div><span className="footer-label">Explore</span><a href="#about">About</a><a href="#treatments">Treatments</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div></div><div className="container footer-bottom"><span>© 2026 DENTAL CLINICa</span><span>Some content pending clinic confirmation</span><span>Privacy · Terms</span></div></footer>
+    <footer className="footer"><div className="container footer-grid"><div><img src={logoImg} alt="DENTAL CLINICa logo" className="footer-logo"/><p>A considered dental experience<br/>in Jamia Nagar, Okhla.</p></div><div><span className="footer-label">Visit</span><a data-testid="footer-address" href={maps} target="_blank" rel="noreferrer">Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</a></div><div><span className="footer-label">Connect</span><a data-testid="footer-phone" href={phone}>+91 83687 84559</a><a data-testid="footer-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking</a><a data-testid="footer-maps" href={maps} target="_blank" rel="noreferrer">Google Maps</a></div><div><span className="footer-label">Explore</span><a href="#about">About</a><a href="#treatments">Treatments</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div></div><div className="container footer-bottom"><span>© 2026 DENTAL CLINICa</span><span>Some content pending clinic confirmation</span><span>Privacy · Terms</span></div></footer>
     <div className="mobile-actions"><a data-testid="mobile-call-action" href={phone}><Phone/>Call</a><a data-testid="mobile-whatsapp-action" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp</a><a data-testid="mobile-book-action" href={whatsapp}>Book</a></div>
   </main>;
 }

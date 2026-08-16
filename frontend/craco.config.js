@@ -102,6 +102,12 @@ let webpackConfig = {
       if (config.enableHealthCheck && healthPluginInstance) {
         webpackConfig.plugins.push(healthPluginInstance);
       }
+
+      // Avoid worker out of memory error in Node 22 on Windows
+      if (webpackConfig.optimization) {
+        webpackConfig.optimization.minimize = false;
+      }
+
       return webpackConfig;
     },
   },

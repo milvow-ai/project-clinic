@@ -1,16 +1,20 @@
 # AI Work Changelog
 
-## 2026-08-16 — Oralic Hero & Navbar Redesign
+## 2026-08-16 — Oralic Hero & Navbar Redesign (v2 Brand Alignment)
 - **What changed**:
-  - Implemented the Oralic-style Navbar with left navigation links (`HOME`, `ABOUT`, `SERVICES`, `PAGES +`, `CONTACT`), centered clinic brand logo with radiant sun emblem in clinic red, shopping cart pill (`🛒 0`), and `SCHEDULE A CALL •` CTA button.
-  - Implemented the Oralic-style Hero Section with user-provided high-res treatment background image (`/media/hero-treatment.jpg`), medical cross badge (`✛ SINCE 1998 — TRUSTED DENTAL CARE`), bold grotesque headline (`Trusted Partner for Exceptional Oral Health.`), subtitle (`Expert medical specialists dedicated to your family's wellness.`), solid white primary CTA (`OUR SERVICES •`), dark navy secondary CTA (`BOOK APPOINTMENT •`), and Google 5-star rating glass card (`4.9 on Google (288 reviews)`).
-  - 100% strictly responsive across desktop and mobile (390px) viewports with mobile drawer menu and touch-optimized controls.
+  - Replaced the dark theme header with a clean white/frosted navbar (`rgba(255, 255, 255, 0.96)` with blur).
+  - Swapped navbar positions to place site navigation links (`ABOUT`, `TREATMENTS`, `REVIEWS`, `GALLERY`, `CONTACT`) on the left, the real clinic brand logo in the center, and the animated "BOOK APPOINTMENT" button on the right.
+  - Implemented the custom animated button with solid red background, white text, dot-to-arrow morph and text flip animation on hover, and removed all glowing box-shadows.
+  - Sized and aligned the hero typography (H1 & copy) cleanly to match the Oralic structure.
+  - Updated eyebrow badge text to `SINCE 2018 — TRUSTED DENTAL CARE`.
+  - Added a compact Oralic-style real Google Review card for patient Taniya Zabeen with 5 red stars, quote, and tooth avatar, positioned at the bottom right on desktop and stacked neatly on mobile.
 - **Files modified/added**:
+  - `frontend/public/media/dental-clinica-logo.png` [NEW]
   - `frontend/public/media/hero-treatment.jpg` [NEW]
-  - `frontend/public/index.html` [MODIFIED]
   - `frontend/src/App.js` [MODIFIED]
   - `frontend/src/App.css` [MODIFIED]
-- **Why**: Requested by user to adapt Oralic visual layout, typography, radius, depth, badge, and navigation structure while preserving clinic branding and WhatsApp CTAs.
+  - `frontend/craco.config.js` [MODIFIED]
+- **Why**: Addressed user review feedback to use real clinic branding, correct navbar alignment/swapping, remove red glow shadow, update badge year to 2018, and place compact Taniya Zabeen Google review card.
 - **Verification**:
   - `yarn build` compiled successfully without warnings or errors.
-  - Browser visual verification tested and verified via live rendering at desktop (1440px) and mobile (390px) viewports with screenshots.
+  - Verified in browser with desktop and mobile screenshots.
