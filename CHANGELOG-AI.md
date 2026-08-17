@@ -2,24 +2,17 @@
 
 ## 2026-08-17 — FINAL REVISION: Testimonials / Infinite Editorial Marquee (#080808 + White Cards)
 - **What changed**:
-  - Rebuilt the **Testimonials section** according to the exact infinite marquee specification:
-    - **Visual Contrast**: Deep solid black `#080808` section background with large, crisp, pure white `#FFFFFF` editorial cards (`460px` width, `500px` height, `20px` radius).
-    - **Removed All Navigation UI**: Completely eliminated previous/next arrow buttons, pagination, counters (`04 / 06`), and finite slider behaviors.
-    - **Continuous Right-to-Left Infinite Marquee**: Seamless 3x duplicated sequence (`patientReviews`) running a continuous `55s` linear translation without visible jumps or resets.
-    - **Viewport-Triggered Dynamic Typewriter Loop**:
-      - Typing starts from character 0 at `50ms/char` when a card enters the viewport from the right.
-      - Full review holds for `1000ms` upon completion.
-      - Review text smoothly fades out (`400ms`) as the card continues leftward toward exit.
-      - Review resets off-screen and types fresh from character 0 when returning from the right.
-    - **Cursor-Responsive 2px Red Gradient Border**: Masked `::before` pseudo-element with radial gradient mapped to `--mouse-x` and `--mouse-y` tracking the cursor strictly around the 2px perimeter border with zero internal content shifting or tilting.
-    - **Card Hierarchy**: 5 Red Stars (`#E31B23`) → Near-black `#080808` Fraunces review text → Divider line → Patient name (`#080808`) + Context (`#64748b`) + Review number (`01`–`06` in `DM Mono`).
-    - **Header**: Large `Real experiences.` in `#FFFFFF` Fraunces serif and supporting copy in `#E8E8E2` Sora.
+  - Refined the **Testimonials section** based on feedback:
+    - **Persistent In-Viewport Review Text**: Once the typewriter animation finishes typing, the full review text remains permanently visible and intact for the card's entire journey across the viewport (does not fade out or disappear prematurely). When the card exits on the left, it resets off-screen and types fresh from character 0 on re-entering from the right.
+    - **Ultra-Vibrant 2.5px Cursor Border Gradient**: Enhanced the hover border glow with a `2.5px` radial gradient mapped to cursor coordinates (`--mouse-x`, `--mouse-y`) featuring `#E31B23` / `#FF2630` highlights, subtle warm ambient shadow, and zero internal content shifting.
+    - **Visual Contrast**: Deep solid black `#080808` section background with crisp `#FFFFFF` editorial cards (`460px` x `500px`).
+    - **Zero Navigation UI**: Removed all manual arrows, pagination, and counter buttons in favor of continuous infinite convection.
 - **Files modified**:
   - `frontend/src/App.js` [MODIFIED]
   - `frontend/src/App.css` [MODIFIED]
 - **Verification**:
-  - Production build compiled successfully (`main.7de967fc.js`, `main.7d7954c7.css`).
-  - Verified live in browser subagent on Desktop (1440x900) and Mobile (390x844).
+  - Production build compiled successfully (`main.5c17caad.js`, `main.ee19fd69.css`).
+  - Verified live in browser subagent on Desktop (1440x900) with interactive screenshots.
 
 ## 2026-08-17 — Rebuilt Comparison Section From Scratch (Monumental Editorial Architecture)
 - **What changed**:

@@ -520,7 +520,7 @@ const patientReviews = [
 
 function TestimonialCard({ item, reviewNumber }) {
   const [displayedText, setDisplayedText] = useState("");
-  const [isFading, setIsFading] = useState(false);
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
   const cardRef = useRef(null);
   const isTypingRef = useRef(false);
   const timeoutRef = useRef(null);
@@ -532,12 +532,10 @@ function TestimonialCard({ item, reviewNumber }) {
 
     let charIndex = 0;
     const fullText = `"${item.review}"`;
-    const typeSpeed = 50; // 45–60ms per character
-    const holdDuration = 1000; // 800–1200ms hold after typing
-    const fadeDuration = 400; // 400ms fade
+    const typeSpeed = 45; // 40–50ms per character
 
     setDisplayedText("");
-    setIsFading(false);
+    setIsTypingComplete(false);
 
     const typeNextChar = () => {
       if (charIndex < fullText.length) {
@@ -545,16 +543,8 @@ function TestimonialCard({ item, reviewNumber }) {
         setDisplayedText(fullText.slice(0, charIndex));
         timeoutRef.current = setTimeout(typeNextChar, typeSpeed);
       } else {
-        // Typing complete -> Hold briefly
-        timeoutRef.current = setTimeout(() => {
-          // Fade text out
-          setIsFading(true);
-          timeoutRef.current = setTimeout(() => {
-            setDisplayedText("");
-            setIsFading(false);
-            isTypingRef.current = false;
-          }, fadeDuration);
-        }, holdDuration);
+        // Typing complete -> Remains permanently visible in viewport (never disappears)
+        setIsTypingComplete(true);
       }
     };
 
@@ -572,15 +562,15 @@ function TestimonialCard({ item, reviewNumber }) {
           if (entry.isIntersecting) {
             startTypingCycle();
           } else {
-            // When exiting viewport, cancel typing and reset text
+            // When exiting viewport on the left, reset state so it types fresh on re-entering
             clearTimeout(timeoutRef.current);
             isTypingRef.current = false;
             setDisplayedText("");
-            setIsFading(false);
+            setIsTypingComplete(false);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
     observer.observe(cardEl);
@@ -616,9 +606,9 @@ function TestimonialCard({ item, reviewNumber }) {
       </div>
 
       <div className="testimonial-quote-box">
-        <blockquote className={`testimonial-quote-text ${isFading ? "text-fading" : ""}`}>
+        <blockquote className="testimonial-quote-text">
           {displayedText}
-          <span className="testimonial-caret" aria-hidden="true" />
+          {!isTypingComplete && <span className="testimonial-caret" aria-hidden="true" />}
         </blockquote>
       </div>
 
