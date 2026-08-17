@@ -12,8 +12,9 @@
     - Top of Page Anchor: Always visible at `scrollY <= 65px`.
     - Trackpad Jitter Protection: Integrated directional threshold (`8px`) to prevent flickering during small wheel ticks or trackpad finger resting.
     - Adjusted `.site-shell` to `overflow-x: clip; overflow-y: visible` to ensure unbroken sticky behavior.
-  - **Bottom-of-Viewport Editorial Soft Focus Overlay**:
-    - Implemented a fixed `48px` viewport bottom edge blur (`.viewport-edge-blur`) with `pointer-events: none`, `backdrop-filter: blur(2.5px)`, and a vertical linear gradient mask so content entering/leaving the viewport edge gets a subtle photographic softness while central content remains 100% crisp.
+  - **Bottom-of-Viewport Editorial Progressive Blur Overlay (Webflow & Framer Calibrated)**:
+    - Upgraded `.viewport-edge-blur` to $92\text{px}$ height with `backdrop-filter: blur(12px) saturate(130%)` and a smooth multi-stop linear gradient alpha mask (`rgba(0,0,0,1)` to `transparent`).
+    - Gives a clearly perceptible, luxurious progressive blur effect to incoming cards and text passing through the lower viewport boundary while keeping the active reading area crisp.
   - **Continuous Section Transitions & Subtle Micro-Motion**:
     - Replaced heavy section jump reveals with GPU-accelerated `.reveal` classes (`translate3d(0, 22px, 0)`).
     - Added subtle parallax micro-motion to the hero background image (`scale(1.03) translate3d(0, pos * 0.045px, 0)`).

@@ -26,9 +26,9 @@ html.lenis,html.lenis body{height:auto}
 .lenis.lenis-stopped{overflow:hidden}
 .lenis.lenis-scrolling iframe{pointer-events:none}
 
-/* Viewport Bottom Edge Soft Focus Gradient Treatment (Fixed, pointer-events: none) */
-.viewport-edge-blur{position:fixed;bottom:0;left:0;right:0;height:48px;pointer-events:none;z-index:45;backdrop-filter:blur(2.5px);-webkit-backdrop-filter:blur(2.5px);mask-image:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 45%,transparent 100%);-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 45%,transparent 100%);transition:opacity .4s ease}
-@media(max-width:900px){.viewport-edge-blur{bottom:48px;height:32px}}
+/* Viewport Bottom Edge Progressive Blur Treatment (Webflow/Framer Style, Fixed, pointer-events: none) */
+.viewport-edge-blur{position:fixed;bottom:0;left:0;right:0;height:92px;pointer-events:none;z-index:45;backdrop-filter:blur(12px) saturate(130%);-webkit-backdrop-filter:blur(12px) saturate(130%);mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0.85) 32%,rgba(0,0,0,0.35) 68%,transparent 100%);-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,1) 0%,rgba(0,0,0,0.85) 32%,rgba(0,0,0,0.35) 68%,transparent 100%);transition:opacity .4s ease}
+@media(max-width:900px){.viewport-edge-blur{bottom:48px;height:65px;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}}
 .navbar-left .nav a{font-family:'Sora',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#1a1a1a;transition:color .25s ease;white-space:nowrap}
 .navbar-left .nav a:hover{color:var(--red)}
 .navbar-center-brand{display:flex;align-items:center;justify-content:center;margin:0 auto}
