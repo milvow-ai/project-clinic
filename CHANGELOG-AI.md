@@ -1,5 +1,15 @@
 # AI Work Changelog
 
+## 2026-08-17 — HERO SECTION: Updated Main Hero Background Image
+- **What changed**:
+  - Replaced `hero-treatment.jpg` with the user's preferred high-resolution photo showcasing a peaceful patient in relaxed comfort with eyes closed receiving a gentle dental checkup from the clinician.
+  - Recompiled production bundle and verified visual harmony with the live Google Review card, typographic overlay, and CTA buttons.
+- **Files modified**:
+  - `frontend/public/media/hero-treatment.jpg` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully.
+  - Verified live in browser subagent on 1440x900 (`verified_new_hero_image.png`).
+
 ## 2026-08-17 — GLOBAL SCROLL EXPERIENCE: Apple/Webflow-Style Inertial Scrolling, Direction-Aware Navbar & Viewport Depth Blur
 - **What changed**:
   - **Lenis Inertial Scroll Engine Integration**:
