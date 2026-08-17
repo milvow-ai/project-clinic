@@ -1,25 +1,29 @@
 # AI Work Changelog
 
-## 2026-08-17 — WHY / Our Standards Comparison Section (Airy #E8E8E2 Editorial Revision)
+## 2026-08-17 — Comparison Table Visual Language & Iconography (Final Editorial Polish)
 - **What changed**:
-  - Completely redesigned the **WHY / Standards Section** to match the light, airy, expansive editorial benchmark:
-    - **Removed Large Dark Block**: Swapped out the dark block treatment for a light, high-end, clinical visual palette using `#FFFFFF` primary background and `#E8E8E2` soft warm-grey/cream for the Project Clinic column.
-    - **Expanded Table Scale**: Increased container width to `1420px` desktop scale with generous 84px row heights and spacious padding.
-    - **Editorial Header**: `[ ✛ OUR STANDARDS ]` badge with red plus icon in DM Mono, large `Experience the difference.` heading in Fraunces serif, and concise right-aligned supporting statement in Sora.
-    - **Original Clinic Logo**: Embedded the exact original `dental-clinica-logo.png` logo asset centered directly in the `#E8E8E2` header column.
-    - **Black Line Icons & Indicators**:
-      - Column 1: Minimal black line icons inside light neutral containers (`MessageSquare`, `SlidersHorizontal`, `Heart`, `Eye`, `Clock`, `RotateCcw`).
-      - Column 2 (Project Clinic): Circular checkmarks (`✓`) in clean white circle badges with dark borders.
-      - Column 3 (Typical Dental Visit): Subtle neutral minus indicators (`—`) in soft circle containers.
-    - **Refined Micro-Interactions**: On row hover, the row background shifts subtly toward `#E8E8E2`, the feature icon and checkmark transition smoothly to Project Clinic Red (`#E31B23`) with a soft glow, and feature typography strengthens.
-    - **Responsive Layout**: Desktop (1420px) 3-column table, tablet proportional scaling, and mobile horizontal swipe wrapper with compact column sizing.
+  - Refined the **WHY / Standards Comparison Table** to match the Oralic editorial benchmark:
+    - **Two Equal Worlds Color Architecture**:
+      - Column 1 (`What Matters`): 50% width on clean **WHITE** background.
+      - Column 2 (`DENTAL CLINICa`): 25% width on clean **WHITE** background with original centered logo.
+      - Column 3 (`Typical Dental Visit`): 25% width on muted **`#E8E8E2`** background with rounded top/bottom caps.
+      - One continuous architectural table (no floating cards, no dark navy/black blocks).
+    - **Refined Editorial Indicators (No AI UI)**:
+      - Removed all large filled red circles and heavy SaaS UI elements.
+      - Dental Clinica: Clean, thin, centered black circular checkmark (`✓`).
+      - Typical Dental Visit: Clean, thin, centered muted grey circular cross (`×`).
+    - **Cohesive Lucide Line-Icon System**:
+      - 40x40px neutral `#E8E8E2` square container with 10px radius (no heavy border or shadow).
+      - Black `1.85px` line icons: `MessageSquare`, `SlidersHorizontal`, `Heart`, `Eye`, `Clock3`, `RotateCcw`.
+    - **Restrained Micro-Interactions**:
+      - On row hover, feature icon container receives a subtle warm tint (`rgba(227, 27, 35, 0.08)`), icon transitions from Black to Project Clinic Red (`#E31B23`), checkmark transitions from Black to `#E31B23`, and feature text font weight strengthens without any jarring scale jumps.
+    - **Responsive Architecture**: Generous 84px desktop row height with horizontal touch swipe on mobile.
 - **Files modified/added**:
   - `frontend/src/App.js` [MODIFIED]
   - `frontend/src/App.css` [MODIFIED]
-  - `frontend/public/media/dental-clinica-logo.png` [UPDATED]
 - **Verification**:
-  - Production build compiled successfully (`main.cc64e207.js`, `main.2ffba611.css`).
-  - Verified live in browser subagent on Desktop (1440px) and Mobile (502px/390px) with interactive screenshots.
+  - Production build compiled successfully (`main.0b72de30.js`, `main.98ad5c36.css`).
+  - Verified live in browser subagent on Desktop (1440px), Hover state, and Mobile (390px) with interactive screenshots.
 
 ## 2026-08-17 — Services Section Premium UI Refinement (Agency Editorial Benchmark)
 - **What changed**:
