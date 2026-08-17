@@ -484,4 +484,5 @@
 }
 
 .intro-main,.intro-small{transition:transform 1.1s var(--ease-out-expo)}.intro-images:hover .intro-main{transform:scale(1.02)}
+.enquiry-form .oralic-button,.enquiry-form .button,.enquiry-form button[type="submit"]{margin-top:26px!important;display:inline-flex}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}.hero-content>*,.hero-bottom,.reveal{opacity:1!important;transform:none!important}.testimonials-marquee-track{animation:none!important;overflow-x:auto}}

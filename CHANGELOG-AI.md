@@ -1,6 +1,15 @@
 # AI Work Changelog
 
-## 2026-08-17 — SITE-WIDE CONSISTENCY: Button Unification, Text Link Red Hover, Circle Button Gradients & Global Typography Audit
+## 2026-08-17 — FINAL CTA / CONTACT: Enquiry Form Button Spacing
+- **What changed**:
+  - Added dedicated `26px` top margin (`margin-top: 26px !important; display: inline-flex;`) to the `.oralic-button` and submit button in `.enquiry-form`.
+  - Added clear visual separation between the `REPLY VIA` select dropdown and the `PREPARE ENQUIRY ■` submission button to eliminate cramped touch targets.
+- **Files modified**:
+  - `frontend/src/Enquiry.css` [MODIFIED]
+  - `frontend/src/App.css` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.b76e0b41.js`, `main.560f77c1.css`).
+  - Verified live in browser subagent on Desktop (1440x900) (`verified_enquiry_form_spacing_1786980758138.png`).
 - **What changed**:
   - **Button System Unification**:
     - Harmonized all CTA and form buttons across the entire website (`.button`, `.oralic-button`, Navbar CTA, Hero CTA, Contact CTA, Enquiry Form Submit button) to use the exact identical Hero button structure.
