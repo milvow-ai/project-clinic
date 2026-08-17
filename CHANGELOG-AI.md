@@ -1,6 +1,17 @@
 # AI Work Changelog
 
-## 2026-08-17 — PEOPLE / OUR TEAM: Editorial Asymmetric Grid on Left-Aligned Grid System
+## 2026-08-17 — Unified Global Typography Across Entire Webpage (Fraunces + Sora + DM Mono)
+- **What changed**:
+  - Unified the typography system across all sections of the landing page to match the Hero section:
+    - **Headings & Display Typography**: `Fraunces` (`font-family: 'Fraunces', serif;`) systematically enforced across all `h1, h2, h3, h4, h5, h6`, Hero headline, Section headings, Card titles, Statement quotes, and Review quote text.
+    - **Subheadings, Lead Text, Body & Interactive UI**: `Sora` (`font-family: 'Sora', sans-serif;`) enforced globally across all body text, paragraphs, lead copy, navigation items, buttons, form inputs, and clinical profile details.
+    - **Metadata, Badges & Technical Accents**: `DM Mono` (`font-family: 'DM Mono', monospace;`) enforced across all eyebrows, pill badges, indexes, numerals, timestamps, and captions.
+- **Files modified**:
+  - `frontend/src/App.css` [MODIFIED]
+  - `frontend/src/index.css` [VERIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.66e0fee4.js`, `main.58ec95ae.css`).
+  - Verified live across entire landing page in browser subagent (`typography_hero_trust.png`, `typography_services_standards.png`, `typography_testimonials_people.png`, `typography_contact_faq_footer.png`).
 - **What changed**:
   - Built the **PEOPLE / OUR TEAM section** for Dental Clinica inspired by Oralic's composition while strictly adhering to our website's left-aligned grid system:
     - **Left-Aligned Page Grid (01, 17)**: Uses the exact same container width (`min(92vw, 1540px)`) and left content edge as Hero, Services, Standards, and Testimonials.
