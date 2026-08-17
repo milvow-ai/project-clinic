@@ -1,20 +1,25 @@
 # AI Work Changelog
 
-## 2026-08-17 — WHY / Experience the Difference Section (Editorial 3-Column Comparison Table)
+## 2026-08-17 — WHY / Our Standards Comparison Section (Airy #E8E8E2 Editorial Revision)
 - **What changed**:
-  - Implemented the **WHY Section** immediately below the Services section:
-    - **Header Composition**: `[ ✛ WHY US ]` signature pill badge with red plus icon in DM Mono, editorial Fraunces serif headline (`A more considered way to care.`), and right-aligned supporting text in Sora.
-    - **3-Column Comparison Table**:
-      - **Column 1 (`What Matters`)**: 6 patient-centered differences with subtle icon accents (`MessageSquare`, `SlidersHorizontal`, `Heart`, `Eye`, `Clock`, `RotateCcw`).
-      - **Column 2 (`DENTAL CLINICa`)**: Continuous dark ink column (`#12161f`) with rounded top/bottom caps, original clinic logo asset badge in the header, and crisp white SVG checkmarks (`✓`) that illuminate in clinic red on row hover.
-      - **Column 3 (`Typical Dental Visit`)**: Neutral comparison state with subtle circular dash icons (`—`).
-    - **Row Dividers & Responsive Rhythms**: Thin 1px dividers, row hover highlights, and smooth horizontal scrolling on mobile viewports.
+  - Completely redesigned the **WHY / Standards Section** to match the light, airy, expansive editorial benchmark:
+    - **Removed Large Dark Block**: Swapped out the dark block treatment for a light, high-end, clinical visual palette using `#FFFFFF` primary background and `#E8E8E2` soft warm-grey/cream for the Project Clinic column.
+    - **Expanded Table Scale**: Increased container width to `1420px` desktop scale with generous 84px row heights and spacious padding.
+    - **Editorial Header**: `[ ✛ OUR STANDARDS ]` badge with red plus icon in DM Mono, large `Experience the difference.` heading in Fraunces serif, and concise right-aligned supporting statement in Sora.
+    - **Original Clinic Logo**: Embedded the exact original `dental-clinica-logo.png` logo asset centered directly in the `#E8E8E2` header column.
+    - **Black Line Icons & Indicators**:
+      - Column 1: Minimal black line icons inside light neutral containers (`MessageSquare`, `SlidersHorizontal`, `Heart`, `Eye`, `Clock`, `RotateCcw`).
+      - Column 2 (Project Clinic): Circular checkmarks (`✓`) in clean white circle badges with dark borders.
+      - Column 3 (Typical Dental Visit): Subtle neutral minus indicators (`—`) in soft circle containers.
+    - **Refined Micro-Interactions**: On row hover, the row background shifts subtly toward `#E8E8E2`, the feature icon and checkmark transition smoothly to Project Clinic Red (`#E31B23`) with a soft glow, and feature typography strengthens.
+    - **Responsive Layout**: Desktop (1420px) 3-column table, tablet proportional scaling, and mobile horizontal swipe wrapper with compact column sizing.
 - **Files modified/added**:
   - `frontend/src/App.js` [MODIFIED]
   - `frontend/src/App.css` [MODIFIED]
+  - `frontend/public/media/dental-clinica-logo.png` [UPDATED]
 - **Verification**:
-  - Production build compiled successfully (`main.910d79ae.js`, `main.abc2de8d.css`).
-  - Verified live in browser subagent on Desktop (1440px) and Mobile (390px) with interactive screenshots.
+  - Production build compiled successfully (`main.cc64e207.js`, `main.2ffba611.css`).
+  - Verified live in browser subagent on Desktop (1440px) and Mobile (502px/390px) with interactive screenshots.
 
 ## 2026-08-17 — Services Section Premium UI Refinement (Agency Editorial Benchmark)
 - **What changed**:

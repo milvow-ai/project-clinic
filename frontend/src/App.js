@@ -407,9 +407,9 @@ function WhySection() {
           <div className="why-header-left">
             <div className="trust-badge">
               <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
-              <span>Why Us</span>
+              <span>Our Standards</span>
             </div>
-            <h2 className="why-heading">A more considered<br />way to care.</h2>
+            <h2 className="why-heading">Experience the difference.</h2>
           </div>
           <div className="why-header-right">
             <p className="why-lead-text">
@@ -424,12 +424,10 @@ function WhySection() {
             {/* Table Header Row */}
             <div className="why-table-head">
               <div className="why-col-feature why-head-cell">
-                <span>What Matters</span>
+                <span>Features</span>
               </div>
               <div className="why-col-brand why-head-cell">
-                <div className="why-logo-badge">
-                  <img src={logoImg} alt="DENTAL CLINICa" className="why-brand-logo" />
-                </div>
+                <img src={logoImg} alt="DENTAL CLINICa" className="why-brand-logo" />
               </div>
               <div className="why-col-typical why-head-cell">
                 <span>Typical Dental Visit</span>
@@ -451,23 +449,21 @@ function WhySection() {
                       <span className="why-feature-text">{row.feature}</span>
                     </div>
 
-                    {/* Column 2: Project Clinic (Emphasized Column) */}
+                    {/* Column 2: Project Clinic (Subtle #E8E8E2 Emphasized Column) */}
                     <div className="why-col-brand why-cell">
                       <span className="why-check-circle" aria-label="Included at DENTAL CLINICa">
-                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                          <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                          <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </span>
                     </div>
 
                     {/* Column 3: Typical Dental Visit (Neutral State) */}
                     <div className="why-col-typical why-cell">
-                      <span className="why-dash-indicator" aria-label="Not standard in typical dental visits">
-                        <span className="why-neutral-circle">
-                          <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                            <path d="M2.5 6H9.5" stroke="#8a94a6" strokeWidth="1.75" strokeLinecap="round"/>
-                          </svg>
-                        </span>
+                      <span className="why-neutral-circle" aria-label="Not standard in typical dental visits">
+                        <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                          <path d="M3 7H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                        </svg>
                       </span>
                     </div>
                   </div>
