@@ -1,6 +1,29 @@
 # AI Work Changelog
 
-## 2026-08-17 — YOUR CARE: Real Doctor Portraits (Dr. Ahmad & Dr. Sidra) & Header Streamlining
+## 2026-08-17 — SITE-WIDE CONSISTENCY: Button Unification, Text Link Red Hover, Circle Button Gradients & Global Typography Audit
+- **What changed**:
+  - **Button System Unification**:
+    - Harmonized all CTA and form buttons across the entire website (`.button`, `.oralic-button`, Navbar CTA, Hero CTA, Contact CTA, Enquiry Form Submit button) to use the exact identical Hero button structure.
+    - Features the dual-layer label flip (`.button-flip-current` → `.button-flip-next`), morphing dot indicator (`■` to `↗`), `8px` rounded borders, and white-on-hover transition (`color: var(--red); background: #ffffff; border-color: var(--red)`).
+  - **Text Links Red Hover State**:
+    - Ensured all text links across the website (`.text-link`, `.light-link`, `.custom-services-link`, contact phone number `+91 83687 84559`, map directions, footer links, and navbar links) turn brand red (`#E31B23`) with coordinated arrow nudging on `:hover`.
+  - **Services Navigation Circle Buttons**:
+    - Upgraded circle navigation buttons (`.services-arrow-btn`) so on `:hover` they smoothly fill with a red gradient (`linear-gradient(135deg, #E31B23 0%, #C41219 100%)`), elevate with subtle scale (`1.08`), and transform their SVG arrow icon to pure white (`#FFFFFF`).
+  - **Typography Consistency Check**:
+    - Verified strict adherence across every section:
+      - Headings: `Fraunces` (`font-family: 'Fraunces', serif;`).
+      - Subheadings, body copy, interactive UI: `Sora` (`font-family: 'Sora', sans-serif;`).
+      - Technical tags, badges, coordinates, and notes: `DM Mono` (`font-family: 'DM Mono', monospace;`).
+- **Files modified**:
+  - `frontend/src/App.js` [MODIFIED]
+  - `frontend/src/App.css` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.b76e0b41.js`, `main.49c77b7f.css`).
+  - Verified live in browser subagent on Desktop (1440x900) and Mobile (390x844):
+    - `verified_hero_services_link_red.png` (Hero link turns red on hover).
+    - `verified_services_circle_arrow_gradient.png` (Services circle button fills with red gradient & white arrow on hover).
+    - `verified_contact_phone_red.png` (Phone number turns red on hover).
+    - `verified_enquiry_button.png` (Enquiry submit button uses exact Hero button flip/morph).
 - **What changed**:
   - Integrated high-resolution, verified clinic portraits provided by the user:
     - **Dr. Ahmad Mohammad** (`dr-ahmad-mohammad.jpg`): Principal Dentist & Implantologist in dark clinical scrubs with dental clinic badge.
