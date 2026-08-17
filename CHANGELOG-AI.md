@@ -1,6 +1,17 @@
 # AI Work Changelog
 
-## 2026-08-17 — Unified Global Typography Across Entire Webpage (Fraunces + Sora + DM Mono)
+## 2026-08-17 — Testimonials: Differentiated Typing Speeds & Organic Editorial Cadence
+- **What changed**:
+  - Replaced uniform/synchronous typewriter timing with tailored, individualized typing speeds for each testimonial card:
+    - **Individual Speed Profiles**: Assigned curated base typing speeds (`20ms` to `48ms`) and initial stagger delays (`90ms` to `320ms`) across all 6 patient reviews so cards do not type in robotic lockstep.
+    - **Speed Hierarchy**: Short/punchy reviews type briskly and finish soon (e.g. Card 01 & 03), while detailed surgical reviews type with calm, measured pacing and complete later (e.g. Card 04).
+    - **Organic Punctuation Cadence**: Added natural human-like micro-pauses at periods/exclamations (`+95ms`), commas/dashes (`+50ms`), and spaces (`+6ms`), plus subtle organic jitter (±3ms) to eliminate mechanical feel.
+    - **Permanent In-Viewport Text Retention**: Once typing completes, review text remains permanently visible and readable across the viewport until it exits on the left.
+- **Files modified**:
+  - `frontend/src/App.js` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.e84c3bf5.js`, `main.58ec95ae.css`).
+  - Verified live in browser subagent with sequential time captures: `testimonials_typing_start.png` (1.5s), `testimonials_typing_mid.png` (4.5s), `testimonials_typing_completed.png` (7.5s).
 - **What changed**:
   - Unified the typography system across all sections of the landing page to match the Hero section:
     - **Headings & Display Typography**: `Fraunces` (`font-family: 'Fraunces', serif;`) systematically enforced across all `h1, h2, h3, h4, h5, h6`, Hero headline, Section headings, Card titles, Statement quotes, and Review quote text.

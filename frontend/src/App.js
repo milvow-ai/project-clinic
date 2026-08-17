@@ -517,12 +517,27 @@ const patientReviews = [
   },
 ];
 
-function TestimonialCard({ item, reviewNumber }) {
+const typingProfiles = [
+  { baseSpeed: 20, initialDelay: 90 },   // Card 01 (Taniya Zabeen) — Brisk & crisp, finishes first
+  { baseSpeed: 38, initialDelay: 260 },  // Card 02 (FIROZ Ahamad) — Measured & calm
+  { baseSpeed: 24, initialDelay: 140 },  // Card 03 (Sadia Naz) — Fluid & brisk
+  { baseSpeed: 48, initialDelay: 320 },  // Card 04 (Ubaid Ur Rehman) — Thoughtful & deliberate, finishes later
+  { baseSpeed: 32, initialDelay: 190 },  // Card 05 (Saddam Hussain) — Natural conversational pace
+  { baseSpeed: 28, initialDelay: 120 },  // Card 06 (Snehal Sharma) — Confident editorial pace
+];
+
+function TestimonialCard({ item, reviewIndex = 0, reviewNumber }) {
   const [displayedText, setDisplayedText] = useState("");
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const cardRef = useRef(null);
   const isTypingRef = useRef(false);
   const timeoutRef = useRef(null);
+
+  // Individualized typing speed & staggered initial delay per card
+  const profile = typingProfiles[reviewIndex % typingProfiles.length] || {
+    baseSpeed: 30,
+    initialDelay: 150,
+  };
 
   const startTypingCycle = () => {
     if (isTypingRef.current) return;
@@ -531,23 +546,42 @@ function TestimonialCard({ item, reviewNumber }) {
 
     let charIndex = 0;
     const fullText = `"${item.review}"`;
-    const typeSpeed = 45; // 40–50ms per character
 
     setDisplayedText("");
     setIsTypingComplete(false);
 
-    const typeNextChar = () => {
-      if (charIndex < fullText.length) {
-        charIndex++;
-        setDisplayedText(fullText.slice(0, charIndex));
-        timeoutRef.current = setTimeout(typeNextChar, typeSpeed);
-      } else {
-        // Typing complete -> Remains permanently visible in viewport (never disappears)
-        setIsTypingComplete(true);
-      }
-    };
+    // Initial stagger delay so cards do not start in robotic synchronization
+    timeoutRef.current = setTimeout(() => {
+      const typeNextChar = () => {
+        if (charIndex < fullText.length) {
+          charIndex++;
+          const currentText = fullText.slice(0, charIndex);
+          setDisplayedText(currentText);
 
-    typeNextChar();
+          const lastChar = fullText[charIndex - 1];
+          let nextDelay = profile.baseSpeed;
+
+          // Organic cadence: slight human-like pauses on sentence breaks and punctuation
+          if (lastChar === "." || lastChar === "!") {
+            nextDelay = profile.baseSpeed + 95;
+          } else if (lastChar === "," || lastChar === "–" || lastChar === "-") {
+            nextDelay = profile.baseSpeed + 50;
+          } else if (lastChar === " ") {
+            nextDelay = profile.baseSpeed + 6;
+          } else {
+            // Subtle organic jitter (±3ms)
+            nextDelay += ((charIndex % 3) - 1) * 3;
+          }
+
+          timeoutRef.current = setTimeout(typeNextChar, Math.max(14, nextDelay));
+        } else {
+          // Finished typing -> remains permanently visible for remainder of viewport journey
+          setIsTypingComplete(true);
+        }
+      };
+
+      typeNextChar();
+    }, profile.initialDelay);
   };
 
   useEffect(() => {
@@ -578,7 +612,7 @@ function TestimonialCard({ item, reviewNumber }) {
       clearTimeout(timeoutRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [item.review]);
+  }, [item.review, reviewIndex]);
 
   // Cursor-responsive border gradient ONLY (affects border highlight, zero content movement)
   const handleMouseMove = (e) => {
@@ -651,11 +685,13 @@ function TestimonialsSection() {
       <div className="testimonials-marquee-wrapper">
         <div className="testimonials-marquee-track">
           {marqueeItems.map((item, idx) => {
-            const reviewNumber = `0${(idx % patientReviews.length) + 1}`;
+            const reviewIndex = idx % patientReviews.length;
+            const reviewNumber = `0${reviewIndex + 1}`;
             return (
               <TestimonialCard
                 key={`${item.name}-${idx}`}
                 item={item}
+                reviewIndex={reviewIndex}
                 reviewNumber={reviewNumber}
               />
             );
