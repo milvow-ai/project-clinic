@@ -402,7 +402,7 @@ function WhySection() {
   return (
     <section id="about" className="section why-section">
       <div className="container why-container">
-        {/* Top Header: Badge + Left Heading + Right Supporting Copy */}
+        {/* Top Header: Badge + Large Fraunces Headline + Right Supporting Paragraph */}
         <div className="why-header">
           <div className="why-header-left">
             <div className="trust-badge">
@@ -418,10 +418,10 @@ function WhySection() {
           </div>
         </div>
 
-        {/* Continuous 3-Column Editorial Comparison Table */}
+        {/* Monumental Continuous 3-Column Architectural Table */}
         <div className="why-table-wrapper">
           <div className="why-table">
-            {/* Table Header Row */}
+            {/* Table Header Row (100–115px Height) */}
             <div className="why-table-head">
               <div className="why-col-feature why-head-cell">
                 <span>What Matters</span>
@@ -434,37 +434,37 @@ function WhySection() {
               </div>
             </div>
 
-            {/* Table Body Rows */}
+            {/* Table Body Rows (88–96px Height) */}
             <div className="why-table-body">
               {differenceRows.map((row, idx) => {
                 const IconComponent = row.icon;
                 const isLast = idx === differenceRows.length - 1;
                 return (
                   <div className={`why-table-row ${isLast ? "why-row-last" : ""}`} key={row.feature}>
-                    {/* Column 1: Feature (50% Width, White surface, 40px Neutral Container + Black Line Icon) */}
+                    {/* Column 1: Features (50% Width, Pure White Surface, 42px #E8E8E2 Container + Black Line Icon) */}
                     <div className="why-col-feature why-cell">
                       <div className="why-feature-icon-wrap" aria-hidden="true">
-                        <IconComponent size={18} strokeWidth={1.85} />
+                        <IconComponent size={22} strokeWidth={1.75} />
                       </div>
                       <span className="why-feature-text">{row.feature}</span>
                     </div>
 
-                    {/* Column 2: DENTAL CLINICa (25% Width, White surface, Refined Checkmark) */}
+                    {/* Column 2: DENTAL CLINICa (25% Width, Pure White Surface, Refined 28px Circular Checkmark) */}
                     <div className="why-col-brand why-cell">
                       <span className="why-check-indicator" aria-label="Included at DENTAL CLINICa">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.75" />
-                          <path d="M8 12.3L10.7 15L16 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                          <circle cx="14" cy="14" r="12" stroke="currentColor" strokeWidth="1.6" />
+                          <path d="M9.5 14.2L12.5 17.2L18.5 10.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </span>
                     </div>
 
-                    {/* Column 3: Typical Dental Visit (25% Width, #E8E8E2 surface, Subtle Muted Cross) */}
+                    {/* Column 3: Typical Dental Visit (25% Width, #E8E8E2 Paper Tone, Refined 28px Circular Cross) */}
                     <div className="why-col-typical why-cell">
                       <span className="why-cross-indicator" aria-label="Not standard in typical dental visits">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <circle cx="12" cy="12" r="10" stroke="#8e99a8" strokeWidth="1.75" />
-                          <path d="M9 9L15 15M15 9L9 15" stroke="#8e99a8" strokeWidth="1.75" strokeLinecap="round" />
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                          <circle cx="14" cy="14" r="12" stroke="currentColor" strokeWidth="1.6" />
+                          <path d="M10.5 10.5L17.5 17.5M17.5 10.5L10.5 17.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                         </svg>
                       </span>
                     </div>

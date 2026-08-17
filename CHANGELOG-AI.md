@@ -1,28 +1,29 @@
 # AI Work Changelog
 
-## 2026-08-17 — Comparison Table Visual Language & Iconography (Final Editorial Polish)
+## 2026-08-17 — Rebuilt Comparison Section From Scratch (Monumental Editorial Architecture)
 - **What changed**:
-  - Refined the **WHY / Standards Comparison Table** to match the Oralic editorial benchmark:
-    - **Two Equal Worlds Color Architecture**:
-      - Column 1 (`What Matters`): 50% width on clean **WHITE** background.
-      - Column 2 (`DENTAL CLINICa`): 25% width on clean **WHITE** background with original centered logo.
-      - Column 3 (`Typical Dental Visit`): 25% width on muted **`#E8E8E2`** background with rounded top/bottom caps.
-      - One continuous architectural table (no floating cards, no dark navy/black blocks).
-    - **Refined Editorial Indicators (No AI UI)**:
-      - Removed all large filled red circles and heavy SaaS UI elements.
-      - Dental Clinica: Clean, thin, centered black circular checkmark (`✓`).
-      - Typical Dental Visit: Clean, thin, centered muted grey circular cross (`×`).
-    - **Cohesive Lucide Line-Icon System**:
-      - 40x40px neutral `#E8E8E2` square container with 10px radius (no heavy border or shadow).
-      - Black `1.85px` line icons: `MessageSquare`, `SlidersHorizontal`, `Heart`, `Eye`, `Clock3`, `RotateCcw`.
-    - **Restrained Micro-Interactions**:
-      - On row hover, feature icon container receives a subtle warm tint (`rgba(227, 27, 35, 0.08)`), icon transitions from Black to Project Clinic Red (`#E31B23`), checkmark transitions from Black to `#E31B23`, and feature text font weight strengthens without any jarring scale jumps.
-    - **Responsive Architecture**: Generous 84px desktop row height with horizontal touch swipe on mobile.
+  - Completely rebuilt the **OUR STANDARDS / Experience the Difference Comparison Section** from scratch:
+    - **Monumental Section Scale (01)**: Broadened container to `92vw` (`max-width: 1540px`) spanning almost the full page width with `130px top / 150px bottom` generous whitespace.
+    - **Expansive Two-Column Editorial Header (02)**: `[ ✛ OUR STANDARDS ]` badge, confident **`64–76px`** Fraunces serif headline (`Experience the difference.`), and right-aligned concise supporting copy in Sora with bottom baseline alignment.
+    - **Continuous Architectural Grid — No Cards, No Rounded Corners (03, 08)**: Removed all floating card treatments, rounded column corners, shadows, and outer borders. Built a pure rectangular architectural grid with thin `1px #E3E3DE` horizontal dividers.
+    - **Exact 50% / 25% / 25% Proportions & Paper Tone Contrast (04, 06, 07)**:
+      - Column 1 (`What Matters`): 50% width on pure **`#FFFFFF`** surface.
+      - Column 2 (`DENTAL CLINICa`): 25% width on pure **`#FFFFFF`** surface.
+      - Column 3 (`Typical Dental Visit`): 25% width on warm **`#E8E8E2`** paper tone with straight clean edges.
+    - **Generous Table Heights & Logo Prominence (05, 06, 09)**:
+      - Header row height: **`105px`** with prominent **`195px`** wide original `DENTAL CLINICa` logo image asset centered naturally.
+      - Feature row height: **`92px`** with generous vertical breathing room and no unnecessary line-wrapping.
+    - **Professional Line Icons & Refined Indicators (10, 11, 12)**:
+      - 44x44px neutral `#E8E8E2` square container with 10px radius.
+      - Crisp `1.75px` Lucide icons (`MessageSquare`, `SlidersHorizontal`, `Heart`, `Eye`, `Clock3`, `RotateCcw`) in black.
+      - 28px refined circular checkmarks (`✓`) on the clinic side and circular crosses (`×`) on the typical visit side.
+    - **Expensive, Restrained Micro-Interactions (13)**: On row hover, feature icon and checkmark smoothly transition from Black → `#E31B23`, container receives subtle warm tint, and typography strengthens without any scale bouncing or SaaS glow effects.
+    - **Responsive Architecture (17)**: Preserves the 3-column architectural comparison with intentional horizontal swipe on mobile.
 - **Files modified/added**:
   - `frontend/src/App.js` [MODIFIED]
   - `frontend/src/App.css` [MODIFIED]
 - **Verification**:
-  - Production build compiled successfully (`main.0b72de30.js`, `main.98ad5c36.css`).
+  - Production build compiled successfully (`main.aea8e36a.js`, `main.6d595c08.css`).
   - Verified live in browser subagent on Desktop (1440px), Hover state, and Mobile (390px) with interactive screenshots.
 
 ## 2026-08-17 — Services Section Premium UI Refinement (Agency Editorial Benchmark)

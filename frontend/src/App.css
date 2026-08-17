@@ -229,61 +229,82 @@
   .service-card-image-wrap{height:195px}
 }
 
-/* WHY / Experience the Difference Section — Continuous Architectural Table */
-.why-section{padding:120px 0 135px;background:#ffffff;position:relative;border-bottom:1px solid var(--line)}
-.why-container{width:min(1420px,calc(100% - 48px));margin:0 auto}
-.why-header{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;margin-bottom:64px}
-.why-header-left{max-width:680px}
-.why-heading{font-family:'Fraunces',serif;font-size:clamp(40px,4.8vw,60px);font-weight:600;line-height:1.08;letter-spacing:-0.028em;color:#0a0a0a;margin:0}
-.why-header-right{max-width:440px}
-.why-lead-text{font-family:'Sora',sans-serif;font-size:16px;line-height:1.65;color:#555550;margin:0}
+/* ==========================================================================
+   WHY / OUR STANDARDS COMPARISON SECTION — EDITORIAL ARCHITECTURAL GRID
+   ========================================================================== */
+.why-section{padding:130px 0 150px;background:#ffffff;position:relative;border-bottom:1px solid #E3E3DE}
 
-/* Continuous 3-Column Architectural Table */
+/* 1. SECTION SCALE: 90–92vw wide, expansive full-width presence */
+.why-container{width:min(92vw,1540px);margin:0 auto}
+
+/* 2. TWO-COLUMN EDITORIAL HEADER */
+.why-header{display:flex;justify-content:space-between;align-items:flex-end;gap:56px;margin-bottom:72px}
+.why-header-left{max-width:800px}
+.why-heading{font-family:'Fraunces',serif;font-size:clamp(48px,5.5vw,76px);font-weight:600;line-height:1.05;letter-spacing:-0.03em;color:#111111;margin:12px 0 0}
+.why-header-right{max-width:440px;padding-bottom:8px}
+.why-lead-text{font-family:'Sora',sans-serif;font-size:17px;line-height:1.65;color:#5F5F5A;margin:0}
+
+/* 3 & 4. CONTINUOUS ARCHITECTURAL TABLE — NO CARDS, NO ROUNDED CORNERS, NO SHADOWS */
 .why-table-wrapper{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;background:transparent}
-.why-table{width:100%;min-width:780px;display:flex;flex-direction:column;border-top:1px solid rgba(0,0,0,0.12)}
+.why-table{width:100%;min-width:880px;display:flex;flex-direction:column;border-top:1px solid #E3E3DE;border-bottom:1px solid #E3E3DE}
 
-/* Table Header Row */
-.why-table-head{display:grid;grid-template-columns:minmax(380px,2fr) minmax(220px,1fr) minmax(220px,1fr);align-items:stretch;border-bottom:1px solid rgba(0,0,0,0.1)}
-.why-head-cell{padding:26px 32px;font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:#0a0a0a;letter-spacing:-0.015em}
-.why-table-head .why-col-brand{background:#ffffff;display:flex;align-items:center;justify-content:center;padding:22px 20px}
-.why-brand-logo{height:32px;width:auto;max-width:170px;object-fit:contain;display:block}
-.why-table-head .why-col-typical{background:#E8E8E2;text-align:center;display:flex;align-items:center;justify-content:center;border-radius:14px 14px 0 0}
+/* 5. TABLE HEADER ROW (100–115px Height) */
+.why-table-head{display:grid;grid-template-columns:50% 25% 25%;align-items:stretch;min-height:105px;border-bottom:1px solid #E3E3DE}
+.why-head-cell{font-family:'Sora',sans-serif;font-size:21px;font-weight:700;color:#111111;letter-spacing:-0.015em;display:flex;align-items:center}
+.why-table-head .why-col-feature{background:#ffffff;padding:0 40px}
+.why-table-head .why-col-brand{background:#ffffff;display:flex;align-items:center;justify-content:center;padding:0 24px}
 
-/* Table Body Rows (Generous 84px Height) */
+/* 6. ORIGINAL LOGO: 170–200px wide, dominant natural presence */
+.why-brand-logo{height:40px;max-width:195px;width:auto;object-fit:contain;display:block}
+.why-table-head .why-col-typical{background:#E8E8E2;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px;font-size:20px}
+
+/* 7 & 8. TABLE BODY ROWS (88–96px Height, Straight Clean Grid) */
 .why-table-body{display:flex;flex-direction:column}
-.why-table-row{display:grid;grid-template-columns:minmax(380px,2fr) minmax(220px,1fr) minmax(220px,1fr);align-items:stretch;border-bottom:1px solid rgba(0,0,0,0.07);transition:background .22s ease}
-.why-cell{display:flex;align-items:center;min-height:84px}
+.why-table-row{display:grid;grid-template-columns:50% 25% 25%;align-items:stretch;min-height:92px;border-bottom:1px solid #E3E3DE;transition:background .22s ease}
+.why-table-row:last-child{border-bottom:none}
+.why-cell{display:flex;align-items:center}
 
-/* Column 1: Features (50% Width, White Surface, 40px #E8E8E2 Square Container) */
-.why-col-feature{background:#ffffff;padding:24px 32px;display:flex;align-items:center}
-.why-feature-icon-wrap{width:40px;height:40px;border-radius:10px;background:#E8E8E2;color:#0a0a0a;display:flex;align-items:center;justify-content:center;margin-right:18px;flex-shrink:0;transition:all .22s ease}
-.why-feature-text{font-family:'Sora',sans-serif;font-size:18px;font-weight:600;color:#18181b;letter-spacing:-0.01em;transition:color .22s ease}
+/* COLUMN 1: FEATURES (50% Width, Pure White, 44px #E8E8E2 Container + Black Line Icon) */
+.why-col-feature{background:#ffffff;padding:0 40px;display:flex;align-items:center}
+.why-feature-icon-wrap{width:44px;height:44px;border-radius:10px;background:#E8E8E2;color:#111111;display:flex;align-items:center;justify-content:center;margin-right:22px;flex-shrink:0;transition:background .22s ease,color .22s ease}
+.why-feature-text{font-family:'Sora',sans-serif;font-size:19px;font-weight:600;color:#111111;letter-spacing:-0.01em;white-space:nowrap;transition:color .22s ease}
 
-/* Column 2: DENTAL CLINICa (25% Width, Clean White Surface, Minimal Checkmark) */
-.why-col-brand{background:#ffffff;display:flex;align-items:center;justify-content:center;padding:22px 20px}
-.why-check-indicator{color:#0a0a0a;display:flex;align-items:center;justify-content:center;transition:color .22s ease,transform .22s ease}
+/* COLUMN 2: DENTAL CLINICA (25% Width, Pure White, Centered Checkmark) */
+.why-col-brand{background:#ffffff;display:flex;align-items:center;justify-content:center;padding:0 24px}
+.why-check-indicator{color:#111111;display:flex;align-items:center;justify-content:center;transition:color .22s ease}
 
-/* Column 3: Typical Dental Visit (25% Width, Soft #E8E8E2 Surface, Muted Cross) */
-.why-col-typical{background:#E8E8E2;display:flex;align-items:center;justify-content:center;padding:22px 20px}
-.why-row-last .why-col-typical{border-radius:0 0 14px 14px}
-.why-cross-indicator{color:#8e99a8;display:flex;align-items:center;justify-content:center}
+/* COLUMN 3: TYPICAL DENTAL VISIT (25% Width, #E8E8E2 Paper Tone, Centered Cross) */
+.why-col-typical{background:#E8E8E2;display:flex;align-items:center;justify-content:center;padding:0 24px}
+.why-cross-indicator{color:#8E8E88;display:flex;align-items:center;justify-content:center}
 
-/* Micro-Interaction on Row Hover */
+/* REFINED HOVER MICRO-INTERACTION (Black → #E31B23) */
+.why-table-row:hover .why-col-feature,.why-table-row:hover .why-col-brand{background:rgba(232,232,226,0.2)}
 .why-table-row:hover .why-feature-icon-wrap{background:rgba(227,27,35,0.08);color:#E31B23}
 .why-table-row:hover .why-feature-text{color:#000000;font-weight:700}
 .why-table-row:hover .why-check-indicator{color:#E31B23}
 
+/* RESPONSIVE STYLES */
+@media(max-width:1024px){
+  .why-container{width:min(94vw,calc(100% - 36px))}
+  .why-heading{font-size:clamp(38px,6vw,56px)}
+  .why-table{min-width:760px}
+  .why-head-cell,.why-cell{padding:0 24px}
+  .why-feature-text{font-size:17px}
+}
+
 @media(max-width:900px){
-  .why-section{padding:75px 0 90px}
-  .why-header{flex-direction:column;align-items:flex-start;gap:22px;margin-bottom:40px}
-  .why-heading{font-size:clamp(30px,7.5vw,44px)}
-  .why-lead-text{font-size:14.5px;max-width:100%}
-  .why-table{min-width:540px}
-  .why-table-head,.why-table-row{grid-template-columns:minmax(240px,1.6fr) minmax(140px,1fr) minmax(140px,1fr)}
-  .why-head-cell,.why-cell{padding:18px 16px;min-height:74px}
-  .why-feature-icon-wrap{width:36px;height:36px;margin-right:14px}
+  .why-section{padding:80px 0 95px}
+  .why-header{flex-direction:column;align-items:flex-start;gap:24px;margin-bottom:44px}
+  .why-heading{font-size:clamp(32px,8vw,46px)}
+  .why-lead-text{font-size:15px;max-width:100%}
+  .why-table{min-width:620px}
+  .why-table-head{min-height:80px}
+  .why-table-row{min-height:80px}
+  .why-table-head,.why-table-row{grid-template-columns:50% 25% 25%}
+  .why-head-cell,.why-col-feature,.why-col-brand,.why-col-typical{padding:0 18px}
+  .why-feature-icon-wrap{width:38px;height:38px;margin-right:14px}
   .why-feature-text{font-size:15px}
-  .why-brand-logo{height:26px}
+  .why-brand-logo{height:30px;max-width:150px}
 }
 
 .intro-main,.intro-small{transition:transform 1.1s var(--ease-out-expo)}.intro-images:hover .intro-main{transform:scale(1.02)}
