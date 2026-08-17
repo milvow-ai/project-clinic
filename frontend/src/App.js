@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowDownRight, ArrowRight, ArrowLeft, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowLeft, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock, RotateCcw } from "lucide-react";
 import "@/App.css";
 import "@/Enquiry.css";
 
@@ -359,6 +359,128 @@ function ServicesCarouselSection() {
   );
 }
 
+const differenceRows = [
+  {
+    icon: MessageSquare,
+    feature: "Clear treatment explanations",
+    clinica: true,
+    typical: false,
+  },
+  {
+    icon: SlidersHorizontal,
+    feature: "Personalized care plans",
+    clinica: true,
+    typical: false,
+  },
+  {
+    icon: Heart,
+    feature: "Comfort-first appointments",
+    clinica: true,
+    typical: false,
+  },
+  {
+    icon: Eye,
+    feature: "Transparent recommendations",
+    clinica: true,
+    typical: false,
+  },
+  {
+    icon: Clock,
+    feature: "Time to understand your concerns",
+    clinica: true,
+    typical: false,
+  },
+  {
+    icon: RotateCcw,
+    feature: "Thoughtful follow-up",
+    clinica: true,
+    typical: false,
+  },
+];
+
+function WhySection() {
+  return (
+    <section id="about" className="section why-section">
+      <div className="container why-container">
+        {/* Top Header: Badge + Left Heading + Right Supporting Copy */}
+        <div className="why-header">
+          <div className="why-header-left">
+            <div className="trust-badge">
+              <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
+              <span>Why Us</span>
+            </div>
+            <h2 className="why-heading">A more considered<br />way to care.</h2>
+          </div>
+          <div className="why-header-right">
+            <p className="why-lead-text">
+              Thoughtful dentistry means clear answers, personal care, and a better experience from your first visit onward.
+            </p>
+          </div>
+        </div>
+
+        {/* 3-Column Editorial Comparison Table */}
+        <div className="why-table-wrapper">
+          <div className="why-table">
+            {/* Table Header Row */}
+            <div className="why-table-head">
+              <div className="why-col-feature why-head-cell">
+                <span>What Matters</span>
+              </div>
+              <div className="why-col-brand why-head-cell">
+                <div className="why-logo-badge">
+                  <img src={logoImg} alt="DENTAL CLINICa" className="why-brand-logo" />
+                </div>
+              </div>
+              <div className="why-col-typical why-head-cell">
+                <span>Typical Dental Visit</span>
+              </div>
+            </div>
+
+            {/* Table Body Rows */}
+            <div className="why-table-body">
+              {differenceRows.map((row, idx) => {
+                const IconComponent = row.icon;
+                const isLast = idx === differenceRows.length - 1;
+                return (
+                  <div className={`why-table-row ${isLast ? "why-row-last" : ""}`} key={row.feature}>
+                    {/* Column 1: Feature with subtle icon */}
+                    <div className="why-col-feature why-cell">
+                      <div className="why-feature-icon-wrap" aria-hidden="true">
+                        <IconComponent size={16} strokeWidth={1.75} />
+                      </div>
+                      <span className="why-feature-text">{row.feature}</span>
+                    </div>
+
+                    {/* Column 2: Project Clinic (Emphasized Column) */}
+                    <div className="why-col-brand why-cell">
+                      <span className="why-check-circle" aria-label="Included at DENTAL CLINICa">
+                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                          <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </span>
+                    </div>
+
+                    {/* Column 3: Typical Dental Visit (Neutral State) */}
+                    <div className="why-col-typical why-cell">
+                      <span className="why-dash-indicator" aria-label="Not standard in typical dental visits">
+                        <span className="why-neutral-circle">
+                          <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                            <path d="M2.5 6H9.5" stroke="#8a94a6" strokeWidth="1.75" strokeLinecap="round"/>
+                          </svg>
+                        </span>
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
@@ -546,7 +668,8 @@ function App() {
     {/* Services Carousel Section Matching Editorial Polish with 4 Cards and Navigation */}
     <ServicesCarouselSection />
 
-    <section className="section difference"><div className="container"><div className="center-heading"><p className="eyebrow red">Why begin here</p><h2>A more considered<br/><em>way to care.</em></h2></div><div className="compare"><div className="compare-head"><span></span><b>DENTAL CLINICa</b><span>What matters</span></div>{[["Clear communication", "A conversation before a recommendation"], ["Easy WhatsApp booking", "Reach us in the way that feels easiest"], ["Verified Google trust", "4.9 rating · 288 public reviews"], ["Clear directions", "Jamia Nagar, Okhla · H74X+26"]].map(([a,b], i) => <div className="compare-row" key={a}><span>{a}</span><strong>✓</strong><em>{b}</em></div>)}</div></div></section>
+    {/* WHY / Experience the Difference Section (Editorial 3-Column Comparison Table) */}
+    <WhySection />
 
     <section id="reviews" className="reviews"><div className="container reviews-grid"><div className="review-score"><p className="eyebrow red">Public Google trust</p><strong>4.9</strong><span>★ ★ ★ ★ ★</span><p>Across 288 public reviews</p><Button testid="reviews-google-button" href={maps}>View Google listing</Button></div><div className="review-quote"><span className="quote-mark">“</span><blockquote>We’re collecting a small selection of real Google reviews to share here, with the clinic team’s approval.</blockquote><small data-testid="review-confirmation-note">Real patient words · being reviewed with the clinic</small></div></div></section>
 

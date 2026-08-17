@@ -1,5 +1,21 @@
 # AI Work Changelog
 
+## 2026-08-17 — WHY / Experience the Difference Section (Editorial 3-Column Comparison Table)
+- **What changed**:
+  - Implemented the **WHY Section** immediately below the Services section:
+    - **Header Composition**: `[ ✛ WHY US ]` signature pill badge with red plus icon in DM Mono, editorial Fraunces serif headline (`A more considered way to care.`), and right-aligned supporting text in Sora.
+    - **3-Column Comparison Table**:
+      - **Column 1 (`What Matters`)**: 6 patient-centered differences with subtle icon accents (`MessageSquare`, `SlidersHorizontal`, `Heart`, `Eye`, `Clock`, `RotateCcw`).
+      - **Column 2 (`DENTAL CLINICa`)**: Continuous dark ink column (`#12161f`) with rounded top/bottom caps, original clinic logo asset badge in the header, and crisp white SVG checkmarks (`✓`) that illuminate in clinic red on row hover.
+      - **Column 3 (`Typical Dental Visit`)**: Neutral comparison state with subtle circular dash icons (`—`).
+    - **Row Dividers & Responsive Rhythms**: Thin 1px dividers, row hover highlights, and smooth horizontal scrolling on mobile viewports.
+- **Files modified/added**:
+  - `frontend/src/App.js` [MODIFIED]
+  - `frontend/src/App.css` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.910d79ae.js`, `main.abc2de8d.css`).
+  - Verified live in browser subagent on Desktop (1440px) and Mobile (390px) with interactive screenshots.
+
 ## 2026-08-17 — Services Section Premium UI Refinement (Agency Editorial Benchmark)
 - **What changed**:
   - Refined the **Services Section** layout and interactions to match the editorial benchmark:
