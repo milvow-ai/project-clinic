@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import Lenis from "lenis";
 import { ArrowDownRight, ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw, Star } from "lucide-react";
 import "@/App.css";
 import "@/Enquiry.css";
@@ -884,32 +885,142 @@ function App() {
   const [openFaq, setOpenFaq] = useState(0);
   const [openService, setOpenService] = useState(0);
   const [formStatus, setFormStatus] = useState("");
+  const [navbarHidden, setNavbarHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
-    const els = document.querySelectorAll(".intro-grid>div,.metrics-grid>div,.statement-inner,.philosophy-inner>*,.philosophy-points>div,.care-intro,.accordion,.section-heading,.card-grid>article,.center-heading,.compare,.review-score,.review-quote,.gallery-grid figure,.gallery-note,.team-inner>div,.contact-grid>div,.faq-grid>div,.journal-grid>article,.final-content>*");
-    els.forEach((el) => el.classList.add("reveal"));
-    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add("in-view");
-      io.unobserve(e.target);
-      setTimeout(() => e.target.classList.remove("reveal", "in-view"), 1500);
-    }), { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-    els.forEach((el) => io.observe(el));
-    const heroImg = document.querySelector(".hero-image");
-    const finalImg = document.querySelector(".final-cta>img");
-    const onScroll = () => {
-      const pos = window.scrollY;
-      if (heroImg) heroImg.style.transform = `scale(${1.03 + pos * 0.0003}) translateY(${pos * 0.08}px)`;
-      if (finalImg) finalImg.style.transform = `scale(${1.18 - (document.body.scrollHeight - window.innerHeight - pos) * 0.0002})`;
-      const headers = document.querySelectorAll(".header, .custom-navbar");
-      headers.forEach(h => {
-        if (pos > 20) h.classList.add("scrolled");
-        else h.classList.remove("scrolled");
-      });
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    
+    let lenis = null;
+    let animationFrameId = null;
+
+    if (!prefersReducedMotion) {
+      try {
+        lenis = new Lenis({
+          duration: 1.15,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Responsive expo-style decay curve
+          orientation: "vertical",
+          gestureOrientation: "vertical",
+          smoothWheel: true,
+          wheelMultiplier: 0.95,
+          touchMultiplier: 1.15,
+          infinite: false,
+        });
+        window.lenis = lenis;
+
+        const raf = (time) => {
+          lenis.raf(time);
+          animationFrameId = requestAnimationFrame(raf);
+        };
+        animationFrameId = requestAnimationFrame(raf);
+      } catch (err) {
+        console.warn("Lenis init warning:", err);
+      }
+    }
+
+    // Direction-Aware Navbar detection with threshold to eliminate trackpad jitter
+    let lastScrollY = window.scrollY || 0;
+    let accumulatedDelta = 0;
+    const DIRECTION_THRESHOLD = 8;
+
+    const handleScroll = () => {
+      const currentScrollY = lenis ? lenis.scroll : window.scrollY;
+
+      // Scrolled state for background blur
+      setIsScrolled(currentScrollY > 30);
+
+      // Always show navbar near the top of the page
+      if (currentScrollY <= 65) {
+        setNavbarHidden(false);
+        accumulatedDelta = 0;
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      const delta = currentScrollY - lastScrollY;
+
+      // If direction changes, reset accumulator
+      if ((delta > 0 && accumulatedDelta < 0) || (delta < 0 && accumulatedDelta > 0)) {
+        accumulatedDelta = delta;
+      } else {
+        accumulatedDelta += delta;
+      }
+
+      if (accumulatedDelta > DIRECTION_THRESHOLD) {
+        // Scrolling DOWN: hide navbar
+        setNavbarHidden(true);
+      } else if (accumulatedDelta < -DIRECTION_THRESHOLD) {
+        // Scrolling UP: reveal navbar
+        setNavbarHidden(false);
+      }
+
+      // Subtle scroll micro-motion on hero background image
+      const heroImg = document.querySelector(".custom-hero .hero-image");
+      if (heroImg && currentScrollY < 1200) {
+        heroImg.style.transform = `scale(1.03) translate3d(0, ${currentScrollY * 0.045}px, 0)`;
+      }
+
+      lastScrollY = currentScrollY;
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => { window.removeEventListener("scroll", onScroll); io.disconnect(); };
+
+    if (lenis) {
+      lenis.on("scroll", handleScroll);
+    } else {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }
+
+    // Smooth anchor navigation handling
+    const handleAnchorClick = (e) => {
+      const target = e.target.closest('a[href^="#"]');
+      if (target) {
+        const href = target.getAttribute("href");
+        if (href && href !== "#" && href.length > 1) {
+          const el = document.querySelector(href);
+          if (el) {
+            e.preventDefault();
+            if (lenis) {
+              lenis.scrollTo(el, { offset: -75, duration: 1.1 });
+            } else {
+              el.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        }
+      }
+    };
+    document.addEventListener("click", handleAnchorClick);
+
+    // Synchronized Section Reveal Observers
+    const els = document.querySelectorAll(
+      ".intro-grid>div,.metrics-grid>div,.statement-inner,.philosophy-inner>*,.philosophy-points>div,.care-intro,.accordion,.section-heading,.card-grid>article,.center-heading,.compare,.review-score,.review-quote,.gallery-grid figure,.gallery-note,.team-inner>div,.contact-grid>div,.faq-grid>div,.journal-grid>article,.final-content>*, .service-editorial-card, .why-comparison-table, .yourcare-feature-card"
+    );
+    els.forEach((el) => el.classList.add("reveal"));
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in-view");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+    els.forEach((el) => io.observe(el));
+
+    return () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      if (lenis) {
+        lenis.destroy();
+        window.lenis = null;
+      } else {
+        window.removeEventListener("scroll", handleScroll);
+      }
+      document.removeEventListener("click", handleAnchorClick);
+      io.disconnect();
+    };
   }, []);
+
   const nav = ["About", "Treatments", "Reviews", "Gallery", "Contact"];
   const services = ["Check-ups and cleaning", "Fillings and restorations", "Root canal treatment", "Crowns and bridges", "Dental implants", "Whitening and smile enhancement"];
   const faqs = [
@@ -967,8 +1078,8 @@ function App() {
       </div>
     </div>
     
-    {/* Redesigned White/Frosted Navbar with Left Links, Center Logo, Right Button */}
-    <header className="header custom-navbar">
+    {/* Redesigned White/Frosted Navbar with Direction-Aware Hide/Show Animation */}
+    <header className={`header custom-navbar ${isScrolled ? "scrolled" : ""} ${navbarHidden ? "navbar-hidden" : ""}`}>
       <div className="container header-inner custom-navbar-inner">
         <div className="navbar-left">
           <nav className={menuOpen ? "nav nav-open" : "nav"}>
@@ -1083,6 +1194,8 @@ function App() {
     <section className="journal"><div className="container"><div className="section-heading"><div><p className="eyebrow red">From the journal</p><h2>Small notes on<br/><em>better care.</em></h2></div><span className="heading-note">Helpful reading<br/>coming soon</span></div><div className="journal-grid">{["How to prepare for your first visit", "Questions worth asking your dentist", "Keeping your smile comfortable"].map((item, i) => <article key={item}><span>0{i + 1} · JOURNAL</span><h3>{item}</h3><p>Helpful guidance from DENTAL CLINICa, coming soon.</p><ArrowDownRight/></article>)}</div></div></section>
     <footer className="footer"><div className="container footer-grid"><div><img src={logoImg} alt="DENTAL CLINICa logo" className="footer-logo"/><p>A considered dental experience<br/>in Jamia Nagar, Okhla.</p></div><div><span className="footer-label">Visit</span><a data-testid="footer-address" href={maps} target="_blank" rel="noreferrer">Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</a></div><div><span className="footer-label">Connect</span><a data-testid="footer-phone" href={phone}>+91 83687 84559</a><a data-testid="footer-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking</a><a data-testid="footer-maps" href={maps} target="_blank" rel="noreferrer">Google Maps</a></div><div><span className="footer-label">Explore</span><a href="#about">About</a><a href="#treatments">Treatments</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div></div><div className="container footer-bottom"><span>© 2026 DENTAL CLINICa</span><span>Some content pending clinic confirmation</span><span>Privacy · Terms</span></div></footer>
     <div className="mobile-actions"><a data-testid="mobile-call-action" href={phone}><Phone/>Call</a><a data-testid="mobile-whatsapp-action" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp</a><a data-testid="mobile-book-action" href={whatsapp}>Book</a></div>
+    {/* Viewport Bottom Edge Soft Focus Gradient Treatment */}
+    <div className="viewport-edge-blur" aria-hidden="true" />
   </main>;
 }
 

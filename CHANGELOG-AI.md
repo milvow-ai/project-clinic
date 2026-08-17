@@ -1,6 +1,34 @@
 # AI Work Changelog
 
-## 2026-08-17 — FINAL CTA / CONTACT: Enquiry Form Button Spacing
+## 2026-08-17 — GLOBAL SCROLL EXPERIENCE: Apple/Webflow-Style Inertial Scrolling, Direction-Aware Navbar & Viewport Depth Blur
+- **What changed**:
+  - **Lenis Inertial Scroll Engine Integration**:
+    - Replaced basic browser scrolling with production-grade `lenis` inertial scroll engine.
+    - Configured Apple-grade responsive deceleration curve `(t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))` with `1.15s` duration, immediate input response, and gentle settling.
+    - Integrated smooth in-page hash anchor scrolling with automatic `-75px` navbar offset.
+  - **Direction-Aware Intelligent Navbar**:
+    - When scrolling **DOWN**: Navbar smoothly hides (`translate3d(0, -115%, 0)` with `340ms cubic-bezier(.16, 1, .3, 1)`).
+    - When scrolling **UP**: Navbar instantly returns (`translate3d(0, 0, 0)`) with frosted glass backdrop and subtle shadow.
+    - Top of Page Anchor: Always visible at `scrollY <= 65px`.
+    - Trackpad Jitter Protection: Integrated directional threshold (`8px`) to prevent flickering during small wheel ticks or trackpad finger resting.
+    - Adjusted `.site-shell` to `overflow-x: clip; overflow-y: visible` to ensure unbroken sticky behavior.
+  - **Bottom-of-Viewport Editorial Soft Focus Overlay**:
+    - Implemented a fixed `48px` viewport bottom edge blur (`.viewport-edge-blur`) with `pointer-events: none`, `backdrop-filter: blur(2.5px)`, and a vertical linear gradient mask so content entering/leaving the viewport edge gets a subtle photographic softness while central content remains 100% crisp.
+  - **Continuous Section Transitions & Subtle Micro-Motion**:
+    - Replaced heavy section jump reveals with GPU-accelerated `.reveal` classes (`translate3d(0, 22px, 0)`).
+    - Added subtle parallax micro-motion to the hero background image (`scale(1.03) translate3d(0, pos * 0.045px, 0)`).
+  - **Accessibility**:
+    - Full support for `prefers-reduced-motion: reduce`, disabling Lenis, blur layers, and transform animations.
+- **Files modified**:
+  - `frontend/package.json` [MODIFIED - added lenis]
+  - `frontend/src/App.js` [MODIFIED]
+  - `frontend/src/App.css` [MODIFIED]
+- **Verification**:
+  - Production build compiled cleanly (`main.3cc09643.js`, `main.d8651e78.css`).
+  - Verified live in browser subagent on 1440x900 viewport:
+    - Navbar hides on scroll down (`-94.3px` translateY).
+    - Navbar smoothly reveals on scroll up (`navbar_scroll_up_sticky_confirmed.png`).
+    - Viewport bottom edge blur confirmed at page base (`viewport_bottom_blur_confirmed.png`).
 - **What changed**:
   - Added dedicated `26px` top margin (`margin-top: 26px !important; display: inline-flex;`) to the `.oralic-button` and submit button in `.enquiry-form`.
   - Added clear visual separation between the `REPLY VIA` select dropdown and the `PREPARE ENQUIRY ■` submission button to eliminate cramped touch targets.
