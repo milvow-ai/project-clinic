@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowDownRight, ArrowRight, ArrowLeft, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw, Star } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw, Star } from "lucide-react";
 import "@/App.css";
 import "@/Enquiry.css";
 
@@ -45,9 +45,8 @@ const trustSlides = [
   },
 ];
 
-const AnimatedButtonContent = ({ children }) => <><span className="button-label"><span className="button-label-current">{children}</span><span aria-hidden="true" className="button-label-next">{children}</span></span><span aria-hidden="true" className="button-arrow"><ArrowUpRight /></span></>;
+const AnimatedButtonContent = ({ children }) => <><span className="button-label"><span className="button-label-current">{children}</span><span aria-hidden="true" className="button-label-next">{children}</span></span><span aria-hidden="true" className="button-arrow"><ArrowUpRight size={15} /></span></>;
 const Button = ({ children, href = "#contact", light = false, testid }) => <a data-testid={testid} className={`button ${light ? "button-light" : ""}`} href={href}><AnimatedButtonContent>{children}</AnimatedButtonContent></a>;
-const ArrowUpRight = () => <ArrowRight size={15} />;
 
 const AnimatedOralicButton = ({ children, href = whatsapp, light = false, testid, className = "" }) => (
   <a data-testid={testid} className={`oralic-button ${light ? "oralic-button-light" : ""} ${className}`} href={href} target="_blank" rel="noreferrer">
@@ -57,7 +56,7 @@ const AnimatedOralicButton = ({ children, href = whatsapp, light = false, testid
     </span>
     <span aria-hidden="true" className="button-morph-icon">
       <span className="btn-dot-indicator">•</span>
-      <span className="btn-arrow-indicator"><ArrowUpRight /></span>
+      <span className="btn-arrow-indicator"><ArrowUpRight size={15} /></span>
     </span>
   </a>
 );
@@ -667,6 +666,117 @@ function TestimonialsSection() {
   );
 }
 
+const teamMembers = [
+  {
+    name: "Dr. Ahmad Mohammad",
+    role: "Principal Dentist & Implantologist",
+    image: "/media/doctor-patient.jpg",
+    objectPosition: "center 20%",
+  },
+  {
+    name: "Dr. Sidra Firdous",
+    role: "Dental Surgeon & Restorative Care",
+    image: "/media/patient-care-close.jpg",
+    objectPosition: "center 30%",
+  },
+  {
+    name: "Dr. Parul",
+    role: "Aesthetic & Restorative Dentist",
+    image: "/media/hero-treatment.jpg",
+    objectPosition: "center 35%",
+  },
+  {
+    name: "Dr. Mohammad Ahamad",
+    role: "Oral Diagnosis & Complex Surgery",
+    image: "/media/xray-diagnostics.jpg",
+    objectPosition: "center center",
+  },
+  {
+    name: "Clinical Care Team",
+    role: "Sterilization & Patient Comfort Specialists",
+    image: "/media/dental-instruments.jpg",
+    objectPosition: "center center",
+  },
+];
+
+function TeamCard({ member, isWider }) {
+  return (
+    <article className={`team-editorial-card ${isWider ? "team-card-wider" : ""}`}>
+      <div className="team-card-top">
+        <div className="team-indicator" aria-hidden="true">
+          <span className="team-dot" />
+          <ArrowUpRight className="team-arrow-icon" size={17} strokeWidth={2.2} />
+        </div>
+
+        <div className="team-portrait-frame">
+          <img
+            src={member.image}
+            alt={member.name}
+            className="team-portrait-img"
+            style={{ objectPosition: member.objectPosition || "center" }}
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <div className="team-card-spacer" />
+
+      <div className="team-card-bottom">
+        <h3 className="team-member-name">{member.name}</h3>
+        <p className="team-member-role">{member.role}</p>
+      </div>
+    </article>
+  );
+}
+
+function TeamSection() {
+  return (
+    <section id="about" className="section team-section">
+      <div className="container team-container">
+        {/* Left-Aligned Header System matching Hero, Services & Standards */}
+        <div className="team-header">
+          <div className="team-header-left">
+            <div className="trust-badge">
+              <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
+              <span>OUR PEOPLE</span>
+            </div>
+            <h2 className="team-heading">
+              The people behind<br />your care.
+            </h2>
+          </div>
+          <div className="team-header-right">
+            <p className="team-lead-text">
+              Experienced clinicians focused on clear communication, precise treatment, and care that puts you at ease.
+            </p>
+          </div>
+        </div>
+
+        {/* Asymmetric Editorial Team Composition */}
+        <div className="team-grid-wrapper">
+          {/* Row 1: 3 cards */}
+          <div className="team-row-triplet">
+            {teamMembers.slice(0, 3).map((member, idx) => (
+              <TeamCard key={member.name} member={member} index={idx} />
+            ))}
+          </div>
+
+          {/* Row 2: 2 cards with asymmetric editorial proportions */}
+          <div className="team-row-asymmetric">
+            {teamMembers.slice(3, 5).map((member, idx) => (
+              <TeamCard
+                key={member.name}
+                member={member}
+                index={idx + 3}
+                isWider={idx === 0}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
@@ -860,9 +970,10 @@ function App() {
     {/* TESTIMONIALS / Real Patient Experiences (Infinite Continuous Marquee & Typewriter Reveal) */}
     <TestimonialsSection />
 
-    <section id="gallery" className="section gallery"><div className="container"><div className="section-heading"><div><p className="eyebrow red">Inside DENTAL CLINICa</p><h2>A space made<br/><em>for ease.</em></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></div><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt="DENTAL CLINICa treatment room"/><figcaption data-testid="gallery-caption-1">Treatment room · DENTAL CLINICa</figcaption></figure><figure><img src={photos[1]} alt="DENTAL CLINICa dental chair"/><figcaption data-testid="gallery-caption-2">Clinical setting · DENTAL CLINICa</figcaption></figure><figure><img src={photos[2]} alt="DENTAL CLINICa interior"/><figcaption data-testid="gallery-caption-3">Care environment · DENTAL CLINICa</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
+    {/* PEOPLE / OUR TEAM Section (Asymmetric Editorial Grid on Left-Aligned Layout) */}
+    <TeamSection />
 
-    <section className="team"><div className="container team-inner"><div><p className="eyebrow red">The people behind the care</p><h2>Meet your<br/><em>care team.</em></h2><p className="lead">Doctor profiles and biographies will be added once confirmed by the clinic.</p></div><div className="team-placeholders"><div><span>01</span><b>Doctor profile</b><small>Details to be confirmed</small></div><div><span>02</span><b>Care team</b><small>Details to be confirmed</small></div></div></div></section>
+    <section id="gallery" className="section gallery"><div className="container"><div className="section-heading"><div><p className="eyebrow red">Inside DENTAL CLINICa</p><h2>A space made<br/><em>for ease.</em></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></div><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt="DENTAL CLINICa treatment room"/><figcaption data-testid="gallery-caption-1">Treatment room · DENTAL CLINICa</figcaption></figure><figure><img src={photos[1]} alt="DENTAL CLINICa dental chair"/><figcaption data-testid="gallery-caption-2">Clinical setting · DENTAL CLINICa</figcaption></figure><figure><img src={photos[2]} alt="DENTAL CLINICa interior"/><figcaption data-testid="gallery-caption-3">Care environment · DENTAL CLINICa</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
 
     <section id="contact" className="dark contact"><div className="container contact-grid"><div><p className="eyebrow red">Visit DENTAL CLINICa</p><h2>Let’s find<br/><em>your next step.</em></h2><p className="dark-lead">Questions are welcome. Reach out in the way that feels easiest.</p><div className="contact-actions"><Button testid="contact-book-button" href={whatsapp}>Book on WhatsApp</Button><a data-testid="contact-phone-button" href={phone} className="text-link light-link"><Phone size={15}/> +91 83687 84559</a></div><form data-testid="appointment-enquiry-form" className="enquiry-form" onSubmit={submitEnquiry}><p className="eyebrow">Written enquiry</p><h3>Prefer to type first?</h3><label>Name<input data-testid="enquiry-name-input" name="name" required placeholder="Your name"/></label><label>Phone<input data-testid="enquiry-phone-input" name="phone" required type="tel" placeholder="Your phone number"/></label><label>What would you like to discuss?<select data-testid="enquiry-concern-select" name="concern" defaultValue="General consultation"><option>General consultation</option><option>Cleaning and check-up</option><option>Restorative care</option><option>Smile enhancement</option></select></label><label>Reply via<select data-testid="enquiry-preference-select" name="preference" defaultValue="WhatsApp"><option>WhatsApp</option><option>Phone call</option></select></label><button data-testid="enquiry-submit-button" className="button" type="submit"><AnimatedButtonContent>Prepare enquiry</AnimatedButtonContent></button>{formStatus && <p data-testid="enquiry-success-message" className="form-success">{formStatus}</p>}</form></div><div className="map-panel"><MapPin size={20}/><p>Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</p><span>Plus Code · H74X+26</span><small data-testid="hours-confirmation-note" className="hours-note">Clinic hours · pending confirmation</small><a data-testid="contact-directions-button" href={maps} target="_blank" rel="noreferrer">Open directions <ArrowRight/></a></div></div></section>
 

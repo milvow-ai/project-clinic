@@ -1,18 +1,27 @@
 # AI Work Changelog
 
-## 2026-08-17 — FINAL REVISION: Testimonials / Infinite Editorial Marquee (#080808 + White Cards)
+## 2026-08-17 — PEOPLE / OUR TEAM: Editorial Asymmetric Grid on Left-Aligned Grid System
 - **What changed**:
-  - Refined the **Testimonials section** based on feedback:
-    - **Persistent In-Viewport Review Text**: Once the typewriter animation finishes typing, the full review text remains permanently visible and intact for the card's entire journey across the viewport (does not fade out or disappear prematurely). When the card exits on the left, it resets off-screen and types fresh from character 0 on re-entering from the right.
-    - **Ultra-Vibrant 2.5px Cursor Border Gradient**: Enhanced the hover border glow with a `2.5px` radial gradient mapped to cursor coordinates (`--mouse-x`, `--mouse-y`) featuring `#E31B23` / `#FF2630` highlights, subtle warm ambient shadow, and zero internal content shifting.
-    - **Visual Contrast**: Deep solid black `#080808` section background with crisp `#FFFFFF` editorial cards (`460px` x `500px`).
-    - **Zero Navigation UI**: Removed all manual arrows, pagination, and counter buttons in favor of continuous infinite convection.
+  - Built the **PEOPLE / OUR TEAM section** for Dental Clinica inspired by Oralic's composition while strictly adhering to our website's left-aligned grid system:
+    - **Left-Aligned Page Grid (01, 17)**: Uses the exact same container width (`min(92vw, 1540px)`) and left content edge as Hero, Services, Standards, and Testimonials.
+    - **Section Header (02, 03, 04)**: `[ ✛ OUR PEOPLE ]` badge in DM Mono, large `The people behind your care.` heading in Fraunces serif, and right-aligned concise supporting copy in Sora.
+    - **Asymmetric Team Composition (05, 06)**:
+      - Row 1: 3 cards (`Dr. Ahmad Mohammad`, `Dr. Sidra Firdous`, `Dr. Parul`).
+      - Row 2: 2 cards with asymmetric width proportions (`Dr. Mohammad Ahamad` + `Clinical Care Team`).
+    - **Quiet Editorial Profile Card Anatomy (07, 08, 09, 10)**:
+      - Pure `#FFFFFF` background with `20px` radius on warm `#F8F8F5` paper surface.
+      - Top-left: Interactive indicator transforming from a small black dot (`•`) to a red diagonal arrow (`↗` / `ArrowUpRight`) on hover.
+      - Top-right: Compact portrait inset (`102px` with `14px` border radius) scaling subtly (`1.04`) on hover.
+      - Middle: Spacious generous whitespace.
+      - Bottom: Clinician name (Sora, 600 weight, `21px`) and specialty role (`15px` muted gray).
+    - **Restrained & Expensive Hover Behavior (11, 12)**: Subtle `translateY(-4px)` lift, `#C8C8C0` border transition, and soft elevation shadow with zero SaaS glow or tilting.
+    - **Confirmed Real Dental Clinica Team (13, 14)**: Features only verified clinical team members derived from clinic records and verified reviews.
 - **Files modified**:
   - `frontend/src/App.js` [MODIFIED]
   - `frontend/src/App.css` [MODIFIED]
 - **Verification**:
-  - Production build compiled successfully (`main.5c17caad.js`, `main.ee19fd69.css`).
-  - Verified live in browser subagent on Desktop (1440x900) with interactive screenshots.
+  - Production build compiled successfully (`main.66e0fee4.js`, `main.dce58240.css`).
+  - Verified live in browser subagent on Desktop (1440x900) and Mobile (390x844).
 
 ## 2026-08-17 — Rebuilt Comparison Section From Scratch (Monumental Editorial Architecture)
 - **What changed**:
