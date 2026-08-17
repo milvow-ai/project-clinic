@@ -707,8 +707,8 @@ const verifiedClinicians = [
     id: "dr-ahmad",
     name: "Dr. Ahmad Mohammad",
     role: "Principal Dentist & Implantologist",
-    image: "/media/doctor-patient.jpg",
-    objectPosition: "center 20%",
+    image: "/media/dr-ahmad-mohammad.jpg",
+    objectPosition: "center 15%",
     description:
       "Focused on precise diagnosis, clear treatment planning, and making patients feel comfortable throughout their care.",
     focusAreas: [
@@ -724,8 +724,8 @@ const verifiedClinicians = [
     id: "dr-sidra",
     name: "Dr. Sidra Firdous",
     role: "Dental Surgeon & Restorative Care",
-    image: "/media/patient-care-close.jpg",
-    objectPosition: "center 28%",
+    image: "/media/dr-sidra-firdous.png",
+    objectPosition: "center 15%",
     description:
       "Dedicated to gentle, reassuring patient care, aesthetic restorations, and stress-free clinical visits for the entire family.",
     focusAreas: [
@@ -741,14 +741,6 @@ const verifiedClinicians = [
 function YourCareSection() {
   const [activeDoctorIndex, setActiveDoctorIndex] = useState(0);
   const activeDoctor = verifiedClinicians[activeDoctorIndex] || verifiedClinicians[0];
-
-  const handlePrev = () => {
-    setActiveDoctorIndex((prev) => (prev === 0 ? verifiedClinicians.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setActiveDoctorIndex((prev) => (prev === verifiedClinicians.length - 1 ? 0 : prev + 1));
-  };
 
   return (
     <section id="about" className="section yourcare-section">
@@ -768,31 +760,6 @@ function YourCareSection() {
             <p className="yourcare-lead-text">
               Meet the clinician behind your care — experienced, approachable, and focused on making every step of treatment clear.
             </p>
-            {verifiedClinicians.length > 1 && (
-              <div className="yourcare-header-nav" aria-label="Clinician selector">
-                <button
-                  type="button"
-                  className="yourcare-nav-arrow"
-                  onClick={handlePrev}
-                  aria-label="Previous clinician"
-                >
-                  <ArrowLeft size={16} />
-                </button>
-                <div className="yourcare-nav-indicator">
-                  <span className="indicator-active">0{activeDoctorIndex + 1}</span>
-                  <span className="indicator-sep">/</span>
-                  <span className="indicator-total">0{verifiedClinicians.length}</span>
-                </div>
-                <button
-                  type="button"
-                  className="yourcare-nav-arrow"
-                  onClick={handleNext}
-                  aria-label="Next clinician"
-                >
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            )}
           </div>
         </div>
 

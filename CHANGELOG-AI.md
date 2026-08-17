@@ -1,6 +1,19 @@
 # AI Work Changelog
 
-## 2026-08-17 — YOUR CARE: Large Editorial Featured Clinician Experience
+## 2026-08-17 — YOUR CARE: Real Doctor Portraits (Dr. Ahmad & Dr. Sidra) & Header Streamlining
+- **What changed**:
+  - Integrated high-resolution, verified clinic portraits provided by the user:
+    - **Dr. Ahmad Mohammad** (`dr-ahmad-mohammad.jpg`): Principal Dentist & Implantologist in dark clinical scrubs with dental clinic badge.
+    - **Dr. Sidra Firdous** (`dr-sidra-firdous.png`): Dental Surgeon & Restorative Care in hijab, clinical mask, and white medical coat with dental clinic badge.
+  - Streamlined the header of the "YOUR CARE" section by removing the top arrow buttons and the number counter (`01 / 02`) to keep the header clean, left-aligned, and distraction-free.
+  - Retained the bottom interactive clinician switcher cards (`.yourcare-secondary-strip`) allowing seamless toggling between Dr. Ahmad and Dr. Sidra.
+- **Files modified**:
+  - `frontend/public/media/dr-ahmad-mohammad.jpg` [NEW]
+  - `frontend/public/media/dr-sidra-firdous.png` [NEW]
+  - `frontend/src/App.js` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.291ba27c.js`, `main.23acdb5d.css`).
+  - Verified live in browser subagent on Desktop (1440x900) for Dr. Ahmad (`yourcare_ahmad_updated.png`), switching to Dr. Sidra (`yourcare_sidra_updated.png`), and Mobile (`yourcare_updated_mobile.png`).
 - **What changed**:
   - Replaced the previous 5-card doctor grid with a **Large Editorial Featured Clinician Experience** ("YOUR CARE"):
     - **Purpose-Driven Architecture**: Focuses on building direct patient trust, clinical authority, and familiarity ("Who am I trusting with my dental care?").
