@@ -702,111 +702,181 @@ function TestimonialsSection() {
   );
 }
 
-const teamMembers = [
+const verifiedClinicians = [
   {
+    id: "dr-ahmad",
     name: "Dr. Ahmad Mohammad",
     role: "Principal Dentist & Implantologist",
     image: "/media/doctor-patient.jpg",
     objectPosition: "center 20%",
+    description:
+      "Focused on precise diagnosis, clear treatment planning, and making patients feel comfortable throughout their care.",
+    focusAreas: [
+      "General Dentistry",
+      "Dental Implants",
+      "Root Canal Treatment",
+      "Restorative Care",
+      "Smile Enhancement",
+    ],
+    tag: "01 · PRINCIPAL DENTIST",
   },
   {
+    id: "dr-sidra",
     name: "Dr. Sidra Firdous",
     role: "Dental Surgeon & Restorative Care",
     image: "/media/patient-care-close.jpg",
-    objectPosition: "center 30%",
-  },
-  {
-    name: "Dr. Parul",
-    role: "Aesthetic & Restorative Dentist",
-    image: "/media/hero-treatment.jpg",
-    objectPosition: "center 35%",
-  },
-  {
-    name: "Dr. Mohammad Ahamad",
-    role: "Oral Diagnosis & Complex Surgery",
-    image: "/media/xray-diagnostics.jpg",
-    objectPosition: "center center",
-  },
-  {
-    name: "Clinical Care Team",
-    role: "Sterilization & Patient Comfort Specialists",
-    image: "/media/dental-instruments.jpg",
-    objectPosition: "center center",
+    objectPosition: "center 28%",
+    description:
+      "Dedicated to gentle, reassuring patient care, aesthetic restorations, and stress-free clinical visits for the entire family.",
+    focusAreas: [
+      "Restorative Dentistry",
+      "Preventive Care",
+      "Painless Fillings",
+      "Aesthetic Smile Design",
+    ],
+    tag: "02 · DENTAL SURGEON",
   },
 ];
 
-function TeamCard({ member, isWider }) {
+function YourCareSection() {
+  const [activeDoctorIndex, setActiveDoctorIndex] = useState(0);
+  const activeDoctor = verifiedClinicians[activeDoctorIndex] || verifiedClinicians[0];
+
+  const handlePrev = () => {
+    setActiveDoctorIndex((prev) => (prev === 0 ? verifiedClinicians.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setActiveDoctorIndex((prev) => (prev === verifiedClinicians.length - 1 ? 0 : prev + 1));
+  };
+
   return (
-    <article className={`team-editorial-card ${isWider ? "team-card-wider" : ""}`}>
-      <div className="team-card-top">
-        <div className="team-indicator" aria-hidden="true">
-          <span className="team-dot" />
-          <ArrowUpRight className="team-arrow-icon" size={17} strokeWidth={2.2} />
-        </div>
-
-        <div className="team-portrait-frame">
-          <img
-            src={member.image}
-            alt={member.name}
-            className="team-portrait-img"
-            style={{ objectPosition: member.objectPosition || "center" }}
-            loading="lazy"
-          />
-        </div>
-      </div>
-
-      <div className="team-card-spacer" />
-
-      <div className="team-card-bottom">
-        <h3 className="team-member-name">{member.name}</h3>
-        <p className="team-member-role">{member.role}</p>
-      </div>
-    </article>
-  );
-}
-
-function TeamSection() {
-  return (
-    <section id="about" className="section team-section">
-      <div className="container team-container">
-        {/* Left-Aligned Header System matching Hero, Services & Standards */}
-        <div className="team-header">
-          <div className="team-header-left">
+    <section id="about" className="section yourcare-section">
+      <div className="container yourcare-container">
+        {/* 1. Header Area: Left-aligned, matching Hero, Services & Standards */}
+        <div className="yourcare-header">
+          <div className="yourcare-header-left">
             <div className="trust-badge">
               <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
-              <span>OUR PEOPLE</span>
+              <span>YOUR CARE</span>
             </div>
-            <h2 className="team-heading">
-              The people behind<br />your care.
+            <h2 className="yourcare-heading">
+              Care starts with the person<br />treating you.
             </h2>
           </div>
-          <div className="team-header-right">
-            <p className="team-lead-text">
-              Experienced clinicians focused on clear communication, precise treatment, and care that puts you at ease.
+          <div className="yourcare-header-right">
+            <p className="yourcare-lead-text">
+              Meet the clinician behind your care — experienced, approachable, and focused on making every step of treatment clear.
             </p>
+            {verifiedClinicians.length > 1 && (
+              <div className="yourcare-header-nav" aria-label="Clinician selector">
+                <button
+                  type="button"
+                  className="yourcare-nav-arrow"
+                  onClick={handlePrev}
+                  aria-label="Previous clinician"
+                >
+                  <ArrowLeft size={16} />
+                </button>
+                <div className="yourcare-nav-indicator">
+                  <span className="indicator-active">0{activeDoctorIndex + 1}</span>
+                  <span className="indicator-sep">/</span>
+                  <span className="indicator-total">0{verifiedClinicians.length}</span>
+                </div>
+                <button
+                  type="button"
+                  className="yourcare-nav-arrow"
+                  onClick={handleNext}
+                  aria-label="Next clinician"
+                >
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Asymmetric Editorial Team Composition */}
-        <div className="team-grid-wrapper">
-          {/* Row 1: 3 cards */}
-          <div className="team-row-triplet">
-            {teamMembers.slice(0, 3).map((member, idx) => (
-              <TeamCard key={member.name} member={member} index={idx} />
-            ))}
-          </div>
-
-          {/* Row 2: 2 cards with asymmetric editorial proportions */}
-          <div className="team-row-asymmetric">
-            {teamMembers.slice(3, 5).map((member, idx) => (
-              <TeamCard
-                key={member.name}
-                member={member}
-                index={idx + 3}
-                isWider={idx === 0}
+        {/* 2. Primary Visual Composition: Large Editorial Featured Clinician Panel */}
+        <div className="yourcare-showcase-wrapper">
+          <article className="yourcare-feature-card">
+            {/* Left: Large Clinician Portrait */}
+            <div className="yourcare-portrait-box">
+              <img
+                key={activeDoctor.id}
+                src={activeDoctor.image}
+                alt={activeDoctor.name}
+                className="yourcare-portrait-img"
+                style={{ objectPosition: activeDoctor.objectPosition || "center" }}
               />
-            ))}
-          </div>
+              <div className="yourcare-portrait-overlay" />
+            </div>
+
+            {/* Right: Large Information Panel */}
+            <div className="yourcare-info-box">
+              <div className="yourcare-info-top">
+                <div className="yourcare-indicator" aria-hidden="true">
+                  <span className="yourcare-dot" />
+                  <ArrowUpRight className="yourcare-arrow-icon" size={17} strokeWidth={2.2} />
+                </div>
+                <span className="yourcare-tag">{activeDoctor.tag}</span>
+              </div>
+
+              <div className="yourcare-info-body">
+                <h3 className="yourcare-doctor-name">{activeDoctor.name}</h3>
+                <p className="yourcare-doctor-role">{activeDoctor.role}</p>
+
+                <div className="yourcare-divider" />
+
+                <p className="yourcare-doctor-desc">{activeDoctor.description}</p>
+              </div>
+
+              <div className="yourcare-focus-area">
+                <span className="yourcare-focus-title">CLINICAL FOCUS</span>
+                <div className="yourcare-focus-list">
+                  {activeDoctor.focusAreas.map((area, idx) => (
+                    <span key={area} className="yourcare-focus-item">
+                      {area}
+                      {idx < activeDoctor.focusAreas.length - 1 && (
+                        <span className="yourcare-focus-bullet" aria-hidden="true">·</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* Secondary Clinician Preview Strip (when multiple verified clinicians exist) */}
+          {verifiedClinicians.length > 1 && (
+            <div className="yourcare-secondary-strip" aria-label="Available clinicians">
+              {verifiedClinicians.map((doc, idx) => {
+                const isActive = idx === activeDoctorIndex;
+                return (
+                  <button
+                    key={doc.id}
+                    type="button"
+                    className={`yourcare-secondary-item ${isActive ? "is-active" : ""}`}
+                    onClick={() => setActiveDoctorIndex(idx)}
+                  >
+                    <div className="yourcare-secondary-avatar">
+                      <img
+                        src={doc.image}
+                        alt={doc.name}
+                        style={{ objectPosition: doc.objectPosition || "center" }}
+                      />
+                    </div>
+                    <div className="yourcare-secondary-info">
+                      <strong className="yourcare-secondary-name">{doc.name}</strong>
+                      <span className="yourcare-secondary-role">{doc.role}</span>
+                    </div>
+                    <div className="yourcare-secondary-status">
+                      {isActive ? "FEATURED" : "VIEW PROFILE ↗"}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -1006,8 +1076,8 @@ function App() {
     {/* TESTIMONIALS / Real Patient Experiences (Infinite Continuous Marquee & Typewriter Reveal) */}
     <TestimonialsSection />
 
-    {/* PEOPLE / OUR TEAM Section (Asymmetric Editorial Grid on Left-Aligned Layout) */}
-    <TeamSection />
+    {/* YOUR CARE / Featured Clinician Experience (Large Editorial Composition) */}
+    <YourCareSection />
 
     <section id="gallery" className="section gallery"><div className="container"><div className="section-heading"><div><p className="eyebrow red">Inside DENTAL CLINICa</p><h2>A space made<br/><em>for ease.</em></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></div><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt="DENTAL CLINICa treatment room"/><figcaption data-testid="gallery-caption-1">Treatment room · DENTAL CLINICa</figcaption></figure><figure><img src={photos[1]} alt="DENTAL CLINICa dental chair"/><figcaption data-testid="gallery-caption-2">Clinical setting · DENTAL CLINICa</figcaption></figure><figure><img src={photos[2]} alt="DENTAL CLINICa interior"/><figcaption data-testid="gallery-caption-3">Care environment · DENTAL CLINICa</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
 

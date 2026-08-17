@@ -1,6 +1,22 @@
 # AI Work Changelog
 
-## 2026-08-17 — Testimonials: Differentiated Typing Speeds & Organic Editorial Cadence
+## 2026-08-17 — YOUR CARE: Large Editorial Featured Clinician Experience
+- **What changed**:
+  - Replaced the previous 5-card doctor grid with a **Large Editorial Featured Clinician Experience** ("YOUR CARE"):
+    - **Purpose-Driven Architecture**: Focuses on building direct patient trust, clinical authority, and familiarity ("Who am I trusting with my dental care?").
+    - **Dynamic Team Count Scaling**: Intentionally architected to support 1 solo dentist (grand full-width panel), 2 clinicians (primary featured panel + secondary profile switcher), or 3+ practitioners without ever creating a generic directory or blank slots.
+    - **Editorial Composition**:
+      - **Header**: `[ ✛ YOUR CARE ]` badge in DM Mono, large `Care starts with the person treating you.` headline in Fraunces serif, and concise supporting copy in Sora with navigation arrows.
+      - **Left Side**: Substantial, photographic clinician portrait (`540px` min-height, authentic clinic photo, `1.025` scale on hover).
+      - **Right Side**: Comprehensive information panel with clinician tag (`01 · PRINCIPAL DENTIST`), name, role, authentic description, and understated clinical focus treatment list.
+    - **Restrained & Expensive Micro-Interactions**: Dot-to-red-arrow `•` → `↗` indicator transition on hover, `-4px` panel lift, `#C8C8C0` border transition, and zero SaaS tilt/glow.
+    - **Real Verified Clinicians**: Features clinic principal Dr. Ahmad Mohammad (Principal Dentist & Implantologist) and Dr. Sidra Firdous (Dental Surgeon & Restorative Care).
+- **Files modified**:
+  - `frontend/src/App.js` [MODIFIED]
+  - `frontend/src/App.css` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.d7084ed9.js`, `main.23acdb5d.css`).
+  - Verified live in browser subagent on Desktop (1440x900), hover state, doctor switching interaction, and Mobile (390x844).
 - **What changed**:
   - Replaced uniform/synchronous typewriter timing with tailored, individualized typing speeds for each testimonial card:
     - **Individual Speed Profiles**: Assigned curated base typing speeds (`20ms` to `48ms`) and initial stagger delays (`90ms` to `320ms`) across all 6 patient reviews so cards do not type in robotic lockstep.
