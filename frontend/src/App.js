@@ -238,21 +238,13 @@ const MakeoverToothIcon = () => (
   </svg>
 );
 
-const OrthodonticsToothIcon = () => (
-  <svg width="34" height="34" viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M11 11C11 7 13.5 5 18 5C22.5 5 25 7 25 11C25 15.5 23 19 21.5 28C21 30.5 19.2 30.5 18 27C16.8 30.5 15 30.5 14.5 28C13 19 11 15.5 11 11Z" />
-    <path d="M6 16H30" strokeWidth="1.2" />
-    <rect x="15" y="13.5" width="6" height="5" rx="1" strokeWidth="1.4" />
-  </svg>
-);
-
 const serviceCardsData = [
   {
     id: "preventive",
     title: "General & Preventive Dentistry",
     description: "Routine check-ups, professional cleaning, gum care, and preventive treatment to keep your smile healthy year-round.",
     image: "/media/service-preventive.jpg",
-    icon: PreventiveToothIcon,
+    icon: "/media/icon-preventive.png",
     whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about General & Preventive Dentistry.",
   },
   {
@@ -260,7 +252,7 @@ const serviceCardsData = [
     title: "Dental Implants",
     description: "Replace missing teeth with secure, natural-looking implants designed to restore function and confidence.",
     image: "/media/service-implants.jpg",
-    icon: ImplantsToothIcon,
+    icon: "/media/icon-implants.png",
     whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about Dental Implants.",
   },
   {
@@ -268,7 +260,7 @@ const serviceCardsData = [
     title: "Smile Makeover",
     description: "A personalized combination of cosmetic treatments to refine your smile while keeping it natural to you.",
     image: "/media/service-makeover.jpg",
-    icon: MakeoverToothIcon,
+    icon: "/media/icon-makeover.png",
     whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about a Smile Makeover consultation.",
   },
   {
@@ -276,7 +268,7 @@ const serviceCardsData = [
     title: "Orthodontics",
     description: "Braces and clear aligners to gradually straighten your teeth and create a healthier, more confident smile.",
     image: "/media/service-orthodontics.png",
-    icon: OrthodonticsToothIcon,
+    icon: "/media/icon-orthodontics.png",
     whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about Orthodontics and Braces.",
   },
 ];
@@ -286,7 +278,7 @@ function ServicesCarouselSection() {
 
   const scroll = (direction) => {
     if (carouselRef.current) {
-      const scrollAmount = direction === "left" ? -380 : 380;
+      const scrollAmount = direction === "left" ? -440 : 440;
       carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
@@ -324,44 +316,43 @@ function ServicesCarouselSection() {
         </div>
       </div>
 
-      {/* Horizontal Overflow Track showing 3 full cards + partial 4th extending beyond */}
+      {/* Horizontal Overflow Track showing 3.2-3.4 cards on Desktop */}
       <div className="services-cards-track" ref={carouselRef}>
         <div className="services-track-inner">
-          {serviceCardsData.map((card) => {
-            const Icon = card.icon;
-            return (
-              <article className="service-editorial-card" key={card.id} data-testid={`service-card-${card.id}`}>
-                <div className="service-card-top">
-                  <div className="service-card-icon" aria-hidden="true">
-                    <Icon />
-                  </div>
-                  <h3 className="service-card-title">{card.title}</h3>
-                  <p className="service-card-desc">{card.description}</p>
-                  <a 
-                    data-testid={`service-cta-${card.id}`}
-                    href={`https://wa.me/message/MWF3LLCPQ53NL1?text=${encodeURIComponent(card.whatsappMsg)}`}
-                    target="_blank" 
-                    rel="noreferrer" 
-                    className="service-card-cta"
-                  >
-                    <span className="cta-dot-circle">
-                      <span className="cta-dot" />
-                      <ArrowRight size={12} className="cta-arrow" />
-                    </span>
-                    <span className="cta-text">View Details</span>
-                  </a>
+          {serviceCardsData.map((card) => (
+            <article className="service-editorial-card" key={card.id} data-testid={`service-card-${card.id}`}>
+              <div className="service-card-top">
+                <div className="service-card-icon" aria-hidden="true">
+                  <img src={card.icon} alt={`${card.title} icon`} className="service-icon-img" />
                 </div>
-                <div className="service-card-image-wrap">
-                  <img 
-                    src={card.image} 
-                    alt={`${card.title} at DENTAL CLINICa`} 
-                    className="service-card-img"
-                    loading="lazy"
-                  />
-                </div>
-              </article>
-            );
-          })}
+                <h3 className="service-card-title">{card.title}</h3>
+                <p className="service-card-desc">{card.description}</p>
+                <a 
+                  data-testid={`service-cta-${card.id}`}
+                  href={`https://wa.me/message/MWF3LLCPQ53NL1?text=${encodeURIComponent(card.whatsappMsg)}`}
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="service-card-cta"
+                >
+                  <span className="cta-dot-circle">
+                    <ArrowRight size={13} className="cta-arrow" />
+                  </span>
+                  <span className="cta-flip-wrapper">
+                    <span className="cta-flip-primary">View Details</span>
+                    <span className="cta-flip-secondary" aria-hidden="true">View Details</span>
+                  </span>
+                </a>
+              </div>
+              <div className="service-card-image-wrap">
+                <img 
+                  src={card.image} 
+                  alt={`${card.title} at DENTAL CLINICa`} 
+                  className="service-card-img"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
