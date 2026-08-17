@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowDownRight, ArrowRight, ArrowLeft, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowLeft, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw, Star } from "lucide-react";
 import "@/App.css";
 import "@/Enquiry.css";
 
@@ -479,6 +479,147 @@ function WhySection() {
   );
 }
 
+const patientReviews = [
+  {
+    name: "Taniya Zabeen",
+    rating: 5,
+    context: "General Dental Care",
+    review: "Excellent experience. Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. The staff was friendly and professional. Highly recommend for anyone seeking top notch dental care.",
+  },
+  {
+    name: "FIROZ Ahamad",
+    rating: 5,
+    context: "Dental Treatment",
+    review: "I had a wonderful experience with Dr. Mohammad Ahamad. The diagnosis was accurate, the treatment worked perfectly, and I felt well cared for throughout my recovery.",
+  },
+  {
+    name: "Sadia Naz",
+    rating: 5,
+    context: "Dental Treatment",
+    review: "Had an amazing experience. Dr. Ahmad and Dr. Sidra were fantastic – made me feel at ease and provided painless treatment. Modern facilities, friendly staff, and a super warm vibe. Highly recommend.",
+  },
+  {
+    name: "Ubaid Ur Rehman",
+    rating: 5,
+    context: "Full Mouth Implants",
+    review: "Best implantologist. Got my full mouth implant done at DENTAL CLINICa Dr Ahmad Mohammad. Advised to all dental patients. 5 star. Fully satisfied.",
+  },
+  {
+    name: "Saddam Hussain",
+    rating: 5,
+    context: "Dental Treatment",
+    review: "Staff is very friendly. Dr informs everything clearly and in advance. Dr also gives ample time. Great experience.",
+  },
+  {
+    name: "Snehal Sharma",
+    rating: 5,
+    context: "Dental Treatment",
+    review: "Painless treatment with amazing facilities and latest technology, excellent sterilization. Everything was on top notch. Highly recommend, go for it without any second opinion.",
+  },
+];
+
+function TestimonialCard({ item, index }) {
+  const [displayedText, setDisplayedText] = useState("");
+  const [hasStarted, setHasStarted] = useState(false);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasStarted) {
+            setHasStarted(true);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    if (cardRef.current) observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    
+    let currentIndex = 0;
+    const fullText = `"${item.review}"`;
+    const speed = fullText.length > 150 ? 12 : 20;
+    
+    const interval = setInterval(() => {
+      currentIndex += 2;
+      if (currentIndex >= fullText.length) {
+        setDisplayedText(fullText);
+        clearInterval(interval);
+      } else {
+        setDisplayedText(fullText.slice(0, currentIndex));
+      }
+    }, speed);
+
+    return () => clearInterval(interval);
+  }, [hasStarted, item.review]);
+
+  return (
+    <article className="testimonial-editorial-card" ref={cardRef}>
+      <div className="testimonial-card-top">
+        <div className="testimonial-stars" aria-label="5 out of 5 stars">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} size={17} className="star-icon-filled" fill="#E31B23" stroke="#E31B23" />
+          ))}
+        </div>
+      </div>
+
+      <div className="testimonial-quote-box">
+        <blockquote className="testimonial-quote-text">
+          {displayedText || `"${item.review}"`}
+        </blockquote>
+      </div>
+
+      <div className="testimonial-card-bottom">
+        <strong className="testimonial-patient-name">{item.name}</strong>
+        <span className="testimonial-patient-context">{item.context}</span>
+      </div>
+    </article>
+  );
+}
+
+function TestimonialsSection() {
+  // Triple duplicated list for an infinitely smooth continuous marquee without any seam
+  const marqueeItems = [...patientReviews, ...patientReviews, ...patientReviews];
+
+  return (
+    <section id="reviews" className="section testimonials-section">
+      <div className="container testimonials-header-container">
+        <div className="testimonials-header">
+          <div className="testimonials-header-left">
+            <div className="trust-badge">
+              <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
+              <span>Testimonials</span>
+            </div>
+            <h2 className="testimonials-heading">
+              Trusted care.<br />Real experiences.
+            </h2>
+          </div>
+          <div className="testimonials-header-right">
+            <p className="testimonials-lead-text">
+              What patients remember most is how they were treated — clearly, comfortably, and with care.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Infinite Seamless Continuous Marquee */}
+      <div className="testimonials-marquee-wrapper">
+        <div className="testimonials-marquee-track">
+          {marqueeItems.map((item, idx) => (
+            <TestimonialCard key={`${item.name}-${idx}`} item={item} index={idx} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
@@ -669,7 +810,8 @@ function App() {
     {/* WHY / Experience the Difference Section (Editorial 3-Column Comparison Table) */}
     <WhySection />
 
-    <section id="reviews" className="reviews"><div className="container reviews-grid"><div className="review-score"><p className="eyebrow red">Public Google trust</p><strong>4.9</strong><span>★ ★ ★ ★ ★</span><p>Across 288 public reviews</p><Button testid="reviews-google-button" href={maps}>View Google listing</Button></div><div className="review-quote"><span className="quote-mark">“</span><blockquote>We’re collecting a small selection of real Google reviews to share here, with the clinic team’s approval.</blockquote><small data-testid="review-confirmation-note">Real patient words · being reviewed with the clinic</small></div></div></section>
+    {/* TESTIMONIALS / Real Patient Experiences (Infinite Continuous Marquee & Typewriter Reveal) */}
+    <TestimonialsSection />
 
     <section id="gallery" className="section gallery"><div className="container"><div className="section-heading"><div><p className="eyebrow red">Inside DENTAL CLINICa</p><h2>A space made<br/><em>for ease.</em></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></div><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt="DENTAL CLINICa treatment room"/><figcaption data-testid="gallery-caption-1">Treatment room · DENTAL CLINICa</figcaption></figure><figure><img src={photos[1]} alt="DENTAL CLINICa dental chair"/><figcaption data-testid="gallery-caption-2">Clinical setting · DENTAL CLINICa</figcaption></figure><figure><img src={photos[2]} alt="DENTAL CLINICa interior"/><figcaption data-testid="gallery-caption-3">Care environment · DENTAL CLINICa</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
 

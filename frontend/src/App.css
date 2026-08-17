@@ -307,5 +307,64 @@
   .why-brand-logo{height:30px;max-width:150px}
 }
 
+/* ==========================================================================
+   TESTIMONIALS / REAL PATIENT EXPERIENCES — INFINITE CONTINUOUS MARQUEE
+   ========================================================================== */
+.testimonials-section{padding:140px 0 130px;background:#ffffff;position:relative;overflow:hidden;border-bottom:1px solid #E3E3DE}
+
+/* 1. SECTION SCALE: Expansive 90–94vw container */
+.testimonials-header-container{width:min(92vw,1540px);margin:0 auto 64px}
+.testimonials-header{display:flex;justify-content:space-between;align-items:flex-end;gap:56px}
+.testimonials-header-left{max-width:750px}
+.testimonials-heading{font-family:'Fraunces',serif;font-size:clamp(48px,5.2vw,72px);font-weight:600;line-height:1.06;letter-spacing:-0.03em;color:#111111;margin:14px 0 0}
+.testimonials-header-right{max-width:440px;padding-bottom:8px}
+.testimonials-lead-text{font-family:'Sora',sans-serif;font-size:17px;line-height:1.65;color:#5F5F5A;margin:0}
+
+/* 2. INFINITE SEAMLESS CONTINUOUS MARQUEE WRAPPER */
+.testimonials-marquee-wrapper{width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;overflow:hidden;padding:10px 0 25px;mask-image:linear-gradient(to right,transparent 0%,black 4%,black 96%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 4%,black 96%,transparent 100%)}
+.testimonials-marquee-track{display:flex;gap:32px;width:max-content;animation:testimonialsInfiniteScroll 50s linear infinite;will-change:transform}
+.testimonials-marquee-wrapper:hover .testimonials-marquee-track{animation-play-state:paused}
+
+@keyframes testimonialsInfiniteScroll{
+  0%{transform:translate3d(0,0,0)}
+  100%{transform:translate3d(calc(-100% / 3),0,0)}
+}
+
+/* 3. LARGE EDITORIAL TESTIMONIAL CARD (Width: 480px, Height: 520px) */
+.testimonial-editorial-card{width:480px;height:520px;background:#ffffff;border:1px solid #E3E3DE;border-radius:26px;padding:46px 42px;display:flex;flex-direction:column;justify-content:space-between;flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,0.025);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease,border-color .35s ease;user-select:none}
+.testimonial-editorial-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.06);border-color:rgba(227,27,35,0.2)}
+
+/* STARS: Refined 17px Project Clinic Red */
+.testimonial-card-top{display:flex;align-items:center;margin-bottom:24px}
+.testimonial-stars{display:flex;align-items:center;gap:4px}
+.star-icon-filled{color:#E31B23}
+
+/* QUOTE / REVIEW: Dominant Hero Text */
+.testimonial-quote-box{flex:1;display:flex;align-items:flex-start;overflow:hidden}
+.testimonial-quote-text{font-family:'Fraunces',serif;font-size:clamp(21px,1.8vw,25px);font-weight:500;line-height:1.4;color:#111111;letter-spacing:-0.015em;margin:0;padding:0;font-style:normal}
+
+/* BOTTOM PATIENT NAME & CONTEXT */
+.testimonial-card-bottom{display:flex;flex-direction:column;padding-top:24px;border-top:1px solid rgba(0,0,0,0.06);margin-top:auto}
+.testimonial-patient-name{font-family:'Sora',sans-serif;font-size:19px;font-weight:600;color:#111111;letter-spacing:-0.01em}
+.testimonial-patient-context{font-family:'Sora',sans-serif;font-size:14.5px;color:#64748b;font-weight:400;margin-top:4px}
+
+/* RESPONSIVE STYLES */
+@media(max-width:1024px){
+  .testimonial-editorial-card{width:420px;height:480px;padding:38px 34px}
+  .testimonial-quote-text{font-size:21px}
+}
+
+@media(max-width:900px){
+  .testimonials-section{padding:85px 0 95px}
+  .testimonials-header-container{margin-bottom:40px}
+  .testimonials-header{flex-direction:column;align-items:flex-start;gap:20px}
+  .testimonials-heading{font-size:clamp(32px,8vw,44px)}
+  .testimonials-lead-text{font-size:15px;max-width:100%}
+  .testimonial-editorial-card{width:clamp(300px,82vw,360px);height:440px;padding:32px 28px;border-radius:20px}
+  .testimonial-quote-text{font-size:19px;line-height:1.38}
+  .testimonial-patient-name{font-size:17px}
+  .testimonial-patient-context{font-size:13.5px}
+}
+
 .intro-main,.intro-small{transition:transform 1.1s var(--ease-out-expo)}.intro-images:hover .intro-main{transform:scale(1.02)}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}.hero-content>*,.hero-bottom,.reveal{opacity:1!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}.hero-content>*,.hero-bottom,.reveal{opacity:1!important;transform:none!important}.testimonials-marquee-track{animation:none!important;overflow-x:auto}}

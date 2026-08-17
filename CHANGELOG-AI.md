@@ -1,5 +1,22 @@
 # AI Work Changelog
 
+## 2026-08-17 — #03 TESTIMONIALS / Real Patient Experiences (Infinite Marquee & Typewriter Reveal)
+- **What changed**:
+  - Built the **TESTIMONIALS / Real Patient Experiences Section** as a major typography-led homepage section:
+    - **Monumental Section Scale & 92vw Grid**: Large container (`min(92vw, 1540px)`) with generous vertical padding (`140px top / 130px bottom`).
+    - **Editorial Two-Column Header**: `[ ✛ TESTIMONIALS ]` badge in DM Mono, large `Trusted care. Real experiences.` headline in Fraunces serif, and right-aligned supporting text in Sora.
+    - **Infinite Continuous Right-to-Left Marquee**: Seamless duplicated sequence with linear 50s continuous translation, zero snaps, no resets, and smooth pause on hover.
+    - **Large Typography-Led Testimonial Cards**: `480px` wide, `520px` tall cards on pure `#FFFFFF` background with `26px` border-radius, subtle `#E3E3DE` border, and 5 red stars (`#E31B23`).
+    - **6 Authentic Real Patient Reviews**: Embedded the exact verbatim reviews from Taniya Zabeen, FIROZ Ahamad, Sadia Naz, Ubaid Ur Rehman, Saddam Hussain, and Snehal Sharma.
+    - **Interactive Typewriter / Character Reveal**: Progressive smooth character reveal when cards enter viewport, completing quickly into static text without repeated loops.
+    - **Accessibility**: Includes `prefers-reduced-motion` fallbacks.
+- **Files modified/added**:
+  - `frontend/src/App.js` [MODIFIED]
+  - `frontend/src/App.css` [MODIFIED]
+- **Verification**:
+  - Production build compiled successfully (`main.525b3a53.js`, `main.2ccae23a.css`).
+  - Verified live in browser subagent on Desktop (1440px) with interactive screenshots.
+
 ## 2026-08-17 — Rebuilt Comparison Section From Scratch (Monumental Editorial Architecture)
 - **What changed**:
   - Completely rebuilt the **OUR STANDARDS / Experience the Difference Comparison Section** from scratch:
