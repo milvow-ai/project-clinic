@@ -1,21 +1,25 @@
 # AI Work Changelog
 
-## 2026-08-17 — #03 TESTIMONIALS / Real Patient Experiences (Infinite Marquee & Typewriter Reveal)
+## 2026-08-17 — FINAL REVISION: Testimonials / Infinite Editorial Marquee (#080808 + White Cards)
 - **What changed**:
-  - Built the **TESTIMONIALS / Real Patient Experiences Section** as a major typography-led homepage section:
-    - **Monumental Section Scale & 92vw Grid**: Large container (`min(92vw, 1540px)`) with generous vertical padding (`140px top / 130px bottom`).
-    - **Editorial Two-Column Header**: `[ ✛ TESTIMONIALS ]` badge in DM Mono, large `Trusted care. Real experiences.` headline in Fraunces serif, and right-aligned supporting text in Sora.
-    - **Infinite Continuous Right-to-Left Marquee**: Seamless duplicated sequence with linear 50s continuous translation, zero snaps, no resets, and smooth pause on hover.
-    - **Large Typography-Led Testimonial Cards**: `480px` wide, `520px` tall cards on pure `#FFFFFF` background with `26px` border-radius, subtle `#E3E3DE` border, and 5 red stars (`#E31B23`).
-    - **6 Authentic Real Patient Reviews**: Embedded the exact verbatim reviews from Taniya Zabeen, FIROZ Ahamad, Sadia Naz, Ubaid Ur Rehman, Saddam Hussain, and Snehal Sharma.
-    - **Interactive Typewriter / Character Reveal**: Progressive smooth character reveal when cards enter viewport, completing quickly into static text without repeated loops.
-    - **Accessibility**: Includes `prefers-reduced-motion` fallbacks.
-- **Files modified/added**:
+  - Rebuilt the **Testimonials section** according to the exact infinite marquee specification:
+    - **Visual Contrast**: Deep solid black `#080808` section background with large, crisp, pure white `#FFFFFF` editorial cards (`460px` width, `500px` height, `20px` radius).
+    - **Removed All Navigation UI**: Completely eliminated previous/next arrow buttons, pagination, counters (`04 / 06`), and finite slider behaviors.
+    - **Continuous Right-to-Left Infinite Marquee**: Seamless 3x duplicated sequence (`patientReviews`) running a continuous `55s` linear translation without visible jumps or resets.
+    - **Viewport-Triggered Dynamic Typewriter Loop**:
+      - Typing starts from character 0 at `50ms/char` when a card enters the viewport from the right.
+      - Full review holds for `1000ms` upon completion.
+      - Review text smoothly fades out (`400ms`) as the card continues leftward toward exit.
+      - Review resets off-screen and types fresh from character 0 when returning from the right.
+    - **Cursor-Responsive 2px Red Gradient Border**: Masked `::before` pseudo-element with radial gradient mapped to `--mouse-x` and `--mouse-y` tracking the cursor strictly around the 2px perimeter border with zero internal content shifting or tilting.
+    - **Card Hierarchy**: 5 Red Stars (`#E31B23`) → Near-black `#080808` Fraunces review text → Divider line → Patient name (`#080808`) + Context (`#64748b`) + Review number (`01`–`06` in `DM Mono`).
+    - **Header**: Large `Real experiences.` in `#FFFFFF` Fraunces serif and supporting copy in `#E8E8E2` Sora.
+- **Files modified**:
   - `frontend/src/App.js` [MODIFIED]
   - `frontend/src/App.css` [MODIFIED]
 - **Verification**:
-  - Production build compiled successfully (`main.525b3a53.js`, `main.2ccae23a.css`).
-  - Verified live in browser subagent on Desktop (1440px) with interactive screenshots.
+  - Production build compiled successfully (`main.7de967fc.js`, `main.7d7954c7.css`).
+  - Verified live in browser subagent on Desktop (1440x900) and Mobile (390x844).
 
 ## 2026-08-17 — Rebuilt Comparison Section From Scratch (Monumental Editorial Architecture)
 - **What changed**:

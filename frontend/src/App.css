@@ -308,62 +308,77 @@
 }
 
 /* ==========================================================================
-   TESTIMONIALS / REAL PATIENT EXPERIENCES — INFINITE CONTINUOUS MARQUEE
+   TESTIMONIALS / INFINITE EDITORIAL MARQUEE (#080808 Background + White Cards)
    ========================================================================== */
-.testimonials-section{padding:140px 0 130px;background:#ffffff;position:relative;overflow:hidden;border-bottom:1px solid #E3E3DE}
+.testimonials-section{padding:140px 0 150px;background:#080808;position:relative;overflow:hidden}
 
-/* 1. SECTION SCALE: Expansive 90–94vw container */
+/* Dark theme badge */
+.trust-badge.dark-badge{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#E8E8E2}
+
+/* Header Container: 92vw scale */
 .testimonials-header-container{width:min(92vw,1540px);margin:0 auto 64px}
 .testimonials-header{display:flex;justify-content:space-between;align-items:flex-end;gap:56px}
-.testimonials-header-left{max-width:750px}
-.testimonials-heading{font-family:'Fraunces',serif;font-size:clamp(48px,5.2vw,72px);font-weight:600;line-height:1.06;letter-spacing:-0.03em;color:#111111;margin:14px 0 0}
-.testimonials-header-right{max-width:440px;padding-bottom:8px}
-.testimonials-lead-text{font-family:'Sora',sans-serif;font-size:17px;line-height:1.65;color:#5F5F5A;margin:0}
+.testimonials-header-left{max-width:700px}
+.testimonials-heading{font-family:'Fraunces',serif;font-size:clamp(48px,5.5vw,76px);font-weight:600;line-height:1.05;letter-spacing:-0.03em;color:#FFFFFF;margin:14px 0 0}
+.testimonials-header-right{max-width:480px;padding-bottom:8px}
+.testimonials-lead-text{font-family:'Sora',sans-serif;font-size:17px;line-height:1.65;color:#E8E8E2;margin:0}
 
-/* 2. INFINITE SEAMLESS CONTINUOUS MARQUEE WRAPPER */
-.testimonials-marquee-wrapper{width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;overflow:hidden;padding:10px 0 25px;mask-image:linear-gradient(to right,transparent 0%,black 4%,black 96%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,black 4%,black 96%,transparent 100%)}
-.testimonials-marquee-track{display:flex;gap:32px;width:max-content;animation:testimonialsInfiniteScroll 50s linear infinite;will-change:transform}
-.testimonials-marquee-wrapper:hover .testimonials-marquee-track{animation-play-state:paused}
+/* INFINITE HORIZONTAL MARQUEE WRAPPER & TRACK */
+.testimonials-marquee-wrapper{width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;overflow:hidden;padding:15px 0 25px}
+.testimonials-marquee-track{display:flex;gap:32px;width:max-content;animation:testimonialsInfiniteMarquee 55s linear infinite;will-change:transform}
 
-@keyframes testimonialsInfiniteScroll{
+@keyframes testimonialsInfiniteMarquee{
   0%{transform:translate3d(0,0,0)}
   100%{transform:translate3d(calc(-100% / 3),0,0)}
 }
 
-/* 3. LARGE EDITORIAL TESTIMONIAL CARD (Width: 480px, Height: 520px) */
-.testimonial-editorial-card{width:480px;height:520px;background:#ffffff;border:1px solid #E3E3DE;border-radius:26px;padding:46px 42px;display:flex;flex-direction:column;justify-content:space-between;flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,0.025);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease,border-color .35s ease;user-select:none}
-.testimonial-editorial-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.06);border-color:rgba(227,27,35,0.2)}
+/* WHITE EDITORIAL TESTIMONIAL CARD (Width: 460px, Height: 500px, 20px Radius) */
+.testimonial-marquee-card{width:460px;height:500px;background:#FFFFFF;border-radius:20px;position:relative;flex-shrink:0;box-sizing:border-box;padding:44px 38px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(0,0,0,0.12);transition:transform .35s cubic-bezier(.16,1,.3,1);user-select:none}
 
-/* STARS: Refined 17px Project Clinic Red */
-.testimonial-card-top{display:flex;align-items:center;margin-bottom:24px}
+/* Subtle 4px Card Lift on Hover (Continuous Marquee Keeps Moving) */
+.testimonial-marquee-card:hover{transform:translateY(-4px)}
+
+/* CURSOR-RESPONSIVE RED GRADIENT 2px BORDER ONLY */
+.testimonial-marquee-card::before{content:"";position:absolute;inset:-2px;border-radius:22px;padding:2px;background:radial-gradient(280px circle at var(--mouse-x,50%) var(--mouse-y,50%),#E31B23 0%,rgba(227,27,35,0.5) 40%,transparent 70%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:0;transition:opacity .3s ease;z-index:2}
+.testimonial-marquee-card:hover::before{opacity:1}
+
+/* TOP: 5 Red Stars */
+.testimonial-card-top{display:flex;align-items:center;margin-bottom:20px}
 .testimonial-stars{display:flex;align-items:center;gap:4px}
 .star-icon-filled{color:#E31B23}
 
-/* QUOTE / REVIEW: Dominant Hero Text */
-.testimonial-quote-box{flex:1;display:flex;align-items:flex-start;overflow:hidden}
-.testimonial-quote-text{font-family:'Fraunces',serif;font-size:clamp(21px,1.8vw,25px);font-weight:500;line-height:1.4;color:#111111;letter-spacing:-0.015em;margin:0;padding:0;font-style:normal}
+/* QUOTE / REVIEW: Near-black #080808 Editorial Text */
+.testimonial-quote-box{flex:1;display:flex;align-items:flex-start;overflow:hidden;min-height:220px}
+.testimonial-quote-text{font-family:'Fraunces',serif;font-size:clamp(20px,1.7vw,24px);font-weight:500;line-height:1.45;color:#080808;letter-spacing:-0.015em;margin:0;padding:0;font-style:normal;transition:opacity .4s ease}
+.testimonial-quote-text.text-fading{opacity:0}
+.testimonial-caret{display:inline-block;width:2px;height:1.1em;background:#E31B23;margin-left:4px;vertical-align:middle;animation:blinkCaret 1s steps(2,start) infinite}
 
-/* BOTTOM PATIENT NAME & CONTEXT */
-.testimonial-card-bottom{display:flex;flex-direction:column;padding-top:24px;border-top:1px solid rgba(0,0,0,0.06);margin-top:auto}
-.testimonial-patient-name{font-family:'Sora',sans-serif;font-size:19px;font-weight:600;color:#111111;letter-spacing:-0.01em}
+@keyframes blinkCaret{to{visibility:hidden}}
+
+/* DIVIDER */
+.testimonial-divider{width:100%;height:1px;background:rgba(0,0,0,0.08);margin:24px 0 20px}
+
+/* BOTTOM: Patient info + Individual Review Number (01–06) */
+.testimonial-card-bottom{display:flex;align-items:flex-end;justify-content:space-between}
+.testimonial-patient-info{display:flex;flex-direction:column}
+.testimonial-patient-name{font-family:'Sora',sans-serif;font-size:19px;font-weight:600;color:#080808;letter-spacing:-0.01em}
 .testimonial-patient-context{font-family:'Sora',sans-serif;font-size:14.5px;color:#64748b;font-weight:400;margin-top:4px}
+.testimonial-card-index{font-family:'DM Mono',monospace;font-size:13.5px;letter-spacing:0.08em;color:#8E8E88;font-weight:500}
 
 /* RESPONSIVE STYLES */
-@media(max-width:1024px){
-  .testimonial-editorial-card{width:420px;height:480px;padding:38px 34px}
-  .testimonial-quote-text{font-size:21px}
+@media(max-width:1200px){
+  .testimonial-marquee-card{width:400px;height:480px;padding:36px 32px}
+  .testimonial-quote-text{font-size:20px}
 }
 
 @media(max-width:900px){
-  .testimonials-section{padding:85px 0 95px}
+  .testimonials-section{padding:90px 0 100px}
   .testimonials-header-container{margin-bottom:40px}
-  .testimonials-header{flex-direction:column;align-items:flex-start;gap:20px}
-  .testimonials-heading{font-size:clamp(32px,8vw,44px)}
-  .testimonials-lead-text{font-size:15px;max-width:100%}
-  .testimonial-editorial-card{width:clamp(300px,82vw,360px);height:440px;padding:32px 28px;border-radius:20px}
-  .testimonial-quote-text{font-size:19px;line-height:1.38}
-  .testimonial-patient-name{font-size:17px}
-  .testimonial-patient-context{font-size:13.5px}
+  .testimonials-header{flex-direction:column;align-items:flex-start;gap:24px}
+  .testimonials-heading{font-size:clamp(34px,8.5vw,48px)}
+  .testimonials-lead-text{font-size:15px}
+  .testimonial-marquee-card{width:clamp(300px,82vw,360px);height:450px;padding:32px 28px;border-radius:18px}
+  .testimonial-quote-text{font-size:18.5px;line-height:1.4}
 }
 
 .intro-main,.intro-small{transition:transform 1.1s var(--ease-out-expo)}.intro-images:hover .intro-main{transform:scale(1.02)}

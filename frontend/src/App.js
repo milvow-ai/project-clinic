@@ -518,73 +518,125 @@ const patientReviews = [
   },
 ];
 
-function TestimonialCard({ item, index }) {
+function TestimonialCard({ item, reviewNumber }) {
   const [displayedText, setDisplayedText] = useState("");
-  const [hasStarted, setHasStarted] = useState(false);
+  const [isFading, setIsFading] = useState(false);
   const cardRef = useRef(null);
+  const isTypingRef = useRef(false);
+  const timeoutRef = useRef(null);
+
+  const startTypingCycle = () => {
+    if (isTypingRef.current) return;
+    isTypingRef.current = true;
+    clearTimeout(timeoutRef.current);
+
+    let charIndex = 0;
+    const fullText = `"${item.review}"`;
+    const typeSpeed = 50; // 45–60ms per character
+    const holdDuration = 1000; // 800–1200ms hold after typing
+    const fadeDuration = 400; // 400ms fade
+
+    setDisplayedText("");
+    setIsFading(false);
+
+    const typeNextChar = () => {
+      if (charIndex < fullText.length) {
+        charIndex++;
+        setDisplayedText(fullText.slice(0, charIndex));
+        timeoutRef.current = setTimeout(typeNextChar, typeSpeed);
+      } else {
+        // Typing complete -> Hold briefly
+        timeoutRef.current = setTimeout(() => {
+          // Fade text out
+          setIsFading(true);
+          timeoutRef.current = setTimeout(() => {
+            setDisplayedText("");
+            setIsFading(false);
+            isTypingRef.current = false;
+          }, fadeDuration);
+        }, holdDuration);
+      }
+    };
+
+    typeNextChar();
+  };
 
   useEffect(() => {
+    const cardEl = cardRef.current;
+    if (!cardEl) return;
+
+    // Viewport-triggered typing: starts typing when card enters viewport from the right
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasStarted) {
-            setHasStarted(true);
+          if (entry.isIntersecting) {
+            startTypingCycle();
+          } else {
+            // When exiting viewport, cancel typing and reset text
+            clearTimeout(timeoutRef.current);
+            isTypingRef.current = false;
+            setDisplayedText("");
+            setIsFading(false);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.2 }
     );
 
-    if (cardRef.current) observer.observe(cardRef.current);
-    return () => observer.disconnect();
-  }, [hasStarted]);
+    observer.observe(cardEl);
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeoutRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item.review]);
 
-  useEffect(() => {
-    if (!hasStarted) return;
-    
-    let currentIndex = 0;
-    const fullText = `"${item.review}"`;
-    const speed = fullText.length > 150 ? 12 : 20;
-    
-    const interval = setInterval(() => {
-      currentIndex += 2;
-      if (currentIndex >= fullText.length) {
-        setDisplayedText(fullText);
-        clearInterval(interval);
-      } else {
-        setDisplayedText(fullText.slice(0, currentIndex));
-      }
-    }, speed);
-
-    return () => clearInterval(interval);
-  }, [hasStarted, item.review]);
+  // Cursor-responsive border gradient ONLY (affects border highlight, zero content movement)
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
+    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
+  };
 
   return (
-    <article className="testimonial-editorial-card" ref={cardRef}>
+    <article
+      className="testimonial-marquee-card"
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+    >
       <div className="testimonial-card-top">
         <div className="testimonial-stars" aria-label="5 out of 5 stars">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} size={17} className="star-icon-filled" fill="#E31B23" stroke="#E31B23" />
+            <Star key={i} size={16} className="star-icon-filled" fill="#E31B23" stroke="#E31B23" />
           ))}
         </div>
       </div>
 
       <div className="testimonial-quote-box">
-        <blockquote className="testimonial-quote-text">
-          {displayedText || `"${item.review}"`}
+        <blockquote className={`testimonial-quote-text ${isFading ? "text-fading" : ""}`}>
+          {displayedText}
+          <span className="testimonial-caret" aria-hidden="true" />
         </blockquote>
       </div>
 
+      <div className="testimonial-divider" />
+
       <div className="testimonial-card-bottom">
-        <strong className="testimonial-patient-name">{item.name}</strong>
-        <span className="testimonial-patient-context">{item.context}</span>
+        <div className="testimonial-patient-info">
+          <strong className="testimonial-patient-name">{item.name}</strong>
+          <span className="testimonial-patient-context">{item.context}</span>
+        </div>
+        <span className="testimonial-card-index">{reviewNumber}</span>
       </div>
     </article>
   );
 }
 
 function TestimonialsSection() {
-  // Triple duplicated list for an infinitely smooth continuous marquee without any seam
+  // Triple duplicated list for seamless continuous infinite horizontal marquee
   const marqueeItems = [...patientReviews, ...patientReviews, ...patientReviews];
 
   return (
@@ -592,13 +644,11 @@ function TestimonialsSection() {
       <div className="container testimonials-header-container">
         <div className="testimonials-header">
           <div className="testimonials-header-left">
-            <div className="trust-badge">
+            <div className="trust-badge dark-badge">
               <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
               <span>Testimonials</span>
             </div>
-            <h2 className="testimonials-heading">
-              Trusted care.<br />Real experiences.
-            </h2>
+            <h2 className="testimonials-heading">Real experiences.</h2>
           </div>
           <div className="testimonials-header-right">
             <p className="testimonials-lead-text">
@@ -608,12 +658,19 @@ function TestimonialsSection() {
         </div>
       </div>
 
-      {/* Infinite Seamless Continuous Marquee */}
+      {/* Infinite Seamless Continuous Horizontal Marquee */}
       <div className="testimonials-marquee-wrapper">
         <div className="testimonials-marquee-track">
-          {marqueeItems.map((item, idx) => (
-            <TestimonialCard key={`${item.name}-${idx}`} item={item} index={idx} />
-          ))}
+          {marqueeItems.map((item, idx) => {
+            const reviewNumber = `0${(idx % patientReviews.length) + 1}`;
+            return (
+              <TestimonialCard
+                key={`${item.name}-${idx}`}
+                item={item}
+                reviewNumber={reviewNumber}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
