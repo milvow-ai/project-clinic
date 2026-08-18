@@ -1,50 +1,53 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import Lenis from "lenis";
 import { ArrowDownRight, ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw, Star } from "lucide-react";
+
+/* ============================================================
+   ACTIVE PROSPECT
+   Every clinic-specific value below comes from
+   prospects/<id>/content.json + theme.json + media/.
+   Nothing about a clinic is hardcoded in this file.
+   Swap prospect:  node scripts/use-prospect.js <id> && yarn build
+   ============================================================ */
+import P from "@/active/prospect.json";
+
+const C = P.clinic;
+const G = P.google || {};
+const M = P.media || {};
+const CONSENT = P.consent || {};
+const HERO = P.hero || {};
+const ok = (g) => !g || CONSENT[g] === true;
+const TICKER = (P.announcements || []).filter((a) => ok(a.gate));
+/* lucide components referenced by name from content.json */
+const ICONS = { MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw };
+
+const logoImg   = M["logo"];
+const heroImage = M["hero"];
+const whatsapp  = C.whatsapp;
+const maps      = C.maps;
+const phone     = C.phoneHref;
+
+const trustSlides = (P.trustSlides || []).map((s) => ({ ...s, image: M["trust-" + s.slotIndex] }));
+const serviceCardsData = (P.services || []).map((s) => ({ ...s, image: M["service-" + s.slotIndex], icon: M[s.icon] }));
+const differenceRows = (P.differenceRows || []).map((r) => ({ ...r, icon: ICONS[r.icon] || MessageSquare, clinica: r.ours }));
+const patientReviews = P.reviews || [];
+const verifiedClinicians = (P.doctors || []).map((d) => ({ ...d, image: M["doctor-" + d.slotIndex] }));
+const services = P.treatments || [];
+const faqs = P.faqs || [];
+/* old gallery strip, now served from the prospect folder instead of a CDN */
+const photos = [M["trust-1"], M["trust-3"], M["trust-4"]].filter(Boolean);
+
 import "@/App.css";
 import "@/Enquiry.css";
+/* LAST: prospect theme must override App.css :root */
+import "@/active/theme.css";
 
-const logoImg = "/media/dental-clinica-logo.png";
-const heroImage = "/media/hero-treatment.jpg";
-const photos = [
-  "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/fp78lijx_WhatsApp%20Image%202026-08-15%20at%206.13.27%20PM.webp",
-  "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/h2fngxq3_WhatsApp%20Image%202026-08-15%20at%206.13.27%20PM%20%281%29.webp",
-  "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/s5o3v421_WhatsApp%20Image%202026-08-15%20at%206.13.26%20PM.webp",
-];
-const whatsapp = "https://wa.me/message/MWF3LLCPQ53NL1";
-const maps = "https://www.google.com/maps/search/?api=1&query=Fa-99%2C+Thokar+-4%2C+Abul+Fazal+Enclave%2C+Jamia+Nagar%2C+Okhla%2C+New+Delhi%2C+Delhi+110025%2C+India";
-const phone = "tel:+918368784559";
 
-const trustSlides = [
-  {
-    number: "01",
-    tag: "X-RAY / DIAGNOSTICS",
-    title: "Diagnostic Accuracy",
-    description: "Every treatment begins with a clear understanding of your oral health. Detailed diagnostics help us identify what needs attention and plan treatment with confidence.",
-    image: "/media/xray-diagnostics.jpg",
-  },
-  {
-    number: "02",
-    tag: "DENTAL TREATMENT",
-    title: "Gentle Care & Patient Comfort",
-    description: "Modern dentistry should feel calm and comfortable. We take the time to make every visit reassuring, precise, and centred around you.",
-    image: "/media/hero-treatment.jpg",
-  },
-  {
-    number: "03",
-    tag: "DENTAL INSTRUMENTS",
-    title: "Precision in Every Detail",
-    description: "From routine care to complex treatment, every procedure is approached with careful technique, modern equipment, and attention to the smallest details.",
-    image: "/media/dental-instruments.jpg",
-  },
-  {
-    number: "04",
-    tag: "DOCTOR + PATIENT",
-    title: "Care Built Around You",
-    description: "Your concerns, goals, and comfort guide every decision. We explain your options clearly so you can move forward with confidence.",
-    image: "/media/patient-care-close.jpg",
-  },
-];
+;
+
+
+
+;
 
 const Button = ({ children, href = whatsapp, light = false, testid, className = "", type = "button", onClick }) => {
   if (type === "submit") {
@@ -214,7 +217,7 @@ function TrustPhilosophySection() {
                 ref={iframeRef}
                 className="trust-vimeo-iframe"
                 src="https://player.vimeo.com/video/1218731432?background=1&autoplay=1&loop=1&muted=1&autopause=0&transparent=0"
-                title="DENTAL CLINICa Patient Care Video"
+                title={`${C.name} Patient Care Video`}
                 allow="autoplay; fullscreen"
                 allowFullScreen
               />
@@ -266,41 +269,7 @@ const MakeoverToothIcon = () => (
     <path d="M28 8L29 11L32 12L29 13L28 16L27 13L24 12L27 11L28 8Z" fill="currentColor" strokeWidth="0.5" />
   </svg>
 );
-
-const serviceCardsData = [
-  {
-    id: "preventive",
-    title: "General & Preventive Dentistry",
-    description: "Routine check-ups, professional cleaning, gum care, and preventive treatment to keep your smile healthy year-round.",
-    image: "/media/service-preventive.jpg",
-    icon: "/media/icon-preventive.png",
-    whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about General & Preventive Dentistry.",
-  },
-  {
-    id: "implants",
-    title: "Dental Implants",
-    description: "Replace missing teeth with secure, natural-looking implants designed to restore function and confidence.",
-    image: "/media/service-implants.jpg",
-    icon: "/media/icon-implants.png",
-    whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about Dental Implants.",
-  },
-  {
-    id: "makeover",
-    title: "Smile Makeover",
-    description: "A personalized combination of cosmetic treatments to refine your smile while keeping it natural to you.",
-    image: "/media/service-makeover.jpg",
-    icon: "/media/icon-makeover.png",
-    whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about a Smile Makeover consultation.",
-  },
-  {
-    id: "orthodontics",
-    title: "Orthodontics",
-    description: "Braces and clear aligners to gradually straighten your teeth and create a healthier, more confident smile.",
-    image: "/media/service-orthodontics.png",
-    icon: "/media/icon-orthodontics.png",
-    whatsappMsg: "Hello DENTAL CLINICa, I would like to inquire about Orthodontics and Braces.",
-  },
-];
+;
 
 function ServicesCarouselSection() {
   const carouselRef = useRef(null);
@@ -375,7 +344,7 @@ function ServicesCarouselSection() {
               <div className="service-card-image-wrap">
                 <img 
                   src={card.image} 
-                  alt={`${card.title} at DENTAL CLINICa`} 
+                  alt={`${card.title} at {C.name}`} 
                   className="service-card-img"
                   loading="lazy"
                 />
@@ -387,45 +356,7 @@ function ServicesCarouselSection() {
     </section>
   );
 }
-
-const differenceRows = [
-  {
-    icon: MessageSquare,
-    feature: "Clear treatment explanations",
-    clinica: true,
-    typical: false,
-  },
-  {
-    icon: SlidersHorizontal,
-    feature: "Personalized care plans",
-    clinica: true,
-    typical: false,
-  },
-  {
-    icon: Heart,
-    feature: "Comfort-first appointments",
-    clinica: true,
-    typical: false,
-  },
-  {
-    icon: Eye,
-    feature: "Transparent recommendations",
-    clinica: true,
-    typical: false,
-  },
-  {
-    icon: Clock3,
-    feature: "Time to understand your concerns",
-    clinica: true,
-    typical: false,
-  },
-  {
-    icon: RotateCcw,
-    feature: "Thoughtful follow-up",
-    clinica: true,
-    typical: false,
-  },
-];
+;
 
 function WhySection() {
   return (
@@ -456,7 +387,7 @@ function WhySection() {
                 <span>What Matters</span>
               </div>
               <div className="why-col-brand why-head-cell">
-                <img src={logoImg} alt="DENTAL CLINICa" className="why-brand-logo" />
+                <img src={logoImg} alt={`${C.name}`} className="why-brand-logo" />
               </div>
               <div className="why-col-typical why-head-cell">
                 <span>Typical Dental Visit</span>
@@ -478,9 +409,9 @@ function WhySection() {
                       <span className="why-feature-text">{row.feature}</span>
                     </div>
 
-                    {/* Column 2: DENTAL CLINICa (25% Width, Pure White Surface, Refined 28px Circular Checkmark) */}
+                    {/* Column 2: {C.name} (25% Width, Pure White Surface, Refined 28px Circular Checkmark) */}
                     <div className="why-col-brand why-cell">
-                      <span className="why-check-indicator" aria-label="Included at DENTAL CLINICa">
+                      <span className="why-check-indicator" aria-label={`Included at ${C.name}`}>
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                           <circle cx="14" cy="14" r="12" stroke="currentColor" strokeWidth="1.6" />
                           <path d="M9.5 14.2L12.5 17.2L18.5 10.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -507,45 +438,7 @@ function WhySection() {
     </section>
   );
 }
-
-const patientReviews = [
-  {
-    name: "Taniya Zabeen",
-    rating: 5,
-    context: "General Dental Care",
-    review: "Excellent experience. Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. The staff was friendly and professional. Highly recommend for anyone seeking top notch dental care.",
-  },
-  {
-    name: "FIROZ Ahamad",
-    rating: 5,
-    context: "Dental Treatment",
-    review: "I had a wonderful experience with Dr. Mohammad Ahamad. The diagnosis was accurate, the treatment worked perfectly, and I felt well cared for throughout my recovery.",
-  },
-  {
-    name: "Sadia Naz",
-    rating: 5,
-    context: "Dental Treatment",
-    review: "Had an amazing experience. Dr. Ahmad and Dr. Sidra were fantastic – made me feel at ease and provided painless treatment. Modern facilities, friendly staff, and a super warm vibe. Highly recommend.",
-  },
-  {
-    name: "Ubaid Ur Rehman",
-    rating: 5,
-    context: "Full Mouth Implants",
-    review: "Best implantologist. Got my full mouth implant done at DENTAL CLINICa Dr Ahmad Mohammad. Advised to all dental patients. 5 star. Fully satisfied.",
-  },
-  {
-    name: "Saddam Hussain",
-    rating: 5,
-    context: "Dental Treatment",
-    review: "Staff is very friendly. Dr informs everything clearly and in advance. Dr also gives ample time. Great experience.",
-  },
-  {
-    name: "Snehal Sharma",
-    rating: 5,
-    context: "Dental Treatment",
-    review: "Painless treatment with amazing facilities and latest technology, excellent sterilization. Everything was on top notch. Highly recommend, go for it without any second opinion.",
-  },
-];
+;
 
 const typingProfiles = [
   { baseSpeed: 20, initialDelay: 90 },   // Card 01 (Taniya Zabeen) — Brisk & crisp, finishes first
@@ -731,42 +624,7 @@ function TestimonialsSection() {
     </section>
   );
 }
-
-const verifiedClinicians = [
-  {
-    id: "dr-ahmad",
-    name: "Dr. Ahmad Mohammad",
-    role: "Principal Dentist & Implantologist",
-    image: "/media/dr-ahmad-mohammad.jpg",
-    objectPosition: "center 15%",
-    description:
-      "Focused on precise diagnosis, clear treatment planning, and making patients feel comfortable throughout their care.",
-    focusAreas: [
-      "General Dentistry",
-      "Dental Implants",
-      "Root Canal Treatment",
-      "Restorative Care",
-      "Smile Enhancement",
-    ],
-    tag: "01 · PRINCIPAL DENTIST",
-  },
-  {
-    id: "dr-sidra",
-    name: "Dr. Sidra Firdous",
-    role: "Dental Surgeon & Restorative Care",
-    image: "/media/dr-sidra-firdous.png",
-    objectPosition: "center 15%",
-    description:
-      "Dedicated to gentle, reassuring patient care, aesthetic restorations, and stress-free clinical visits for the entire family.",
-    focusAreas: [
-      "Restorative Dentistry",
-      "Preventive Care",
-      "Painless Fillings",
-      "Aesthetic Smile Design",
-    ],
-    tag: "02 · DENTAL SURGEON",
-  },
-];
+;
 
 function YourCareSection() {
   const [activeDoctorIndex, setActiveDoctorIndex] = useState(0);
@@ -880,6 +738,11 @@ function YourCareSection() {
   );
 }
 
+/* Every block that animates in on scroll. One source of truth, shared by the
+   pre-paint hook and the observer below. */
+const REVEAL_SELECTOR =
+  ".intro-grid>div,.metrics-grid>div,.statement-inner,.philosophy-inner>*,.philosophy-points>div,.care-intro,.accordion,.section-heading,.card-grid>article,.center-heading,.compare,.review-score,.review-quote,.gallery-grid figure,.gallery-note,.team-inner>div,.contact-grid>div,.faq-grid>div,.journal-grid>article,.final-content>*, .service-editorial-card, .why-comparison-table, .yourcare-feature-card";
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
@@ -887,6 +750,15 @@ function App() {
   const [formStatus, setFormStatus] = useState("");
   const [navbarHidden, setNavbarHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  /* Runs before the browser paints. The same code in useEffect runs AFTER the
+     first paint, so every revealed block flashes at full opacity for one frame
+     and then snaps to hidden. That flash is the clearest tell that a scroll
+     animation was bolted on afterwards. */
+  useLayoutEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    document.querySelectorAll(REVEAL_SELECTOR).forEach((el) => el.classList.add("reveal"));
+  }, []);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -990,23 +862,60 @@ function App() {
     document.addEventListener("click", handleAnchorClick);
 
     // Synchronized Section Reveal Observers
-    const els = document.querySelectorAll(
-      ".intro-grid>div,.metrics-grid>div,.statement-inner,.philosophy-inner>*,.philosophy-points>div,.care-intro,.accordion,.section-heading,.card-grid>article,.center-heading,.compare,.review-score,.review-quote,.gallery-grid figure,.gallery-note,.team-inner>div,.contact-grid>div,.faq-grid>div,.journal-grid>article,.final-content>*, .service-editorial-card, .why-comparison-table, .yourcare-feature-card"
-    );
-    els.forEach((el) => el.classList.add("reveal"));
+    const els = document.querySelectorAll(REVEAL_SELECTOR);
+
+    /* Once a block has finished playing, strip the classes so it stops being a
+       composited layer. Leaving filter + will-change on ~40 elements for the
+       life of the page is what makes a site like this feel heavy to scroll,
+       and it can soften text rendering permanently. */
+    const settleTimers = new Set();
+    const settle = (el) => {
+      const done = (ev) => {
+        if (ev && ev.propertyName !== "transform") return;
+        el.removeEventListener("transitionend", done);
+        el.classList.remove("reveal", "in-view");
+        el.style.willChange = "";
+      };
+      el.addEventListener("transitionend", done);
+      // transitionend never fires for an element that is not painted
+      const t = setTimeout(() => { settleTimers.delete(t); done(null); }, 1800);
+      settleTimers.add(t);
+    };
+
+    /* Cards inside a horizontally translated track (the services carousel)
+       never intersect the viewport on their own, because the track slides them
+       outside it. Observed individually they would sit at opacity 0 forever.
+       So watch the track and release its whole group together. Siblings keep
+       their nth-child stagger, so the group still cascades rather than popping. */
+    const GROUP_CONTAINERS = ".services-cards-track";
+    const groups = new Map();
+    const singles = [];
+    els.forEach((el) => {
+      const g = el.closest(GROUP_CONTAINERS);
+      if (g) {
+        if (!groups.has(g)) groups.set(g, []);
+        groups.get(g).push(el);
+      } else {
+        singles.push(el);
+      }
+    });
 
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in-view");
-            io.unobserve(e.target);
-          }
+          if (!e.isIntersecting) return;
+          io.unobserve(e.target);
+          const members = groups.get(e.target) || [e.target];
+          members.forEach((el) => {
+            el.classList.add("in-view");
+            settle(el);
+          });
         });
       },
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
-    els.forEach((el) => io.observe(el));
+    singles.forEach((el) => io.observe(el));
+    groups.forEach((_members, container) => io.observe(container));
 
     return () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
@@ -1018,21 +927,17 @@ function App() {
       }
       document.removeEventListener("click", handleAnchorClick);
       io.disconnect();
+      settleTimers.forEach(clearTimeout);
     };
   }, []);
 
   const nav = ["About", "Treatments", "Reviews", "Gallery", "Contact"];
-  const services = ["Check-ups and cleaning", "Fillings and restorations", "Root canal treatment", "Crowns and bridges", "Dental implants", "Whitening and smile enhancement"];
-  const faqs = [
-    ["How can I book an appointment?", "Call +91 83687 84559 or message DENTAL CLINICa directly on WhatsApp. We will help you find the right next step."],
-    ["Where is the clinic located?", "Fa-99, Thokar -4, Abul Fazal Enclave, Jamia Nagar, Okhla, New Delhi, Delhi 110025, India. Plus Code: H74X+26."],
-    ["How do I find the clinic?", "Use the directions link for the most direct route to the clinic, or search the Plus Code H74X+26 in Google Maps."],
-    ["What treatments are available?", "Our treatment pathways are being confirmed for publication. Contact the clinic and we will guide you based on your needs."],
-  ];
+;
+;
   const submitEnquiry = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const message = `Hello DENTAL CLINICa, my name is ${form.get("name")}. My phone is ${form.get("phone")}. I would like to enquire about ${form.get("concern")} and prefer ${form.get("preference")} for a reply.`;
+    const message = `Hello {C.name}, my name is ${form.get("name")}. My phone is ${form.get("phone")}. I would like to enquire about ${form.get("concern")} and prefer ${form.get("preference")} for a reply.`;
     setFormStatus("Your enquiry is ready. Continue on WhatsApp to send it to the clinic.");
     window.open(`${whatsapp}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
@@ -1041,39 +946,23 @@ function App() {
     <div className="utility discount-strip" data-testid="discount-banner">
       <div className="ticker-track">
         <div className="ticker-content">
-          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
-            <span className="ticker-badge">SPECIAL OFFER</span>
-            <span>Flat 20% OFF on Advanced Tooth Implants & Smile Restoration — Book on WhatsApp</span>
-            <span className="ticker-sep">✦</span>
-          </a>
-          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
-            <span className="ticker-badge">LIMITED TIME</span>
-            <span>Complimentary Consultation with Dr Ahmad & Dr Sidra</span>
-            <span className="ticker-sep">✦</span>
-          </a>
-          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
-            <span className="ticker-badge">PATIENT CARE</span>
-            <span>Painless Treatments · Modern Facilities · Jamia Nagar, Okhla</span>
-            <span className="ticker-sep">✦</span>
-          </a>
+          {TICKER.map((t, i) => (
+            <a key={i} href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
+              <span className="ticker-badge">{t.badge}</span>
+              <span>{t.text}</span>
+              <span className="ticker-sep">✦</span>
+            </a>
+          ))}
         </div>
         {/* Duplicate track for seamless infinite scroll */}
         <div className="ticker-content" aria-hidden="true">
-          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
-            <span className="ticker-badge">SPECIAL OFFER</span>
-            <span>Flat 20% OFF on Advanced Tooth Implants & Smile Restoration — Book on WhatsApp</span>
-            <span className="ticker-sep">✦</span>
-          </a>
-          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
-            <span className="ticker-badge">LIMITED TIME</span>
-            <span>Complimentary Consultation with Dr Ahmad & Dr Sidra</span>
-            <span className="ticker-sep">✦</span>
-          </a>
-          <a href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
-            <span className="ticker-badge">PATIENT CARE</span>
-            <span>Painless Treatments · Modern Facilities · Jamia Nagar, Okhla</span>
-            <span className="ticker-sep">✦</span>
-          </a>
+          {TICKER.map((t, i) => (
+            <a key={i} href={whatsapp} target="_blank" rel="noreferrer" className="ticker-item">
+              <span className="ticker-badge">{t.badge}</span>
+              <span>{t.text}</span>
+              <span className="ticker-sep">✦</span>
+            </a>
+          ))}
         </div>
       </div>
     </div>
@@ -1092,7 +981,7 @@ function App() {
         </div>
 
         <a data-testid="brand-logo-link" href="#top" className="brand navbar-center-brand">
-          <img src={logoImg} alt="DENTAL CLINICa logo" className="navbar-logo-img" />
+          <img src={logoImg} alt={`${C.name} logo`} className="navbar-logo-img" />
         </a>
 
         <div className="navbar-right">
@@ -1109,22 +998,22 @@ function App() {
 
     {/* Hero Section with Warm Natural Contrast and Oralic Review Card */}
     <section id="top" className="hero custom-hero">
-      <img className="hero-image" src={heroImage} alt="DENTAL CLINICa treatment room" />
+      <img className="hero-image" src={heroImage} alt={`${C.name} treatment room`} />
       <div className="hero-shade custom-hero-shade" />
 
       <div className="container custom-hero-container">
         <div className="custom-hero-content">
           <div className="hero-badge">
             <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
-            <span>SINCE 2018 — TRUSTED DENTAL CARE</span>
+            <span>{HERO.badge}</span>
           </div>
 
           <h1 className="hero-heading">
-            Trusted Partner for<br className="hero-br"/> Exceptional Oral Health.
+            {HERO.titleLine1}{HERO.titleLine2 ? <><br className="hero-br"/> {HERO.titleLine2}</> : null}
           </h1>
 
           <p className="hero-copy">
-            Expert medical specialists dedicated to your family’s wellness.
+            {HERO.subtitle}
           </p>
 
           <div className="hero-buttons custom-hero-buttons">
@@ -1138,7 +1027,7 @@ function App() {
         </div>
 
         {/* Real Google Review Card Matching Oralic Design & Red/White Clinic Theme with Typewriter */}
-        <a data-testid="hero-review-card" className="oralic-google-review-card" href={maps} target="_blank" rel="noreferrer">
+        {HERO.review && ok(HERO.review.gate) && <a data-testid="hero-review-card" className="oralic-google-review-card" href={maps} target="_blank" rel="noreferrer">
           <div className="review-card-stars">
             <span className="star">★</span>
             <span className="star">★</span>
@@ -1146,7 +1035,7 @@ function App() {
             <span className="star">★</span>
             <span className="star">★</span>
           </div>
-          <TypewriterReviewQuote text="Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!" />
+          <TypewriterReviewQuote text={HERO.review.quote} />
           <div className="review-card-author">
             <div className="author-tooth-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1154,17 +1043,17 @@ function App() {
               </svg>
             </div>
             <div className="author-details">
-              <strong className="author-name">Taniya Zabeen</strong>
-              <span className="author-source">Verified Google Review · 5★</span>
+              <strong className="author-name">{HERO.review.name}</strong>
+              <span className="author-source">{HERO.review.meta}</span>
             </div>
           </div>
-        </a>
+        </a>}
       </div>
 
       <div className="hero-bottom">
         <div className="container hero-bottom-inner">
           <span>Precise care. Human conversation.</span>
-          <span>Fa-99, Thokar -4 · Plus Code H74X+26</span>
+          <span>{C.address.line1} · Plus Code {C.plusCode}</span>
         </div>
       </div>
     </section>
@@ -1172,7 +1061,7 @@ function App() {
     {/* Trust & Philosophy Section with Dynamic Slideshow and Video Anchor */}
     <TrustPhilosophySection />
 
-    <section className="metrics"><div className="container metrics-grid"><div><strong data-testid="metric-rating">4.9</strong><span>Google rating</span></div><div><strong data-testid="metric-reviews">288</strong><span>Public reviews</span></div><div><strong>01</strong><span>New Delhi location</span></div><div><strong>WA</strong><span>Easy WhatsApp booking</span></div></div></section>
+    <section className="metrics"><div className="container metrics-grid"><div><strong data-testid="metric-rating">{G.rating}</strong><span>Google rating</span></div><div><strong data-testid="metric-reviews">{G.reviewCount}</strong><span>Public reviews</span></div><div><strong>01</strong><span>{C.city} location</span></div><div><strong>WA</strong><span>Easy WhatsApp booking</span></div></div></section>
 
     {/* Services Carousel Section Matching Editorial Polish with 4 Cards and Navigation */}
     <ServicesCarouselSection />
@@ -1181,20 +1070,20 @@ function App() {
     <WhySection />
 
     {/* TESTIMONIALS / Real Patient Experiences (Infinite Continuous Marquee & Typewriter Reveal) */}
-    <TestimonialsSection />
+    {ok("reviewsPublishable") && <TestimonialsSection />}
 
     {/* YOUR CARE / Featured Clinician Experience (Large Editorial Composition) */}
     <YourCareSection />
 
-    <section id="gallery" className="section gallery"><div className="container"><div className="section-heading"><div><p className="eyebrow red">Inside DENTAL CLINICa</p><h2>A space made<br/><em>for ease.</em></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></div><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt="DENTAL CLINICa treatment room"/><figcaption data-testid="gallery-caption-1">Treatment room · DENTAL CLINICa</figcaption></figure><figure><img src={photos[1]} alt="DENTAL CLINICa dental chair"/><figcaption data-testid="gallery-caption-2">Clinical setting · DENTAL CLINICa</figcaption></figure><figure><img src={photos[2]} alt="DENTAL CLINICa interior"/><figcaption data-testid="gallery-caption-3">Care environment · DENTAL CLINICa</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
+    <section id="gallery" className="section gallery"><div className="container"><div className="section-heading"><div><p className="eyebrow red">Inside {C.name}</p><h2>A space made<br/><em>for ease.</em></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></div><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt={`${C.name} treatment room`}/><figcaption data-testid="gallery-caption-1">Treatment room · {C.name}</figcaption></figure><figure><img src={photos[1]} alt={`${C.name} dental chair`}/><figcaption data-testid="gallery-caption-2">Clinical setting · {C.name}</figcaption></figure><figure><img src={photos[2]} alt={`${C.name} interior`}/><figcaption data-testid="gallery-caption-3">Care environment · {C.name}</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
 
-    <section id="contact" className="dark contact"><div className="container contact-grid"><div><p className="eyebrow red">Visit DENTAL CLINICa</p><h2>Let’s find<br/><em>your next step.</em></h2><p className="dark-lead">Questions are welcome. Reach out in the way that feels easiest.</p><div className="contact-actions"><Button testid="contact-book-button" href={whatsapp}>Book on WhatsApp</Button><a data-testid="contact-phone-button" href={phone} className="text-link light-link"><Phone size={15}/> +91 83687 84559</a></div><form data-testid="appointment-enquiry-form" className="enquiry-form" onSubmit={submitEnquiry}><p className="eyebrow">Written enquiry</p><h3>Prefer to type first?</h3><label>Name<input data-testid="enquiry-name-input" name="name" required placeholder="Your name"/></label><label>Phone<input data-testid="enquiry-phone-input" name="phone" required type="tel" placeholder="Your phone number"/></label><label>What would you like to discuss?<select data-testid="enquiry-concern-select" name="concern" defaultValue="General consultation"><option>General consultation</option><option>Cleaning and check-up</option><option>Restorative care</option><option>Smile enhancement</option></select></label><label>Reply via<select data-testid="enquiry-preference-select" name="preference" defaultValue="WhatsApp"><option>WhatsApp</option><option>Phone call</option></select></label><Button testid="enquiry-submit-button" type="submit">Prepare enquiry</Button>{formStatus && <p data-testid="enquiry-success-message" className="form-success">{formStatus}</p>}</form></div><div className="map-panel"><MapPin size={20}/><p>Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</p><span>Plus Code · H74X+26</span><small data-testid="hours-confirmation-note" className="hours-note">Clinic hours · pending confirmation</small><a data-testid="contact-directions-button" href={maps} target="_blank" rel="noreferrer">Open directions <ArrowRight/></a></div></div></section>
+    <section id="contact" className="dark contact"><div className="container contact-grid"><div><p className="eyebrow red">Visit {C.name}</p><h2>Let’s find<br/><em>your next step.</em></h2><p className="dark-lead">Questions are welcome. Reach out in the way that feels easiest.</p><div className="contact-actions"><Button testid="contact-book-button" href={whatsapp}>Book on WhatsApp</Button><a data-testid="contact-phone-button" href={phone} className="text-link light-link"><Phone size={15}/> {C.phoneDisplay}</a></div><form data-testid="appointment-enquiry-form" className="enquiry-form" onSubmit={submitEnquiry}><p className="eyebrow">Written enquiry</p><h3>Prefer to type first?</h3><label>Name<input data-testid="enquiry-name-input" name="name" required placeholder="Your name"/></label><label>Phone<input data-testid="enquiry-phone-input" name="phone" required type="tel" placeholder="Your phone number"/></label><label>What would you like to discuss?<select data-testid="enquiry-concern-select" name="concern" defaultValue="General consultation"><option>General consultation</option><option>Cleaning and check-up</option><option>Restorative care</option><option>Smile enhancement</option></select></label><label>Reply via<select data-testid="enquiry-preference-select" name="preference" defaultValue="WhatsApp"><option>WhatsApp</option><option>Phone call</option></select></label><Button testid="enquiry-submit-button" type="submit">Prepare enquiry</Button>{formStatus && <p data-testid="enquiry-success-message" className="form-success">{formStatus}</p>}</form></div><div className="map-panel"><MapPin size={20}/><p>{C.address.line1}<br/>{C.address.line2}<br/>{C.address.line3}</p><span>Plus Code · {C.plusCode}</span><small data-testid="hours-confirmation-note" className="hours-note">Clinic hours · pending confirmation</small><a data-testid="contact-directions-button" href={maps} target="_blank" rel="noreferrer">Open directions <ArrowRight/></a></div></div></section>
 
     <section className="section faq"><div className="container faq-grid"><div><p className="eyebrow red">Good to know</p><h2>Questions,<br/><em>answered.</em></h2><p className="lead">The practical details, before you arrive.</p></div><div>{faqs.map(([q,a], i) => <div className="faq-item" key={q}><button data-testid={`faq-question-${i}`} onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{q}</span><ChevronDown className={openFaq === i ? "rotate" : ""}/></button>{openFaq === i && <p data-testid={`faq-answer-${i}`}>{a}</p>}</div>)}</div></div></section>
-    <section className="journal"><div className="container"><div className="section-heading"><div><p className="eyebrow red">From the journal</p><h2>Small notes on<br/><em>better care.</em></h2></div><span className="heading-note">Helpful reading<br/>coming soon</span></div><div className="journal-grid">{["How to prepare for your first visit", "Questions worth asking your dentist", "Keeping your smile comfortable"].map((item, i) => <article key={item}><span>0{i + 1} · JOURNAL</span><h3>{item}</h3><p>Helpful guidance from DENTAL CLINICa, coming soon.</p><ArrowDownRight/></article>)}</div></div></section>
-    <footer className="footer"><div className="container footer-grid"><div><img src={logoImg} alt="DENTAL CLINICa logo" className="footer-logo"/><p>A considered dental experience<br/>in Jamia Nagar, Okhla.</p></div><div><span className="footer-label">Visit</span><a data-testid="footer-address" href={maps} target="_blank" rel="noreferrer">Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</a></div><div><span className="footer-label">Connect</span><a data-testid="footer-phone" href={phone}>+91 83687 84559</a><a data-testid="footer-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking</a><a data-testid="footer-maps" href={maps} target="_blank" rel="noreferrer">Google Maps</a></div><div><span className="footer-label">Explore</span><a href="#about">About</a><a href="#treatments">Treatments</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div></div><div className="container footer-bottom"><span>© 2026 DENTAL CLINICa</span><span>Some content pending clinic confirmation</span><span>Privacy · Terms</span></div></footer>
+    <section className="journal"><div className="container"><div className="section-heading"><div><p className="eyebrow red">From the journal</p><h2>Small notes on<br/><em>better care.</em></h2></div><span className="heading-note">Helpful reading<br/>coming soon</span></div><div className="journal-grid">{["How to prepare for your first visit", "Questions worth asking your dentist", "Keeping your smile comfortable"].map((item, i) => <article key={item}><span>0{i + 1} · JOURNAL</span><h3>{item}</h3><p>Helpful guidance from {C.name}, coming soon.</p><ArrowDownRight/></article>)}</div></div></section>
+    <footer className="footer"><div className="container footer-grid"><div><img src={logoImg} alt={`${C.name} logo`} className="footer-logo"/><p>A considered dental experience<br/>in {C.locality}.</p></div><div><span className="footer-label">Visit</span><a data-testid="footer-address" href={maps} target="_blank" rel="noreferrer">{C.address.line1}<br/>{C.address.line2}<br/>{C.address.line3}</a></div><div><span className="footer-label">Connect</span><a data-testid="footer-phone" href={phone}>{C.phoneDisplay}</a><a data-testid="footer-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking</a><a data-testid="footer-maps" href={maps} target="_blank" rel="noreferrer">Google Maps</a></div><div><span className="footer-label">Explore</span><a href="#about">About</a><a href="#treatments">Treatments</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div></div><div className="container footer-bottom"><span>© 2026 {C.name}</span><span>Some content pending clinic confirmation</span><span>Privacy · Terms</span></div></footer>
     <div className="mobile-actions"><a data-testid="mobile-call-action" href={phone}><Phone/>Call</a><a data-testid="mobile-whatsapp-action" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp</a><a data-testid="mobile-book-action" href={whatsapp}>Book</a></div>
-    {/* Viewport Bottom Edge Soft Focus Gradient Treatment */}
+    {/* Viewport Bottom Edge Progressive Blur Treatment */}
     <div className="viewport-edge-blur" aria-hidden="true" />
   </main>;
 }
