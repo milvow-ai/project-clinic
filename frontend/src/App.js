@@ -1212,10 +1212,6 @@ function App() {
           <span className="button-flip-current">Book</span>
           <span aria-hidden="true" className="button-flip-next">Book</span>
         </span>
-        <span aria-hidden="true" className="button-morph-icon">
-          <span className="btn-dot-indicator">■</span>
-          <span className="btn-arrow-indicator"><ArrowUpRight size={13} /></span>
-        </span>
       </a>
     </div>
     {/* Viewport Bottom Edge Soft Focus Gradient Treatment */}
