@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Lenis from "lenis";
-import { ArrowDownRight, ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw, Star } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw, Star, User } from "lucide-react";
 import "@/App.css";
 import "@/Enquiry.css";
 
@@ -1142,11 +1142,7 @@ function App() {
           <div className="review-card-header">
             <div className="review-card-user">
               <div className="review-card-avatar-wrap">
-                <img 
-                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&h=120&q=80" 
-                  alt="Taniya Zabeen" 
-                  className="review-card-avatar-img"
-                />
+                <User size={22} className="review-card-human-icon" strokeWidth={2.2} />
               </div>
               <div className="review-card-user-meta">
                 <strong className="review-card-name">Taniya Zabeen</strong>

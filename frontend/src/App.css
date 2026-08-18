@@ -77,8 +77,9 @@ html.lenis,html.lenis body{height:auto}
 .oralic-google-review-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 24px 50px rgba(0,0,0,0.24);border-color:rgba(237,28,36,0.3)}
 .review-card-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .review-card-user{display:flex;align-items:center;gap:11px}
-.review-card-avatar-wrap{width:46px;height:46px;border-radius:50%;overflow:hidden;background:#fbbf24;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.12);display:flex;align-items:center;justify-content:center}
-.review-card-avatar-img{width:100%;height:100%;object-fit:cover;display:block}
+.review-card-avatar-wrap{width:44px;height:44px;border-radius:50%;background:rgba(237,28,36,0.08);border:1.5px solid rgba(237,28,36,0.22);color:var(--red);flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;transition:background .3s ease,color .3s ease,transform .3s ease,border-color .3s ease}
+.oralic-google-review-card:hover .review-card-avatar-wrap{background:var(--red);color:#ffffff;border-color:var(--red);transform:scale(1.06)}
+.review-card-human-icon{width:22px;height:22px;color:inherit;transition:color .3s ease}
 .review-card-user-meta{display:flex;flex-direction:column;gap:2px}
 .review-card-name{font-family:'Fraunces',serif;font-size:14.5px;font-weight:700;color:#111827;letter-spacing:-0.01em;transition:color .25s ease}
 .oralic-google-review-card:hover .review-card-name{color:var(--red)}
