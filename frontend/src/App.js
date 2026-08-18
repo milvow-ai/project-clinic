@@ -1137,26 +1137,41 @@ function App() {
           </div>
         </div>
 
-        {/* Real Google Review Card Matching Oralic Design & Red/White Clinic Theme with Typewriter */}
+        {/* Real Google Review Card Matching Inspiration Design & Red/White Clinic Theme with Typewriter */}
         <a data-testid="hero-review-card" className="oralic-google-review-card" href={maps} target="_blank" rel="noreferrer">
-          <div className="review-card-stars">
-            <span className="star">★</span>
-            <span className="star">★</span>
-            <span className="star">★</span>
-            <span className="star">★</span>
-            <span className="star">★</span>
-          </div>
-          <TypewriterReviewQuote text="Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!" />
-          <div className="review-card-author">
-            <div className="author-tooth-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C8.5 2 6 4.5 6 8c0 3 1.5 6.5 2.5 10 .5 2 1.5 4 3.5 4s3-2 3.5-4c1-3.5 2.5-7 2.5-10 0-3.5-2.5-6-6-6z"/>
+          <div className="review-card-header">
+            <div className="review-card-user">
+              <div className="review-card-avatar-wrap">
+                <img 
+                  src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&h=120&q=80" 
+                  alt="Taniya Zabeen" 
+                  className="review-card-avatar-img"
+                />
+              </div>
+              <div className="review-card-user-meta">
+                <strong className="review-card-name">Taniya Zabeen</strong>
+                <div className="review-card-rating-row">
+                  <span className="review-card-score">5.0</span>
+                  <div className="review-card-stars">
+                    <span className="star">★</span>
+                    <span className="star">★</span>
+                    <span className="star">★</span>
+                    <span className="star">★</span>
+                    <span className="star">★</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="review-card-quote-icon-wrap" aria-hidden="true">
+              <svg width="28" height="22" viewBox="0 0 34 26" fill="none" className="review-card-quote-glyph">
+                <path d="M8 0C3.6 0 0 3.6 0 8C0 12.4 3.6 16 8 16C7.5 19.8 4.2 23 0.2 24.5L1.8 26C8.6 23.4 13.5 17.2 13.5 10C13.5 4.5 11 0 8 0ZM26.5 0C22.1 0 18.5 3.6 18.5 8C18.5 12.4 22.1 16 26.5 16C26 19.8 22.7 23 18.7 24.5L20.3 26C27.1 23.4 32 17.2 32 10C32 4.5 29.5 0 26.5 0Z" fill="#E5E7EB"/>
               </svg>
             </div>
-            <div className="author-details">
-              <strong className="author-name">Taniya Zabeen</strong>
-              <span className="author-source">Verified Google Review · 5★</span>
-            </div>
+          </div>
+          
+          <div className="review-card-quote-body">
+            <TypewriterReviewQuote text="Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!" />
           </div>
         </a>
       </div>
