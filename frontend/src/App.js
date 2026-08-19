@@ -783,7 +783,8 @@ function YourCareSection() {
               <span>YOUR CARE</span>
             </div>
             <h2 className="yourcare-heading">
-              Care starts with the person<br />treating you.
+              Care starts with the<br className="yourcare-heading-br" />
+              <span className="yourcare-heading-line2">person treating you.</span>
             </h2>
           </div>
           <div className="yourcare-header-right">
@@ -991,7 +992,7 @@ function App() {
 
     // Synchronized Section Reveal Observers
     const els = document.querySelectorAll(
-      ".intro-grid>div,.metrics-grid>div,.statement-inner,.philosophy-inner>*,.philosophy-points>div,.care-intro,.accordion,.section-heading,.card-grid>article,.center-heading,.compare,.review-score,.review-quote,.gallery-grid figure,.gallery-note,.team-inner>div,.contact-grid>div,.faq-grid>div,.journal-grid>article,.final-content>*, .service-editorial-card, .why-comparison-table, .yourcare-feature-card"
+      ".intro-grid>div,.metrics-grid>div,.statement-inner,.philosophy-inner>*,.philosophy-points>div,.care-intro,.accordion,.section-heading,.card-grid>article,.center-heading,.compare,.review-score,.review-quote,.gallery-grid figure,.gallery-note,.team-inner>div,.contact-grid>div,.faq-grid>div,.final-content>*, .service-editorial-card, .why-comparison-table, .yourcare-feature-card"
     );
     els.forEach((el) => el.classList.add("reveal"));
 
@@ -1025,8 +1026,8 @@ function App() {
   const services = ["Check-ups and cleaning", "Fillings and restorations", "Root canal treatment", "Crowns and bridges", "Dental implants", "Whitening and smile enhancement"];
   const faqs = [
     ["How can I book an appointment?", "Call +91 83687 84559 or message DENTAL CLINICa directly on WhatsApp. We will help you find the right next step."],
-    ["Where is the clinic located?", "Fa-99, Thokar -4, Abul Fazal Enclave, Jamia Nagar, Okhla, New Delhi, Delhi 110025, India. Plus Code: H74X+26."],
-    ["How do I find the clinic?", "Use the directions link for the most direct route to the clinic, or search the Plus Code H74X+26 in Google Maps."],
+    ["Where is the clinic located?", "Fa-99, Thokar -4, Abul Fazal Enclave, Jamia Nagar, Okhla, New Delhi, Delhi 110025, India."],
+    ["How do I find the clinic?", "The clinic is located in Jamia Nagar, Okhla. You can contact us directly on WhatsApp or call +91 83687 84559 for quick guidance."],
     ["What treatments are available?", "Our treatment pathways are being confirmed for publication. Contact the clinic and we will guide you based on your needs."],
   ];
   const submitEnquiry = (event) => {
@@ -1175,7 +1176,6 @@ function App() {
       <div className="hero-bottom">
         <div className="container hero-bottom-inner">
           <span>Precise care. Human conversation.</span>
-          <span>Fa-99, Thokar -4 · Plus Code H74X+26</span>
         </div>
       </div>
     </section>
@@ -1183,7 +1183,21 @@ function App() {
     {/* Trust & Philosophy Section with Dynamic Slideshow and Video Anchor */}
     <TrustPhilosophySection />
 
-    <section className="metrics"><div className="container metrics-grid"><div><strong data-testid="metric-rating">4.9</strong><span>Google rating</span></div><div><strong data-testid="metric-reviews">288</strong><span>Public reviews</span></div><div><strong>01</strong><span>New Delhi location</span></div><div><strong>WA</strong><span>Easy WhatsApp booking</span></div></div></section>
+    <section className="metrics">
+      <div className="container metrics-grid">
+        <div><strong data-testid="metric-rating">4.9</strong><span>Google rating</span></div>
+        <div><strong data-testid="metric-reviews">288</strong><span>Public reviews</span></div>
+        <div><strong>01</strong><span>New Delhi location</span></div>
+        <div>
+          <strong className="metric-whatsapp-icon" aria-label="WhatsApp">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="currentColor" className="whatsapp-metric-glyph">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.15C10.57 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.8 7.37 7.5 3.67 12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.59 20.15 12.05 20.15ZM16.57 14.46C16.32 14.33 15.1 13.73 14.88 13.65C14.65 13.57 14.49 13.53 14.32 13.78C14.16 14.03 13.69 14.58 13.54 14.75C13.4 14.92 13.25 14.94 13 14.81C12.75 14.69 11.95 14.43 11 13.58C10.26 12.92 9.76 12.11 9.61 11.86C9.47 11.61 9.6 11.48 9.72 11.35C9.83 11.24 9.97 11.06 10.1 10.91C10.22 10.76 10.27 10.66 10.35 10.5C10.43 10.33 10.39 10.19 10.33 10.06C10.27 9.94 9.77 8.72 9.57 8.22C9.37 7.74 9.17 7.8 9.02 7.8C8.88 7.79 8.71 7.79 8.55 7.79C8.38 7.79 8.11 7.85 7.88 8.11C7.65 8.36 7.02 8.95 7.02 10.16C7.02 11.37 7.9 12.53 8.02 12.7C8.15 12.86 9.75 15.34 12.21 16.4C12.8 16.65 13.25 16.8 13.61 16.92C14.2 17.11 14.74 17.08 15.16 17.02C15.64 16.95 16.63 16.42 16.83 15.84C17.04 15.26 17.04 14.76 16.98 14.66C16.92 14.55 16.81 14.59 16.57 14.46Z"/>
+            </svg>
+          </strong>
+          <span>Easy WhatsApp booking</span>
+        </div>
+      </div>
+    </section>
 
     {/* Services Carousel Section Matching Editorial Polish with 4 Cards and Navigation */}
     <ServicesCarouselSection />
@@ -1199,10 +1213,9 @@ function App() {
 
     <section id="gallery" className="section gallery"><div className="container"><div className="section-heading"><div><p className="eyebrow red">Inside DENTAL CLINICa</p><h2>A space made<br/><em>for ease.</em></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></div><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt="DENTAL CLINICa treatment room"/><figcaption data-testid="gallery-caption-1">Treatment room · DENTAL CLINICa</figcaption></figure><figure><img src={photos[1]} alt="DENTAL CLINICa dental chair"/><figcaption data-testid="gallery-caption-2">Clinical setting · DENTAL CLINICa</figcaption></figure><figure><img src={photos[2]} alt="DENTAL CLINICa interior"/><figcaption data-testid="gallery-caption-3">Care environment · DENTAL CLINICa</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
 
-    <section id="contact" className="dark contact"><div className="container contact-grid"><div><p className="eyebrow red">Visit DENTAL CLINICa</p><h2>Let’s find<br/><em>your next step.</em></h2><p className="dark-lead">Questions are welcome. Reach out in the way that feels easiest.</p><div className="contact-actions"><Button testid="contact-book-button" href={whatsapp}>Book on WhatsApp</Button><a data-testid="contact-phone-button" href={phone} className="text-link light-link"><Phone size={15}/> +91 83687 84559</a></div><form data-testid="appointment-enquiry-form" className="enquiry-form" onSubmit={submitEnquiry}><p className="eyebrow">Written enquiry</p><h3>Prefer to type first?</h3><label>Name<input data-testid="enquiry-name-input" name="name" required placeholder="Your name"/></label><label>Phone<input data-testid="enquiry-phone-input" name="phone" required type="tel" placeholder="Your phone number"/></label><label>What would you like to discuss?<select data-testid="enquiry-concern-select" name="concern" defaultValue="General consultation"><option>General consultation</option><option>Cleaning and check-up</option><option>Restorative care</option><option>Smile enhancement</option></select></label><label>Reply via<select data-testid="enquiry-preference-select" name="preference" defaultValue="WhatsApp"><option>WhatsApp</option><option>Phone call</option></select></label><Button testid="enquiry-submit-button" type="submit">Prepare enquiry</Button>{formStatus && <p data-testid="enquiry-success-message" className="form-success">{formStatus}</p>}</form></div><div className="map-panel"><MapPin size={20}/><p>Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</p><span>Plus Code · H74X+26</span><small data-testid="hours-confirmation-note" className="hours-note">Clinic hours · pending confirmation</small><a data-testid="contact-directions-button" href={maps} target="_blank" rel="noreferrer">Open directions <ArrowRight/></a></div></div></section>
+    <section id="contact" className="dark contact"><div className="container contact-grid"><div><p className="eyebrow red">Visit DENTAL CLINICa</p><h2>Let’s find<br/><em>your next step.</em></h2><p className="dark-lead">Questions are welcome. Reach out in the way that feels easiest.</p><div className="contact-actions"><Button testid="contact-book-button" href={whatsapp}>Book on WhatsApp</Button><a data-testid="contact-phone-button" href={phone} className="text-link light-link"><Phone size={15}/> +91 83687 84559</a></div><form data-testid="appointment-enquiry-form" className="enquiry-form" onSubmit={submitEnquiry}><p className="eyebrow">Written enquiry</p><h3>Prefer to type first?</h3><label>Name<input data-testid="enquiry-name-input" name="name" required placeholder="Your name"/></label><label>Phone<input data-testid="enquiry-phone-input" name="phone" required type="tel" placeholder="Your phone number"/></label><label>What would you like to discuss?<select data-testid="enquiry-concern-select" name="concern" defaultValue="General consultation"><option>General consultation</option><option>Cleaning and check-up</option><option>Restorative care</option><option>Smile enhancement</option></select></label><label>Reply via<select data-testid="enquiry-preference-select" name="preference" defaultValue="WhatsApp"><option>WhatsApp</option><option>Phone call</option></select></label><Button testid="enquiry-submit-button" type="submit">Prepare enquiry</Button>{formStatus && <p data-testid="enquiry-success-message" className="form-success">{formStatus}</p>}</form></div><div className="map-panel"><MapPin size={20}/><p>Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</p><small data-testid="hours-confirmation-note" className="hours-note">Clinic hours · pending confirmation</small></div></div></section>
 
     <section className="section faq"><div className="container faq-grid"><div><p className="eyebrow red">Good to know</p><h2>Questions,<br/><em>answered.</em></h2><p className="lead">The practical details, before you arrive.</p></div><div>{faqs.map(([q,a], i) => <div className="faq-item" key={q}><button data-testid={`faq-question-${i}`} onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{q}</span><ChevronDown className={openFaq === i ? "rotate" : ""}/></button>{openFaq === i && <p data-testid={`faq-answer-${i}`}>{a}</p>}</div>)}</div></div></section>
-    <section className="journal"><div className="container"><div className="section-heading"><div><p className="eyebrow red">From the journal</p><h2>Small notes on<br/><em>better care.</em></h2></div><span className="heading-note">Helpful reading<br/>coming soon</span></div><div className="journal-grid">{["How to prepare for your first visit", "Questions worth asking your dentist", "Keeping your smile comfortable"].map((item, i) => <article key={item}><span>0{i + 1} · JOURNAL</span><h3>{item}</h3><p>Helpful guidance from DENTAL CLINICa, coming soon.</p><ArrowDownRight/></article>)}</div></div></section>
     <footer className="footer"><div className="container footer-grid"><div><img src={logoImg} alt="DENTAL CLINICa logo" className="footer-logo"/><p>A considered dental experience<br/>in Jamia Nagar, Okhla.</p></div><div><span className="footer-label">Visit</span><a data-testid="footer-address" href={maps} target="_blank" rel="noreferrer">Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</a></div><div><span className="footer-label">Connect</span><a data-testid="footer-phone" href={phone}>+91 83687 84559</a><a data-testid="footer-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking</a><a data-testid="footer-maps" href={maps} target="_blank" rel="noreferrer">Google Maps</a></div><div><span className="footer-label">Explore</span><a href="#about">About</a><a href="#treatments">Treatments</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div></div><div className="container footer-bottom"><span>© 2026 DENTAL CLINICa</span><span>Some content pending clinic confirmation</span><span>Privacy · Terms</span></div></footer>
     <div className="mobile-actions">
       <a data-testid="mobile-call-action" href={phone} className="mobile-action-link"><Phone size={14}/> Call</a>
