@@ -62,7 +62,7 @@ html.lenis,html.lenis body{height:auto}
 .hero-br{display:block}
 .hero-copy{font-family:'Sora',sans-serif;font-size:16px;line-height:1.62;color:rgba(255,255,255,0.9);margin:0 0 24px;max-width:440px;font-weight:400;text-align:left;animation:heroEntrySlide .85s cubic-bezier(.16,1,.3,1) .36s both}
 .custom-hero-buttons{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:14px;text-align:left;justify-content:flex-start;align-self:flex-start;animation:heroEntrySlide .85s cubic-bezier(.16,1,.3,1) .5s both}
-.metrics strong.metric-whatsapp-icon{display:inline-flex;align-items:center;justify-content:flex-start;height:50px;color:var(--red)}
+.metrics strong.metric-whatsapp-icon{display:inline-flex;align-items:center;justify-content:flex-start;height:50px;color:var(--ink);transition:color .25s ease}
 .whatsapp-metric-glyph{width:42px;height:42px;display:block;fill:currentColor}
 .custom-services-link{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#ffffff;display:inline-flex;align-items:center;gap:8px;transition:color .25s ease,transform .25s ease}
 .custom-services-link svg{color:#ffffff;stroke:#ffffff;transition:color .25s ease,stroke .25s ease,transform .25s ease}
