@@ -11,7 +11,7 @@ const photos = [
   "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/h2fngxq3_WhatsApp%20Image%202026-08-15%20at%206.13.27%20PM%20%281%29.webp",
   "https://customer-assets-wrfwihn1.emergentagent.net/job_58267dcc-e88f-40f4-9dc7-e543556b9ed8/artifacts/s5o3v421_WhatsApp%20Image%202026-08-15%20at%206.13.26%20PM.webp",
 ];
-const whatsapp = "https://wa.me/message/MWF3LLCPQ53NL1";
+const whatsapp = "https://wa.me/918368784559";
 const maps = "https://www.google.com/maps/search/?api=1&query=Fa-99%2C+Thokar+-4%2C+Abul+Fazal+Enclave%2C+Jamia+Nagar%2C+Okhla%2C+New+Delhi%2C+Delhi+110025%2C+India";
 const phone = "tel:+918368784559";
 
@@ -358,7 +358,7 @@ function ServicesCarouselSection() {
                 <p className="service-card-desc">{card.description}</p>
                 <a 
                   data-testid={`service-cta-${card.id}`}
-                  href={`https://wa.me/message/MWF3LLCPQ53NL1?text=${encodeURIComponent(card.whatsappMsg)}`}
+                  href={`${whatsapp}?text=${encodeURIComponent(card.whatsappMsg)}`}
                   target="_blank" 
                   rel="noreferrer" 
                   className="service-card-cta"
