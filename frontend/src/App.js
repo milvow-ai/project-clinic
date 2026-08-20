@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import Lenis from "lenis";
+import { motion } from "framer-motion";
 import { ArrowDownRight, ArrowRight, ArrowLeft, ArrowUpRight, ChevronDown, Menu, Phone, MapPin, X, ShoppingCart, Plus, MessageSquare, SlidersHorizontal, Heart, Eye, Clock3, RotateCcw, Star, User } from "lucide-react";
+import { BlurTextReveal, BlurRevealContainer, BlurItem, blurTransition, blurVariants } from "./BlurReveal";
 import "@/App.css";
 import "@/Enquiry.css";
 
@@ -148,22 +150,22 @@ function TrustPhilosophySection() {
     <section id="about" className="section trust-section">
       <div className="container trust-container">
         {/* Header: Left Badge + Heading, Right Description */}
-        <div className="trust-header">
+        <BlurRevealContainer className="trust-header" delay={0.05} stagger={0.06}>
           <div className="trust-header-left">
-            <div className="trust-badge">
+            <BlurItem className="trust-badge">
               <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
               <span>OUR PHILOSOPHY</span>
-            </div>
+            </BlurItem>
             <h2 className="trust-heading">
-              Trusted Dental Care for a<br/>Brighter Smile.
+              <BlurTextReveal text="Trusted Dental Care for a Brighter Smile." stagger={0.035} />
             </h2>
           </div>
           <div className="trust-header-right">
-            <p className="trust-description">
+            <motion.p className="trust-description" transition={blurTransition} variants={blurVariants}>
               At the heart of our practice is a commitment to precision and patient comfort. We don’t just treat symptoms; we focus on the long-term health and vitality of your smile.
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </BlurRevealContainer>
 
         {/* 2-Panel Showcase Grid: Left Slideshow (larger), Right Video (anchor) */}
         <div className="trust-showcase-grid">
@@ -316,13 +318,15 @@ function ServicesCarouselSection() {
     <section id="treatments" className="section services-carousel-section">
       <div className="container services-carousel-container">
         {/* Top Header: Badge + Heading on Left, Arrows on Right */}
-        <div className="services-carousel-header">
+        <BlurRevealContainer className="services-carousel-header" delay={0.05} stagger={0.06}>
           <div className="services-header-left">
-            <div className="trust-badge">
+            <BlurItem className="trust-badge">
               <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
               <span>Our Services</span>
-            </div>
-            <h2 className="services-heading">Find your way forward.</h2>
+            </BlurItem>
+            <h2 className="services-heading">
+              <BlurTextReveal text="Find your way forward." stagger={0.04} />
+            </h2>
           </div>
           <div className="services-nav-arrows">
             <button 
@@ -342,7 +346,7 @@ function ServicesCarouselSection() {
               <ArrowRight size={18} />
             </button>
           </div>
-        </div>
+        </BlurRevealContainer>
       </div>
 
       {/* Horizontal Overflow Track showing 3.2-3.4 cards on Desktop */}
@@ -432,20 +436,22 @@ function WhySection() {
     <section id="about" className="section why-section">
       <div className="container why-container">
         {/* Top Header: Badge + Large Fraunces Headline + Right Supporting Paragraph */}
-        <div className="why-header">
+        <BlurRevealContainer className="why-header" delay={0.05} stagger={0.06}>
           <div className="why-header-left">
-            <div className="trust-badge">
+            <BlurItem className="trust-badge">
               <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
               <span>Our Standards</span>
-            </div>
-            <h2 className="why-heading">Experience the difference.</h2>
+            </BlurItem>
+            <h2 className="why-heading">
+              <BlurTextReveal text="Experience the difference." stagger={0.04} />
+            </h2>
           </div>
           <div className="why-header-right">
-            <p className="why-lead-text">
+            <motion.p className="why-lead-text" transition={blurTransition} variants={blurVariants}>
               Thoughtful dentistry means clear answers, personal care, and a better experience from your first visit onward.
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </BlurRevealContainer>
 
         {/* Monumental Continuous 3-Column Architectural Table */}
         <div className="why-table-wrapper">
@@ -695,20 +701,22 @@ function TestimonialsSection() {
   return (
     <section id="reviews" className="section testimonials-section">
       <div className="container testimonials-header-container">
-        <div className="testimonials-header">
+        <BlurRevealContainer className="testimonials-header" delay={0.05} stagger={0.06}>
           <div className="testimonials-header-left">
-            <div className="trust-badge dark-badge">
+            <BlurItem className="trust-badge dark-badge">
               <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
               <span>Testimonials</span>
-            </div>
-            <h2 className="testimonials-heading">Real experiences.</h2>
+            </BlurItem>
+            <h2 className="testimonials-heading">
+              <BlurTextReveal text="Real experiences." stagger={0.04} />
+            </h2>
           </div>
           <div className="testimonials-header-right">
-            <p className="testimonials-lead-text">
+            <motion.p className="testimonials-lead-text" transition={blurTransition} variants={blurVariants}>
               What patients remember most is how they were treated — clearly, comfortably, and with care.
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </BlurRevealContainer>
       </div>
 
       {/* Infinite Seamless Continuous Horizontal Marquee */}
@@ -776,23 +784,26 @@ function YourCareSection() {
     <section id="about" className="section yourcare-section">
       <div className="container yourcare-container">
         {/* 1. Header Area: Left-aligned, matching Hero, Services & Standards */}
-        <div className="yourcare-header">
+        <BlurRevealContainer className="yourcare-header" delay={0.05} stagger={0.06}>
           <div className="yourcare-header-left">
-            <div className="trust-badge">
+            <BlurItem className="trust-badge">
               <span className="badge-cross"><Plus size={12} strokeWidth={3} /></span>
               <span>YOUR CARE</span>
-            </div>
+            </BlurItem>
             <h2 className="yourcare-heading">
-              Care starts with the<br className="yourcare-heading-br" />
-              <span className="yourcare-heading-line2">person treating you.</span>
+              <BlurTextReveal text="Care starts with the" stagger={0.04} />
+              <br className="yourcare-heading-br" />
+              <span className="yourcare-heading-line2">
+                <BlurTextReveal text="person treating you." stagger={0.04} delay={0.16} />
+              </span>
             </h2>
           </div>
           <div className="yourcare-header-right">
-            <p className="yourcare-lead-text">
+            <motion.p className="yourcare-lead-text" transition={blurTransition} variants={blurVariants}>
               Meet the clinician behind your care — experienced, approachable, and focused on making every step of treatment clear.
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </BlurRevealContainer>
 
         {/* 2. Primary Visual Composition: Large Editorial Featured Clinician Panel */}
         <div className="yourcare-showcase-wrapper">
@@ -1114,32 +1125,43 @@ function App() {
       <div className="hero-shade custom-hero-shade" />
 
       <div className="container custom-hero-container">
-        <div className="custom-hero-content">
-          <div className="hero-badge">
+        <BlurRevealContainer className="custom-hero-content" delay={0.08} stagger={0.06}>
+          <BlurItem className="hero-badge">
             <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
             <span>SINCE 2018 — TRUSTED DENTAL CARE</span>
-          </div>
+          </BlurItem>
 
           <h1 className="hero-heading">
-            Trusted Partner for<br className="hero-br"/> Exceptional Oral Health.
+            <BlurTextReveal text="Trusted Partner for Exceptional Oral Health." stagger={0.04} />
           </h1>
 
-          <p className="hero-copy">
+          <motion.p className="hero-copy" transition={blurTransition} variants={blurVariants}>
             Expert medical specialists dedicated to your family’s wellness.
-          </p>
+          </motion.p>
 
-          <div className="hero-buttons custom-hero-buttons">
+          <motion.div className="hero-buttons custom-hero-buttons" transition={blurTransition} variants={blurVariants}>
             <AnimatedOralicButton testid="hero-book-button" href={whatsapp}>
               Book appointment
             </AnimatedOralicButton>
             <a data-testid="hero-services-button" className="text-link light-link custom-services-link" href="#treatments">
               Our services <ArrowRight size={14}/>
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </BlurRevealContainer>
 
         {/* Real Google Review Card Matching Inspiration Design & Red/White Clinic Theme with Typewriter */}
-        <a data-testid="hero-review-card" className="oralic-google-review-card" href={maps} target="_blank" rel="noreferrer">
+        <motion.a 
+          data-testid="hero-review-card" 
+          className="oralic-google-review-card" 
+          href={maps} 
+          target="_blank" 
+          rel="noreferrer"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ ...blurTransition, delay: 0.2 }}
+          variants={blurVariants}
+        >
           <div className="review-card-header">
             <div className="review-card-user">
               <div className="review-card-avatar-wrap">
@@ -1170,7 +1192,7 @@ function App() {
           <div className="review-card-quote-body">
             <TypewriterReviewQuote text="Painless treatment with modern facilities and warm vibe. Dr Ahmad and Dr Sidra made me feel super comfortable. Highly recommend!" />
           </div>
-        </a>
+        </motion.a>
       </div>
 
       <div className="hero-bottom">
@@ -1211,11 +1233,11 @@ function App() {
     {/* YOUR CARE / Featured Clinician Experience (Large Editorial Composition) */}
     <YourCareSection />
 
-    <section id="gallery" className="section gallery"><div className="container"><div className="section-heading"><div><p className="eyebrow red">Inside DENTAL CLINICa</p><h2>A space made<br/><em>for ease.</em></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></div><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt="DENTAL CLINICa treatment room"/><figcaption data-testid="gallery-caption-1">Treatment room · DENTAL CLINICa</figcaption></figure><figure><img src={photos[1]} alt="DENTAL CLINICa dental chair"/><figcaption data-testid="gallery-caption-2">Clinical setting · DENTAL CLINICa</figcaption></figure><figure><img src={photos[2]} alt="DENTAL CLINICa interior"/><figcaption data-testid="gallery-caption-3">Care environment · DENTAL CLINICa</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
+    <section id="gallery" className="section gallery"><div className="container"><BlurRevealContainer className="section-heading"><div><p className="eyebrow red">Inside DENTAL CLINICa</p><h2><BlurTextReveal text="A space made for ease." stagger={0.04} /></h2></div><span className="heading-note">Clinic imagery<br/>from our space</span></BlurRevealContainer><div className="gallery-grid"><figure className="gallery-large"><img src={photos[0]} alt="DENTAL CLINICa treatment room"/><figcaption data-testid="gallery-caption-1">Treatment room · DENTAL CLINICa</figcaption></figure><figure><img src={photos[1]} alt="DENTAL CLINICa dental chair"/><figcaption data-testid="gallery-caption-2">Clinical setting · DENTAL CLINICa</figcaption></figure><figure><img src={photos[2]} alt="DENTAL CLINICa interior"/><figcaption data-testid="gallery-caption-3">Care environment · DENTAL CLINICa</figcaption></figure></div><p data-testid="gallery-confirmation-note" className="gallery-note">Gallery captions and imagery shown from the supplied clinic set · final approval pending</p></div></section>
 
-    <section id="contact" className="dark contact"><div className="container contact-grid"><div><p className="eyebrow red">Visit DENTAL CLINICa</p><h2>Let’s find<br/><em>your next step.</em></h2><p className="dark-lead">Questions are welcome. Reach out in the way that feels easiest.</p><div className="contact-actions"><Button testid="contact-book-button" href={whatsapp}>Book on WhatsApp</Button><a data-testid="contact-phone-button" href={phone} className="text-link light-link"><Phone size={15}/> +91 83687 84559</a></div><form data-testid="appointment-enquiry-form" className="enquiry-form" onSubmit={submitEnquiry}><p className="eyebrow">Written enquiry</p><h3>Prefer to type first?</h3><label>Name<input data-testid="enquiry-name-input" name="name" required placeholder="Your name"/></label><label>Phone<input data-testid="enquiry-phone-input" name="phone" required type="tel" placeholder="Your phone number"/></label><label>What would you like to discuss?<select data-testid="enquiry-concern-select" name="concern" defaultValue="General consultation"><option>General consultation</option><option>Cleaning and check-up</option><option>Restorative care</option><option>Smile enhancement</option></select></label><label>Reply via<select data-testid="enquiry-preference-select" name="preference" defaultValue="WhatsApp"><option>WhatsApp</option><option>Phone call</option></select></label><Button testid="enquiry-submit-button" type="submit">Prepare enquiry</Button>{formStatus && <p data-testid="enquiry-success-message" className="form-success">{formStatus}</p>}</form></div><div className="map-panel"><MapPin size={20}/><p>Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</p><small data-testid="hours-confirmation-note" className="hours-note">Clinic hours · pending confirmation</small></div></div></section>
+    <section id="contact" className="dark contact"><div className="container contact-grid"><div><p className="eyebrow red">Visit DENTAL CLINICa</p><h2><BlurTextReveal text="Let’s find your next step." stagger={0.04} /></h2><p className="dark-lead">Questions are welcome. Reach out in the way that feels easiest.</p><div className="contact-actions"><Button testid="contact-book-button" href={whatsapp}>Book on WhatsApp</Button><a data-testid="contact-phone-button" href={phone} className="text-link light-link"><Phone size={15}/> +91 83687 84559</a></div><form data-testid="appointment-enquiry-form" className="enquiry-form" onSubmit={submitEnquiry}><p className="eyebrow">Written enquiry</p><h3>Prefer to type first?</h3><label>Name<input data-testid="enquiry-name-input" name="name" required placeholder="Your name"/></label><label>Phone<input data-testid="enquiry-phone-input" name="phone" required type="tel" placeholder="Your phone number"/></label><label>What would you like to discuss?<select data-testid="enquiry-concern-select" name="concern" defaultValue="General consultation"><option>General consultation</option><option>Cleaning and check-up</option><option>Restorative care</option><option>Smile enhancement</option></select></label><label>Reply via<select data-testid="enquiry-preference-select" name="preference" defaultValue="WhatsApp"><option>WhatsApp</option><option>Phone call</option></select></label><Button testid="enquiry-submit-button" type="submit">Prepare enquiry</Button>{formStatus && <p data-testid="enquiry-success-message" className="form-success">{formStatus}</p>}</form></div><div className="map-panel"><MapPin size={20}/><p>Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</p><small data-testid="hours-confirmation-note" className="hours-note">Clinic hours · pending confirmation</small></div></div></section>
 
-    <section className="section faq"><div className="container faq-grid"><div><p className="eyebrow red">Good to know</p><h2>Questions,<br/><em>answered.</em></h2><p className="lead">The practical details, before you arrive.</p></div><div>{faqs.map(([q,a], i) => <div className="faq-item" key={q}><button data-testid={`faq-question-${i}`} onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{q}</span><ChevronDown className={openFaq === i ? "rotate" : ""}/></button>{openFaq === i && <p data-testid={`faq-answer-${i}`}>{a}</p>}</div>)}</div></div></section>
+    <section className="section faq"><div className="container faq-grid"><div><p className="eyebrow red">Good to know</p><h2><BlurTextReveal text="Questions, answered." stagger={0.04} /></h2><p className="lead">The practical details, before you arrive.</p></div><div>{faqs.map(([q,a], i) => <div className="faq-item" key={q}><button data-testid={`faq-question-${i}`} onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{q}</span><ChevronDown className={openFaq === i ? "rotate" : ""}/></button>{openFaq === i && <p data-testid={`faq-answer-${i}`}>{a}</p>}</div>)}</div></div></section>
     <footer className="footer"><div className="container footer-grid"><div><img src={logoImg} alt="DENTAL CLINICa logo" className="footer-logo"/><p>A considered dental experience<br/>in Jamia Nagar, Okhla.</p></div><div><span className="footer-label">Visit</span><a data-testid="footer-address" href={maps} target="_blank" rel="noreferrer">Fa-99, Thokar -4<br/>Abul Fazal Enclave, Jamia Nagar<br/>Okhla, New Delhi, Delhi 110025, India</a></div><div><span className="footer-label">Connect</span><a data-testid="footer-phone" href={phone}>+91 83687 84559</a><a data-testid="footer-whatsapp" href={whatsapp} target="_blank" rel="noreferrer">WhatsApp booking</a><a data-testid="footer-maps" href={maps} target="_blank" rel="noreferrer">Google Maps</a></div><div><span className="footer-label">Explore</span><a href="#about">About</a><a href="#treatments">Treatments</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div></div><div className="container footer-bottom"><span>© 2026 DENTAL CLINICa</span><span>Some content pending clinic confirmation</span><span>Privacy · Terms</span></div></footer>
     <div className="mobile-actions">
       <a data-testid="mobile-call-action" href={phone} className="mobile-action-link"><Phone size={14}/> Call</a>
