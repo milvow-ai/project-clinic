@@ -1128,7 +1128,7 @@ function App() {
         <BlurRevealContainer className="custom-hero-content" delay={0.08} stagger={0.06}>
           <BlurItem className="hero-badge">
             <span className="badge-cross"><Plus size={12} strokeWidth={3}/></span>
-            <span>SINCE 2018 — TRUSTED DENTAL CARE</span>
+            <span>SINCE 2017 — TRUSTED DENTAL CARE</span>
           </BlurItem>
 
           <h1 className="hero-heading">
