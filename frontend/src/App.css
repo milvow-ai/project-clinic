@@ -113,9 +113,9 @@ html.lenis,html.lenis body{height:auto}
 /* Scroll entrance. Blur clears at ~60% of the travel so the element reads
    sharp just before it finishes settling. Landing blur and transform on the
    same beat is what makes this effect feel muddy. */
-.reveal{opacity:0;transform:translateY(20%);filter:blur(10px);transition:opacity 1s cubic-bezier(.25,.1,.25,1),transform 1s cubic-bezier(.25,.1,.25,1),filter 1s cubic-bezier(.25,.1,.25,1);will-change:opacity,transform,filter}
+.reveal{opacity:0;transform:translateY(24%);filter:blur(20px);transition:opacity 1.15s cubic-bezier(.25,.1,.25,1),transform 1.15s cubic-bezier(.25,.1,.25,1),filter 1.15s cubic-bezier(.25,.1,.25,1);will-change:opacity,transform,filter}
 .reveal.in-view{opacity:1;transform:translateY(0);filter:blur(0)}
-.reveal:nth-child(2){transition-delay:.04s}.reveal:nth-child(3){transition-delay:.08s}.reveal:nth-child(4){transition-delay:.12s}.reveal:nth-child(5){transition-delay:.16s}.reveal:nth-child(6){transition-delay:.20s}
+.reveal:nth-child(2){transition-delay:.05s}.reveal:nth-child(3){transition-delay:.10s}.reveal:nth-child(4){transition-delay:.15s}.reveal:nth-child(5){transition-delay:.20s}.reveal:nth-child(6){transition-delay:.25s}
 .final-cta>img{transform:scale(1.18);will-change:transform}
 .service-card{overflow:hidden;transition:transform .5s var(--ease-out-expo),box-shadow .5s var(--ease-out-expo)}
 .service-card:hover{transform:translateY(-8px);box-shadow:0 28px 56px rgba(10,10,10,.16)}
@@ -512,4 +512,4 @@ html.lenis,html.lenis body{height:auto}
 
 /* Mobile: softer blur and shorter travel. A 10px blur on a full-width
    block is expensive on mid-range Android, and all traffic here is Android. */
-@media(max-width:900px){.reveal{filter:blur(8px);transform:translateY(15%)}}
+@media(max-width:900px){.reveal{filter:blur(15px);transform:translateY(18%)}}
